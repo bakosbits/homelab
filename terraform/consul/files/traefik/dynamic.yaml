@@ -24,7 +24,7 @@ http:
       entrypoints:
         - websecure
       middlewares:
-        - auth   
+        - auth@file   
 
     pfsense:
       service: pfsense
@@ -32,7 +32,7 @@ http:
       entrypoints:
         - websecure
       middlewares:
-        - auth   
+        - auth@file   
 
     pve:
       service: pve
@@ -40,7 +40,7 @@ http:
       entrypoints:
         - websecure
       middlewares:
-        - auth   
+        - auth@file   
 
     pve-backup:
       service: pve-backup
@@ -48,7 +48,7 @@ http:
       entrypoints:
         - websecure
       middlewares:
-        - auth   
+        - auth@file   
 
   middlewares:
     auth:

@@ -1,5 +1,5 @@
 build {
-  sources = ["source.proxmox-iso.overwatch"]
+  sources = ["source.proxmox-iso.manager"]
 
   # Copy configs up to tmp
   provisioner "file" {

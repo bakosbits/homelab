@@ -6,9 +6,9 @@ source "proxmox-iso" "logging" {
   node                     = var.proxmox_node
   insecure_skip_tls_verify = true  
 
-  vm_id                   = 9001
-  vm_name                 = "logging"
-  template_description    = "Logging services (Graylog, mongo and opensearch on Debian 12) built on ${formatdate("MM/DD/YYYY hh:mm:ss ZZZ", timestamp())}"
+  vm_id                   = 9011
+  vm_name                 = "opensearch-server"
+  template_description    = "Managed by terraform, built on ${formatdate("MM/DD/YYYY hh:mm:ss ZZZ", timestamp())}"
 
   os                      = "l26"
   cpu_type                = "host"
@@ -23,16 +23,16 @@ source "proxmox-iso" "logging" {
   cloud_init_storage_pool = var.storage_pool
 
   network_adapters {
-    bridge = var.bridge
-    model  = "virtio"
-    tag    = var.vlan_tag    
+    bridge   = var.bridge
+    model    = "virtio"
+    vlan_tag = var.vlan_tag    
   }
 
   disks {
-    disk_size         = "4G"
-    format            = "raw"
-    storage_pool      = var.storage_pool
-    type              = "scsi"
+    disk_size    = "4G"
+    format       = "raw"
+    storage_pool = var.storage_pool
+    type         = "scsi"
   }
 
   iso_file     = var.iso_file

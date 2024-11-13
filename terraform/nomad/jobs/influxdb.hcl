@@ -10,19 +10,19 @@ job "influxdb" {
 
     volume "influxdb_config" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
       read_only       = false
       source          = "influxdb_config"
-    }
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    } 
 
     volume "influxdb_data" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
       read_only       = false
       source          = "influxdb_data"
-    }
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    } 
 
     service {
       name = "influxdb"

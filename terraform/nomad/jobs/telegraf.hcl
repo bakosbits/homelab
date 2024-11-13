@@ -10,6 +10,7 @@ job "telegraf" {
 
     task "telegraf" {
       driver = "docker"
+      
       service {
         name = "telegraf"
         port = "http"

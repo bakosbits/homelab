@@ -17,7 +17,7 @@ job "cephfs-controller" {
       driver = "docker"
 
       config {
-        image = "quay.io/cephcsi/cephcsi:v3.12.0"
+        image = "quay.io/cephcsi/cephcsi:v3.12.2"
         args = [
           "--type=cephfs",
           "--controllerserver=true",
@@ -48,22 +48,22 @@ job "cephfs-controller" {
         ]
       }
       
-      resources {
-        cpu    = 500
-        memory = 256
-      }
-
       csi_plugin {
         id        = "cephfs"
         type      = "controller"
         mount_dir = "/csi"
       }
 
+      resources {
+        cpu    = 500
+        memory = 256
+      }
+
       template {
         destination = "local/config.json"
         change_mode = "restart"
         data        = <<-EOF
-        [{ "clusterID": "820b0f5c-cee3-40a7-b5d5-0aada0355612","monitors": ["192.168.1.10","192.168.1.11","192.168.1.12"] }]
+          [{ "clusterID": "820b0f5c-cee3-40a7-b5d5-0aada0355612","monitors": ["192.168.1.10","192.168.1.11","192.168.1.12"] }]
         EOF
       }
     }

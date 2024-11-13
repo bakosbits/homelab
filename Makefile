@@ -1,4 +1,4 @@
-include .env
+# include .env
 
 help:##............Show this help
 	@echo ""

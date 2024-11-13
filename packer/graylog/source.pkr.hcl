@@ -6,9 +6,9 @@ source "proxmox-iso" "logging" {
   node                     = var.proxmox_node
   insecure_skip_tls_verify = true  
 
-  vm_id                   = 9001
-  vm_name                 = "logging"
-  template_description    = "Logging services (Graylog, mongo and opensearch on Debian 12) built on ${formatdate("MM/DD/YYYY hh:mm:ss ZZZ", timestamp())}"
+  vm_id                   = 9010
+  vm_name                 = "graylog-server"
+  template_description    = "Managed by terraform, built on ${formatdate("MM/DD/YYYY hh:mm:ss ZZZ", timestamp())}"
 
   os                      = "l26"
   cpu_type                = "host"
@@ -25,7 +25,7 @@ source "proxmox-iso" "logging" {
   network_adapters {
     bridge = var.bridge
     model  = "virtio"
-    tag    = var.vlan_tag    
+    vlan_tag    = var.vlan_tag    
   }
 
   disks {

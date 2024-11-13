@@ -10,11 +10,11 @@ job "home-assistant" {
 
     volume "hass" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
       read_only       = false
       source          = "hass"
-    }
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    } 
 
     service {
       name = "home-assistant"
@@ -24,8 +24,10 @@ job "home-assistant" {
         "traefik.http.routers.home-assistant.entrypoints=websecure",
         "traefik.http.routers.home-assistant.rule=Host(`home-assistant.bakos.me`) || Host(`hass.bakos.me`)"
       ]
+
       check {
-        type     = "tcp"
+        type     = "http"
+        path     = "/"
         interval = "10s"
         timeout  = "2s"
       }
@@ -35,7 +37,7 @@ job "home-assistant" {
       driver = "docker"
 
       config {
-        image        = "homeassistant/home-assistant:2024.9.2"
+        image        = "homeassistant/home-assistant:2024.11.1"
         ports        = ["http"]
         network_mode = "host"
       }

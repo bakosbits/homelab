@@ -1,30 +1,31 @@
-job "ceph-rbd-controller" {
+job "cephrbd-node" {
   datacenters = ["dc1"]
-  type        = "service"
+  type        = "system"
 
-  group "ceph-rbd-controller" {
+  group "cephrbd-node" {
     
     network { 
       port "metrics" {} 
     }
    
     service {
-      name = "ceph-rbd-controller"
+      name = "cephrbd-node"
       port = "metrics"
     }
-
-    task "ceph-rbd-controller" {
+    
+    task "cephrbd-node" {
       driver = "docker"
 
       config {
-        image = "quay.io/cephcsi/cephcsi:v3.12.0"
+        image = "quay.io/cephcsi/cephcsi:v3.12.2"
+        privileged = true
         args = [
           "--type=rbd",
-          "--controllerserver=true",
           "--drivername=rbd.csi.ceph.com",
+          "--nodeserver=true",
           "--endpoint=unix://csi/csi.sock",
           "--nodeid=${node.unique.name}",
-          "--instanceid=${node.unique.name}-controller",
+          "--instanceid=${node.unique.name}-node",
           "--pidlimit=-1",
           "--logtostderr=true",
           "--v=5",
@@ -34,7 +35,7 @@ job "ceph-rbd-controller" {
         volumes = [
           "./local/config.json:/etc/ceph-csi-config/config.json",
           "/lib/modules:/lib/modules"          
-        ]
+        ]        
 
         mounts = [
           {
@@ -47,25 +48,25 @@ job "ceph-rbd-controller" {
           }
         ]
       }
-      
+
+      csi_plugin {
+        id        = "cephrbd"
+        type      = "node"
+        mount_dir = "/csi"
+      }
+
       resources {
         cpu    = 500
         memory = 256
-      }
-
-      csi_plugin {
-        id        = "ceph-rbd"
-        type      = "controller"
-        mount_dir = "/csi"
       }
 
       template {
         destination = "local/config.json"
         change_mode = "restart"
         data        = <<-EOF
-        [{ "clusterID": "820b0f5c-cee3-40a7-b5d5-0aada0355612","monitors": ["192.168.1.10","192.168.1.11","192.168.1.12"] }]
+          [{"clusterID": "820b0f5c-cee3-40a7-b5d5-0aada0355612","monitors": ["192.168.1.10","192.168.1.11","192.168.1.12"] }]
         EOF
-      }
+      }  
     }
   }
 }

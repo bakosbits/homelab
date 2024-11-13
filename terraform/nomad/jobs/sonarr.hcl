@@ -10,18 +10,18 @@ job "sonarr" {
 
     volume "sonarr" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
       read_only       = false
       source          = "sonarr"
-    }
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    } 
 
     volume "media" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "multi-node-multi-writer"
       read_only       = false
       source          = "media"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
     }
 
     service {
@@ -30,7 +30,7 @@ job "sonarr" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.sonarr.entrypoints=websecure",
-        "traefik.http.routers.sonarr.middlewares=auth",
+        "traefik.http.routers.sonarr.middlewares=auth"
       ]
 
       check {
@@ -45,7 +45,7 @@ job "sonarr" {
       driver = "docker"
 
       config {
-        image        = "lscr.io/linuxserver/sonarr:4.0.8"
+        image        = "linuxserver/sonarr:4.0.9"
         ports        = ["http"]
         network_mode = "host"
       }

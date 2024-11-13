@@ -10,19 +10,18 @@ job "transmission" {
 
     volume "transmission" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
       read_only       = false
       source          = "transmission"
-    }
-
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    } 
 
     volume "media" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "multi-node-multi-writer"
       read_only       = false
       source          = "media"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
     }
 
     service {
@@ -31,8 +30,9 @@ job "transmission" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.transmission.entrypoints=websecure",
-        "traefik.http.routers.transmission.middlewares=auth",
+        "traefik.http.routers.transmission.middlewares=auth"
       ]
+
       check {
         type     = "tcp"
         interval = "10s"
@@ -47,9 +47,6 @@ job "transmission" {
         image        = "lscr.io/linuxserver/transmission:4.0.6"
         ports        = ["http"]
         network_mode = "host"
-        volumes = [
-          "watch/:/data/downloads/watch"
-        ]
       }
 
       volume_mount {

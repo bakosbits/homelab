@@ -10,18 +10,18 @@ job "prometheus" {
 
     volume "prometheus" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
       read_only       = false
       source          = "prometheus"
-    }    
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    } 
 
     service {
       name = "prometheus"
       port = "http"
       tags = [
         "traefik.enable=true",
-        #       "traefik.http.routers.prometheus.entrypoints=websecure",             				
+        "traefik.http.routers.prometheus.entrypoints=websecure",             				
         "traefik.http.routers.prometheus.middlewares=auth"
       ]
       check {
@@ -37,7 +37,7 @@ job "prometheus" {
       driver = "docker"
 
       config {
-        image        = "prom/prometheus"
+        image        = "prometheus"
         network_mode = "host"
         ports        = ["http"]
         volumes = [

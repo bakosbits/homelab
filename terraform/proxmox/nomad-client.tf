@@ -25,7 +25,6 @@ resource "proxmox_vm_qemu" "nomad-client" {
   sshkeys    = var.proxmox_sshkeys
   ipconfig0  = "ip=dhcp"
 
-
   network {
     model  = "virtio"
     bridge = var.bridge

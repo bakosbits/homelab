@@ -15,21 +15,21 @@ job "emulatorjs" {
     }
 
     volume "arcade_config" {
-      type            = "csi"
+      type = "csi"
+      read_only = false
+      source = "arcade_config"
       attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-      read_only       = false
-      source          = "arcade_config"
-    }
+      access_mode = "single-node-writer"
+    }  
 
     volume "arcade_data" {
-      type            = "csi"
+      type = "csi"
+      read_only = false
+      source = "arcade_data"
       attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-      read_only       = false
-      source          = "arcade_data"
-    }
-
+      access_mode = "single-node-writer"
+    } 
+    
     service {
       name = "arcade"
       port = "http"
@@ -68,7 +68,7 @@ job "emulatorjs" {
       driver = "docker"
 
       config {
-        image        = "lscr.io/linuxserver/emulatorjs:latest"
+        image        = "linuxserver/emulatorjs:latest"
         network_mode = "bridge"
         ports        = ["http", "admin"]
       }

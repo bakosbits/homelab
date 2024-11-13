@@ -1,4 +1,4 @@
-source "proxmox-iso" "overwatch" {
+source "proxmox-iso" "manager" {
 
   proxmox_url              = var.proxmox_api_url
   username                 = var.proxmox_api_user
@@ -7,7 +7,7 @@ source "proxmox-iso" "overwatch" {
   insecure_skip_tls_verify = true  
 
   vm_id                   = 9000
-  vm_name                 = "overwatch-img"
+  vm_name                 = "overwatch"
   template_description    = "Managed by terraform, built on ${formatdate("MM/DD/YYYY hh:mm:ss ZZZ", timestamp())}"
 
   os                      = "l26"
@@ -25,7 +25,7 @@ source "proxmox-iso" "overwatch" {
   network_adapters {
     bridge = var.bridge
     model  = "virtio"
-    tag    = var.vlan_tag    
+    vlan_tag    = var.vlan_tag    
   }
 
   disks {

@@ -24,7 +24,6 @@ module "consul" {
 module "nomad" {
   source     = "./nomad"
   depends_on = [module.consul.configured]
-
   # Ceph
   ceph_userid  = var.ceph_userid
   ceph_userkey = var.ceph_userkey
@@ -49,8 +48,6 @@ module "nomad" {
   # Postgres
   postgres_root_user     = var.postgres_root_user
   postgres_root_password = var.postgres_root_password
-  # Plex
-  plex_auth_token = var.plex_auth_token
   # Samba
   samba_uid      = var.samba_uid
   samba_password = var.samba_password

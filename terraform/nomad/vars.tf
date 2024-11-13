@@ -19,7 +19,7 @@ variable "auth_domain" {
 
 variable "auth_client_id" {
   type        = string
-  description = "The client ID for hte forwardAuth plugin for Traefik"
+  description = "The client ID for the forwardAuth plugin for Traefik"
 }
 
 variable "auth_client_secret" {
@@ -68,12 +68,12 @@ variable "postgres_root_password" {
 
 variable "influxdb_password" {
   type        = string
-  description = "The password for the Postgres root user"
+  description = "The password for the influxdb root user"
 }
 
 variable "influxdb_user" {
   type        = string
-  description = "The root user for postgres"
+  description = "The root user for influxdb"
 }
 
 ###--- Samba vars ---###
@@ -112,10 +112,4 @@ variable "mongo_initdb_root_username" {
 variable "mongo_initdb_root_password" {
   type        = string
   description = "The mongo password for the auth db"
-}
-
-###--- Plex vars ---###
-variable "plex_auth_token" {
-  type        = string
-  description = "The API of the plex instance"
 }

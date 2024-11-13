@@ -1,6 +1,7 @@
   - platform: group
     name: Color Lights
     entities:
-      - light.led_lights
+      - light.led_light
       - light.rocket_lamp
       - light.movie_lamp
+      - light.loft_lamp

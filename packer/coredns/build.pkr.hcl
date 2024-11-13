@@ -1,5 +1,5 @@
 build {
-  sources = ["source.proxmox-iso.coredns"]
+  sources = ["source.proxmox-iso.dns"]
 
   # Copy configs up to tmp
   provisioner "file" {

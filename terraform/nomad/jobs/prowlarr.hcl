@@ -10,18 +10,18 @@ job "prowlarr" {
 
     volume "prowlarr" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
       read_only       = false
       source          = "prowlarr"
-    }
+      attachment_mode = "file-system"
+      access_mode      = "single-node-writer"
+    } 
 
     volume "media" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "multi-node-multi-writer"
       read_only       = false
       source          = "media"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
     }
 
     service {
@@ -44,7 +44,7 @@ job "prowlarr" {
       driver = "docker"
 
       config {
-        image        = "lscr.io/linuxserver/prowlarr:1.21.2"
+        image        = "linuxserver/prowlarr:1.25.4"
         ports        = ["http"]
         network_mode = "host"
       }

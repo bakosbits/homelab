@@ -10,18 +10,18 @@ job "radarr" {
 
     volume "radarr" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
       read_only       = false
       source          = "radarr"
-    }
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    } 
 
     volume "media" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "multi-node-multi-writer"
       read_only       = false
       source          = "media"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
     }
 
     service {
@@ -45,7 +45,7 @@ job "radarr" {
       driver = "docker"
 
       config {
-        image        = "lscr.io/linuxserver/radarr:5.9.1"
+        image        = "linuxserver/radarr:5.14.0"
         ports        = ["http"]
         network_mode = "host"
       }

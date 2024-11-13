@@ -161,9 +161,3 @@ variable "mongo_initdb_root_password" {
   type        = string
   description = "The mongo password for the auth db"
 }
-
-### Plex
-variable "plex_auth_token" {
-  type        = string
-  description = "The API of the plex instance"
-}

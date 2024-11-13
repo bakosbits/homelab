@@ -10,10 +10,13 @@ job "traefik" {
       port "postgres" { static = "5432" }
     }
 
-    volume certs {
-      type   = "host"
-      source = "certs"
-    }
+    volume "certs" {
+      type            = "csi"
+      read_only       = true
+      source          = "certs"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-reader-only"
+    } 
 
     service {
       name = "traefik"
@@ -23,7 +26,7 @@ job "traefik" {
         "traefik.http.routers.api.entrypoints=websecure",
         "traefik.http.routers.api.service=api@internal",
         "traefik.http.services.dummy.loadbalancer.server.port=9000",
-        "traefik.http.routers.api.middlewares=auth",
+        "traefik.http.routers.api.middlewares=auth"
       ]
 
       check {
@@ -37,7 +40,7 @@ job "traefik" {
       driver = "docker"
 
       config {
-        image        = "traefik:3.1.4"
+        image        = "traefik:3.1.5"
         ports        = ["http", "https", "postgres"]
         network_mode = "host"
         volumes = [

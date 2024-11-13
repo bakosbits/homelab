@@ -10,20 +10,24 @@ job "flaresolverr" {
 
     volume "flaresolverr" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
       read_only       = false
       source          = "flaresolverr"
-    }
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    }   
 
     volume "media" {
-      type   = "host"
-      source = "media"
-    }
+      type            = "csi"
+      read_only       = false
+      source          = "media"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
+    } 
 
     service {
       name = "flaresolverr"
       port = "http"
+      
       check {
         type     = "tcp"
         interval = "10s"
@@ -35,7 +39,7 @@ job "flaresolverr" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/flaresolverr/flaresolverr:latest"
+        image = "flaresolverr/flaresolverr:latest"
         ports = ["http"]
       }
 

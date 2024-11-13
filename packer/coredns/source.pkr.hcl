@@ -1,4 +1,4 @@
-source "proxmox-iso" "coredns" {
+source "proxmox-iso" "dns" {
 
   proxmox_url              = var.proxmox_api_url
   username                 = var.proxmox_api_user
@@ -7,7 +7,7 @@ source "proxmox-iso" "coredns" {
   insecure_skip_tls_verify = true  
 
   vm_id                   = 9001
-  vm_name                 = "coredns-img"
+  vm_name                 = "coredns"
   template_description    = "Managed by terraform, built on ${formatdate("MM/DD/YYYY hh:mm:ss ZZZ", timestamp())}"
 
   os                      = "l26"

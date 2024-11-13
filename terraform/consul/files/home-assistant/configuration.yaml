@@ -46,15 +46,6 @@ google_assistant:
     - climate
     - camera
   entity_config:
-    media_player.home_theater:
-      expose: true
-      room: Family Room
-    media_player.sony_bravia_tv:
-      expose: true
-      room: Family Room
-    switch.pergola_lights:
-      expose: true
-      room: Outside
     switch.garage_door:
       expose: false
     switch.family_room_fan_switch:
@@ -69,4 +60,4 @@ ffmpeg:
 
 cover: !include covers.yaml
 automation: !include automations.yaml
-light: !include lights.yaml
+light: !include lights.yamlsudo nano conf 

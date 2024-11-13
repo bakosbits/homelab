@@ -9,13 +9,17 @@ job "samba" {
     }
 
     volume "samba" {
-      type   = "host"
-      source = "samba"
-    }
+      type            = "csi"
+      read_only       = false
+      source          = "samba"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    } 
 
     service {
       name = "samba"
       port = "smb"
+      
       check {
         type     = "tcp"
         interval = "10s"

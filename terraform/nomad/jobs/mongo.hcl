@@ -16,13 +16,22 @@ job "mongo" {
       port "mongo" { static = "27017" }
     }
 
+
+    volume "init-mongo" {
+      type            = "csi"
+      read_only       = true
+      source          = "init-mongo"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-reader-only"
+    } 
+
     volume "mongo" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
       read_only       = false
       source          = "mongo"
-    }
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    }  
 
     service {
       name = "mongo"
@@ -33,12 +42,14 @@ job "mongo" {
       driver = "docker"
 
       config {
-        image        = "docker.io/mongo:7.0.14"
+        image        = "mongo:7.0.14"
         network_mode = "host"
         ports        = ["mongo"]
-        volumes = [
-          "/mnt/volumes/mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro",
-        ]
+      }
+
+      volume_mount {
+        volume      = "init-mongo"
+        destination = "/docker-entrypoint-initdb.d/init-mongo.sh:ro"
       }
 
       volume_mount {

@@ -10,18 +10,18 @@ job "plex" {
 
     volume "plex" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
       read_only       = false
       source          = "plex"
-    }
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    }    
 
     volume "media" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "multi-node-multi-writer"
       read_only       = false
       source          = "media"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
     }
 
     service {
@@ -30,10 +30,12 @@ job "plex" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.plex.entrypoints=websecure",
+        "traefik.http.routers.plex.middlewares=auth"        
       ]
 
       check {
-        type     = "tcp"
+        type     = "http"
+        path     = "/web" 
         interval = "10s"
         timeout  = "2s"
       }
@@ -62,7 +64,7 @@ job "plex" {
       env {
         PLEX_UID   = "1010"
         PLEX_GID   = "1010"
-        PLEX_CLAIM = "claim-1kbMcezLyfAQEDfz9idS"
+        PLEX_CLAIM = "claim-UfnzQyxu1GmSBGEwFW7W"
       }
 
       resources {

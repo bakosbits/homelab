@@ -10,11 +10,11 @@ job "wikijs" {
 
     volume "wikijs" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
       read_only       = false
       source          = "wikijs"
-    }
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    }   
 
     service {
       name = "wikijs"
@@ -22,11 +22,12 @@ job "wikijs" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.wikijs.entrypoints=websecure",
-        "traefik.http.routers.wikijs.middlewares=auth",
+        "traefik.http.routers.wikijs.middlewares=auth"
       ]
 
       check {
-        type     = "tcp"
+        type     = "http"
+        path     = "/"
         interval = "10s"
         timeout  = "2s"
       }

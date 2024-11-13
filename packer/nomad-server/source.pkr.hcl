@@ -24,7 +24,7 @@ source "proxmox-iso" "nomad-server" {
   network_adapters {
     bridge = var.bridge
     model  = "virtio"
-    tag    = var.vlan_tag    
+    vlan_tag    = var.vlan_tag    
   }
 
   disks {

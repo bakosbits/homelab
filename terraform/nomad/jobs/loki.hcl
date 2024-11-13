@@ -2,14 +2,6 @@ job "loki" {
   datacenters = ["dc1"]
   type        = "service"
 
-  reschedule {
-    attempts       = 5
-    interval       = "1h"
-    unlimited      = false
-    delay          = "5s"
-    delay_function = "constant"
-  }
-
   group "loki" {
 
     network {
@@ -18,11 +10,11 @@ job "loki" {
 
     volume "loki" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
       read_only       = false
       source          = "loki"
-    }
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    } 
 
     service {
       name = "loki"
@@ -38,7 +30,7 @@ job "loki" {
 
     task "loki" {
       driver = "docker"
-      user   = "10001:10001"
+      user   = "root:root"
 
       config {
         image        = "grafana/loki:2.9.10"

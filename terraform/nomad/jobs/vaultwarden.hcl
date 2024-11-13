@@ -10,11 +10,11 @@ job "vaultwarden" {
 
     volume "vaultwarden" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
       read_only       = false
       source          = "vaultwarden"
-    }
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    }   
 
     service {
       name = "vaultwarden"

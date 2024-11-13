@@ -2,7 +2,7 @@ resource "proxmox_vm_qemu" "coredns" {
 
   name        = "coredns"
   target_node = "pve03"
-  clone       = "coredns-img"
+  clone       = "coredns-server"
   full_clone  = true
 
   cores     = 2

@@ -2,24 +2,27 @@ job "unifi" {
   datacenters = ["dc1"]
   type        = "service"
 
-  constraint {
-    attribute = "${attr.unique.hostname}"
-    value     = "client03"
-  }
-
   group "unifi" {
 
     network {
       port "http" { static = "8443" }
     }
 
+    volume "init-mongo" {
+      type            = "csi"
+      read_only       = true
+      source          = "init-mongo"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-reader-only"
+    } 
+
     volume "unifi" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
       read_only       = false
       source          = "unifi"
-    }
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    }  
 
     service {
       name = "unifi"
@@ -28,11 +31,12 @@ job "unifi" {
         "traefik.enable=true",
         "traefik.http.routers.unifi.entrypoints=websecure",
         "traefik.http.services.unifi.loadbalancer.server.scheme=https",
-        "traefik.http.routers.unifi.middlewares=auth",
+        "traefik.http.routers.unifi.middlewares=auth"
       ]
+
       check {
         type     = "tcp"
-        port     = "http"
+        path     = "http"
         interval = "10s"
         timeout  = "2s"
       }
@@ -42,12 +46,14 @@ job "unifi" {
       driver = "docker"
 
       config {
-        image        = "linuxserver/unifi-network-application:8.4.62"
+        image        = "linuxserver/unifi-network-application:8.5.6"
         network_mode = "host"
         ports        = ["http"]
-        volumes = [
-          "/mnt/volumes/unifi/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro",
-        ]
+      }
+
+      volume_mount {
+        volume      = "init-mongo"
+        destination = "/docker-entrypoint-initdb.d/init-mongo.sh:ro"
       }
 
       volume_mount {

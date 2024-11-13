@@ -1,13 +1,9 @@
-resource "nomad_job" "auth" {
-  jobspec = file("${path.module}/jobs/auth.hcl")
+resource "nomad_job" "cephrbd-controller" {
+  jobspec = file("${path.module}/jobs/cephrbd-controller.hcl")
 }
 
-resource "nomad_job" "ceph-rbd-controller" {
-  jobspec = file("${path.module}/jobs/ceph-rbd-controller.hcl")
-}
-
-resource "nomad_job" "ceph-rbd-node" {
-  jobspec = file("${path.module}/jobs/ceph-rbd-node.hcl")
+resource "nomad_job" "cephrbd-node" {
+  jobspec = file("${path.module}/jobs/cephrbd-node.hcl")
 }
 
 resource "nomad_job" "cephfs-controller" {
@@ -16,6 +12,14 @@ resource "nomad_job" "cephfs-controller" {
 
 resource "nomad_job" "cephfs-node" {
   jobspec = file("${path.module}/jobs/cephfs-node.hcl")
+}
+
+resource "nomad_job" "auth" {
+  jobspec = file("${path.module}/jobs/auth.hcl")
+}
+
+resource "nomad_job" "docker-registry" {
+  jobspec = file("${path.module}/jobs/docker-registry.hcl")
 }
 
 resource "nomad_job" "docker-cleanup" {
@@ -39,7 +43,7 @@ resource "nomad_job" "grafana" {
 }
 
 resource "nomad_job" "home-assistant" {
-  jobspec = file("${path.module}/jobs/home-assistant.hcl")
+  jobspec = file("${path.module}/jobs/home-assistant.hcl") 
 }
 
 resource "nomad_job" "influxdb" {
@@ -104,7 +108,6 @@ resource "nomad_job" "telegraf" {
 
 resource "nomad_job" "traefik" {
   jobspec = file("${path.module}/jobs/traefik.hcl")
-  depends_on = [resource.nomad_job.auth]
 }
 
 resource "nomad_job" "transmission" {
@@ -120,9 +123,9 @@ resource "nomad_job" "vaultwarden" {
   jobspec = file("${path.module}/jobs/vaultwarden.hcl")
 }
 
-resource "nomad_job" "vector" {
-  jobspec = file("${path.module}/jobs/vector.hcl")
-}
+# resource "nomad_job" "vector" {
+#   jobspec = file("${path.module}/jobs/vector.hcl")
+# }
 
 resource "nomad_job" "wikijs" {
   jobspec = file("${path.module}/jobs/wikijs.hcl")

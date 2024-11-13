@@ -10,16 +10,19 @@ job "jellyfin" {
 
     volume "jellyfin" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
       read_only       = false
       source          = "jellyfin"
-    }
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    } 
 
     volume "media" {
-      type   = "host"
-      source = "media"
-    }
+      type            = "csi"
+      read_only       = false
+      source          = "media"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
+    } 
 
     service {
       name = "jellyfin"
@@ -41,7 +44,7 @@ job "jellyfin" {
       driver = "docker"
 
       config {
-        image        = "lscr.io/linuxserver/jellyfin:10.9.8"
+        image        = "linuxserver/jellyfin:10.9.8"
         ports        = ["http"]
         network_mode = "host"
       }

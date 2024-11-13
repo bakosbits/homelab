@@ -10,19 +10,19 @@ job "sabnzbd" {
 
     volume "sabnzbd" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
       read_only       = false
       source          = "sabnzbd"
-    }
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    }   
 
     volume "media" {
       type            = "csi"
-      attachment_mode = "file-system"
-      access_mode     = "multi-node-multi-writer"
       read_only       = false
       source          = "media"
-    }
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
+    } 
 
     service {
       port = "http"
@@ -45,7 +45,7 @@ job "sabnzbd" {
       driver = "docker"
 
       config {
-        image        = "lscr.io/linuxserver/sabnzbd:4.3.2"
+        image        = "linuxserver/sabnzbd:4.3.2"
         ports        = ["http"]
         network_mode = "bridge"
       }

@@ -1,6 +1,6 @@
 # urban-disco (my homelab)
 
-This repository contains the configuration for my homelab. I'm using [Nomad](https://nomadproject.io) and [Consul](https://www.consul.io/) for orchestration and service discovery. [Packer](https://packer.io) is slinging virtual images while [Terraform](https://www.terraform.io) is helping to manage state. 
+This repository holds the configuration for my homelab. I'm using [Nomad](https://nomadproject.io) and [Consul](https://www.consul.io/) for orchestration and service discovery. [Packer](https://packer.io) is slinging virtual images while [Terraform](https://www.terraform.io) is helping to deploy and manage state. 
 
 My lab runs on a 3 node [Proxmox](https://www.proxmox.com/en/) cluster. Terraform deploys 3 server nodes and 3 client nodes that makeup the cluster. It also manages a services node (DNS, etc) as well as several hosts that makeup a logging infrastructure seperate from the Nomad cluster.  
 
