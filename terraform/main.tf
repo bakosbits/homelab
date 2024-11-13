@@ -4,6 +4,10 @@ terraform {
 
 module "proxmox" {
   source               = "./proxmox"
+
+  ###---Variables---###
+
+  # Proxmox
   ciuser               = var.ciuser
   cipassword           = var.cipassword
   proxmox_api_url      = var.proxmox_api_url
@@ -18,12 +22,15 @@ module "proxmox" {
 
 module "consul" {
   source     = "./consul"
-  depends_on = [module.proxmox.configured]
+  depends_on = [module.proxmox]
 }
 
 module "nomad" {
   source     = "./nomad"
-  depends_on = [module.consul.configured]
+  depends_on = [module.consul]
+
+  ###---Variables---###
+
   # Ceph
   ceph_userid  = var.ceph_userid
   ceph_userkey = var.ceph_userkey

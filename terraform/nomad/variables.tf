@@ -77,18 +77,3 @@ resource "nomad_variable" "influxdb" {
     DOCKER_INFLUXDB_INIT_USERNAME = var.influxdb_user
   }
 }
-
-resource "nomad_variable" "graylog" {
-  path = "nomad/jobs/graylog"
-  items = {
-    GRAYLOG_NODE_ID_FILE="/usr/share/graylog/data/config/node-id"
-    GRAYLOG_HTTP_BIND_ADDRESS="0.0.0.0:9000"
-    GRAYLOG_ELASTICSEARCH_HOSTS="http://opensearch:9200"
-    GRAYLOG_MONGODB_URI="mongodb://mongodb:27017/graylog"
-    GRAYLOG_REPORT_DISABLE_SANDBOX="true"
-    GRAYLOG_PASSWORD_SECRET="somepasswordpepper"
-      # Password: "admin"
-    GRAYLOG_ROOT_PASSWORD_SHA2="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
-    GRAYLOG_HTTP_EXTERNAL_URI="http://127.0.0.1:9000/"
-  }
-}

@@ -4,7 +4,6 @@ source "proxmox-iso" "dns" {
   username                 = var.proxmox_api_user
   password                 = var.proxmox_api_password
   node                     = var.proxmox_node
-  insecure_skip_tls_verify = true  
 
   vm_id                   = 9001
   vm_name                 = "coredns"

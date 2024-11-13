@@ -2,14 +2,6 @@ job "mongo" {
   datacenters = ["dc1"]
   type        = "service"
 
-  reschedule {
-    attempts       = 5
-    interval       = "1h"
-    unlimited      = false
-    delay          = "5s"
-    delay_function = "constant"
-  }
-
   group "mongo" {
 
     network {

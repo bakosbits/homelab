@@ -1,4 +1,4 @@
-### Proxmox
+# Proxmox
 variable "proxmox_api_url" {
   type        = string
   description = "The url to Proxmox"
@@ -49,7 +49,7 @@ variable "vlan_tag" {
   description = "The vlan used by the virtual machines"
 }
 
-###--- Ceph vars ---###
+# Ceph
 
 variable "ceph_userid" {
   type        = string
@@ -61,7 +61,7 @@ variable "ceph_userkey" {
   description = "The ceph auth client key required for cephx"
 }
 
-### ForwardAuth
+# ForwardAuth
 variable "auth_domain" {
   type        = string
   description = "The domain of the homelab"
@@ -87,7 +87,7 @@ variable "auth_whitelist_email" {
   description = "The email to be whitelisted by the forwardAuth plugin"
 }
 
-### Grafana
+# Grafana
 variable "grafana_email" {
   type        = string
   description = "The username of the grafana admin"
@@ -103,7 +103,7 @@ variable "grafana_url" {
   description = "The URL of the grafana instance"
 }
 
-### Postgres
+# Postgres
 variable "postgres_root_user" {
   type        = string
   description = "The root user for postgres"
@@ -114,7 +114,7 @@ variable "postgres_root_password" {
   description = "The password for the Postgres root user"
 }
 
-### Influxdb
+# Influxdb
 variable "influxdb_password" {
   type        = string
   description = "The password for the Postgres root user"
@@ -125,7 +125,7 @@ variable "influxdb_user" {
   description = "The root user for postgres"
 }
 
-### Samba
+# Samba
 variable "samba_password" {
   type        = string
   description = "The password for samba"
@@ -141,7 +141,7 @@ variable "samba_uid" {
   description = "The UID for the samba user"
 }
 
-### Mongo
+# Mongo
 variable "mongo_password" {
   type        = string
   description = "The mongo password for the Unifi db"

@@ -1,4 +1,4 @@
-###--- Ceph vars ---###
+# Ceph
 
 variable "ceph_userid" {
   type        = string
@@ -10,7 +10,7 @@ variable "ceph_userkey" {
   description = "The ceph auth client key required for cephx"
 }
 
-###--- Auth vars ---###
+# ForwardAuth
 
 variable "auth_domain" {
   type        = string
@@ -37,7 +37,7 @@ variable "auth_whitelist_email" {
   description = "The email to be whitelisted by the forwardAuth plugin"
 }
 
-###--- Grafana vars ---###
+# Grafana
 
 variable "grafana_email" {
   type        = string
@@ -64,7 +64,7 @@ variable "postgres_root_password" {
   description = "The password for the Postgres root user"
 }
 
-###--- Influxdb vars ---###
+# Influxdb
 
 variable "influxdb_password" {
   type        = string
@@ -76,7 +76,7 @@ variable "influxdb_user" {
   description = "The root user for influxdb"
 }
 
-###--- Samba vars ---###
+# Samba
 
 variable "samba_password" {
   type        = string
@@ -93,7 +93,8 @@ variable "samba_uid" {
   description = "The UID for the samba user"
 }
 
-###--- Mongo vars ---###
+#Mongo
+
 variable "mongo_password" {
   type        = string
   description = "The mongo password for the Unifi db"
