@@ -1,0 +1,25 @@
+- platform: group
+  name: Motion sensors
+  entities:
+    - binary_sensor.family_room_motion
+    - binary_sensor.hall_motion
+    - binary_sensor.kitchen_motion
+    - binary_sensor.loft_motion
+    - binary_sensor.living_room_motion
+    - binary_sensor.garage_motion
+    - binary_sensor.master_bath_motion
+    - binary_sensor.water_closet_motion
+    - binary_sensor.guest_bath_motion
+  name: Garage_motion
+  entities:
+    - binary_sensor.garage_motion_1
+    - binary_sensor.garage_motion_2
+    - binary_sensor.garage_motion_3
+  name: Hall motion
+  entities:   
+    - binary_sensor.hall_motion_1
+    - binary_sensor.hall_motion_2
+  name: Living room motion
+  entities:    
+    - binary_sensor.living_room_motion_1
+    - binary_sensor.living_room_motion_2

@@ -1,0 +1,59 @@
+- platform: group
+  name: Exterior lights
+  entities:
+    - switch.front_porch_lights
+    - switch.back_pation_light
+    - switch.side_door_light
+  name: Interior switches
+  entities:
+    - switch.garage_light
+    - switch.guest_bath_fan
+    - switch.laundry_light
+    - switch.master_bath_fan
+    - switch.nook_bath_fan
+    - switch.family_room_fan_switch
+    - switch.bedroom_fan_switch
+    - switch.water_closet_fan
+
+- platform: template
+  switches:
+    kitchen_sensor:
+      value_template: "{{ is_state('automation.motion_toggle_kitchen_lights', 'on') }}"
+      turn_on:
+        action: homeassistant.turn_on
+        target:
+          entity_id: automation.motion_toggle_kitchen_lights
+      turn_off:
+        action: homeassistant.turn_off
+        target:
+          entity_id: automation.motion_toggle_kitchen_lights
+    loft_sensor:
+      value_template: "{{ is_state('automation.motion_toggle_loft_lights', 'on') }}"
+      turn_on:
+        action: homeassistant.turn_on
+        target:
+          entity_id: automation.motion_toggle_loft_lights
+      turn_off:
+        action: homeassistant.turn_off
+        target:
+          entity_id: automation.motion_toggle_loft_lights
+    living_room_sensor:
+      value_template: "{{ is_state('automation.motion_toggle_living_room_lights', 'on') }}"
+      turn_on:
+        action: homeassistant.turn_on
+        target:
+          entity_id: automation.motion_toggle_living_room_lights
+      turn_off:
+        action: homeassistant.turn_off
+        target:
+          entity_id: automation.motion_toggle_living_room_lights
+    family_room_sensor:
+      value_template: "{{ is_state('automation.motion_toggle_family_room_lights', 'on') }}"
+      turn_on:
+        action: homeassistant.turn_on
+        target:
+          entity_id: automation.motion_toggle_family_room_lights
+      turn_off:
+        action: homeassistant.turn_off
+        target:
+          entity_id: automation.motion_toggle_family_room_lights            

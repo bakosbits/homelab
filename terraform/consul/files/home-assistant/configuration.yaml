@@ -22,25 +22,7 @@ http:
   ip_ban_enabled: true
   login_attempts_threshold: 5
 
-google_assistant:
-  project_id: !secret google_project_id
-  service_account: !include service_account.json
-  report_state: true
-  exposed_domains:
-    - switch
-    - light
-    - fan
-    - climate
-    - camera
-  entity_config:
-    switch.garage_door:
-      expose: false
-    switch.family_room_fan_switch:
-      expose: false
-    switch.bedroom_fan_switch:
-      expose: false
-    switch.living_room_fan_switch:
-      expose: false
+google_assistant: !include google_assistant.yaml
 
 tts:
   - platform: google_translate
@@ -48,7 +30,11 @@ tts:
 ffmpeg:
   ffmpeg_bin: /usr/bin/ffmpeg
 
+light: !include: lights.yaml
+switch: !include switch.yaml
 cover: !include covers.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
+scene: !include scenes.yaml
+media_player: !include media_players.yaml
 

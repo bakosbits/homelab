@@ -1,15 +1,19 @@
 resource "consul_key_prefix" "home-assistant" {
   path_prefix = "homelab/hass/"
   subkeys = {
-    "automations.yaml"     = file("${path.module}/files/home-assistant/automations.yaml"),
-    "configuration.yaml"   = file("${path.module}/files/home-assistant/configuration.yaml"),
-    "covers.yaml"          = file("${path.module}/files/home-assistant/covers.yaml"),
-    "customize.yaml"       = file("${path.module}/files/home-assistant/customize.yaml"),   
-    "lights.yaml"          = file("${path.module}/files/home-assistant/lights.yaml"),
-    "scripts.yaml"         = file("${path.module}/files/home-assistant/scripts.yaml"),
-    "secrets.yaml"         = file("${path.module}/files/home-assistant/secrets.yaml"),
-    "service_account.json" = file("${path.module}/files/home-assistant/service_account.json"),  
-    "trusted_proxies.yaml" = file("${path.module}/files/home-assistant/trusted_proxies.yaml"),                
+    "automations.yaml"     = file("/home/rab/hass/automations.yaml"),
+    "binary_sensors.yaml"  = file("/home/rab/hass/binary_sensors.yaml"),    
+    "configuration.yaml"   = file("/home/rab/hass/configuration.yaml"),
+    "covers.yaml"          = file("/home/rab/hass/covers.yaml"),
+    "customize.yaml"       = file("/home/rab/hass/customize.yaml"),   
+    "lights.yaml"          = file("/home/rab/hass/lights.yaml"),
+    "scripts.yaml"         = file("/home/rab/hass/scripts.yaml"),
+    "secrets.yaml"         = file("/home/rab/hass/secrets.yaml"),
+    "service_account.json" = file("/home/rab/hass/service_account.json"),  
+    "trusted_proxies.yaml" = file("/home/rab/hass/trusted_proxies.yaml"),   
+    "fans.yaml"            = file("/home/rab/hass/fans.yaml"),
+    "media_players.yaml"   = file("/home/rab/hass/media_players.yaml"),
+    "switches.yaml"        = file("/home/rab/hass/switches.yaml"),
   }
 }
 

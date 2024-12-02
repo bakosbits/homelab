@@ -1,0 +1,6 @@
+- platform: group
+  name: Ceiling fans
+  entities:
+    - fan.bedroom_fan
+    - fan.living_room_fan
+    - fan.family_room_fan
