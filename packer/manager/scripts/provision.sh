@@ -28,7 +28,7 @@ sudo apt-get update
 # Add Hashicorp repo
 wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-sudo apt update
+sudo apt-get update
 
 # Install ceph, ansible, consul and cloud-init
 sudo apt-get update && apt-get install -y ceph-common ansible consul packer terraform git make cloud-init
@@ -39,9 +39,9 @@ sudo cp /tmp/configs/consul/client.hcl /etc/consul.d/consul.hcl
 sudo systemctl enable consul 
 
 # Setup ceph
-sudo cp /tmp/configs/ceph/ceph.cong /etc/ceph/ceph.conf
-sudo cp /tmp/configs/ceph/ceph.client.admin.keyring /etc/ceph/ceph.client.admin.keyring
-sudo echo "192.168.1.10,192.168.1.11,192.168.1.12:/ /mnt ceph name=nomad,secretfile=/etc/ceph/nomad.secret,fs=cephfs,noatime,_netdev 0 0" >> /etc/fstab
+sudo cp /tmp/configs/ceph/ceph.conf /etc/ceph/ceph.conf
+sudo cp /tmp/configs/ceph/ceph.client.proxmox.keyring /etc/ceph/ceph.client.proxmox.keyring
+sudo echo "192.168.1.10,192.168.1.11,192.168.1.12:/ /mnt ceph name=proxmox,secretfile=/etc/ceph/proxmox.secret,fs=cephfs,noatime,_netdev 0 0" >> /etc/fstab
 
 # Disable root
 sudo /usr/bin/passwd -l root

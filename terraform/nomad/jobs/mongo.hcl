@@ -9,14 +9,6 @@ job "mongo" {
     }
 
 
-    volume "init-mongo" {
-      type            = "csi"
-      read_only       = true
-      source          = "init-mongo"
-      attachment_mode = "file-system"
-      access_mode     = "multi-node-reader-only"
-    } 
-
     volume "mongo" {
       type            = "csi"
       read_only       = false
@@ -37,11 +29,9 @@ job "mongo" {
         image        = "mongo:7.0.14"
         network_mode = "host"
         ports        = ["mongo"]
-      }
-
-      volume_mount {
-        volume      = "init-mongo"
-        destination = "/docker-entrypoint-initdb.d/init-mongo.sh:ro"
+        volumes = [
+          "/mnt/volumes/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro"
+        ]
       }
 
       volume_mount {

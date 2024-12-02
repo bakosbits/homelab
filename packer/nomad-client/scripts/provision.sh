@@ -23,7 +23,7 @@ sudo apt-get update
 # Add hashicorp repo
 wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-sudo apt update
+sudo apt-get update
 
 # Install ceph, docker, nomad, consul, cloud-init
 sudo apt-get update && apt-get install -y ceph-common docker-ce consul nomad cloud-init

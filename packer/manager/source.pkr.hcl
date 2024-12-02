@@ -1,12 +1,12 @@
-source "proxmox-iso" "logging" {
+source "proxmox-iso" "manager" {
 
   proxmox_url              = var.proxmox_api_url
   username                 = var.proxmox_api_user
   password                 = var.proxmox_api_password
   node                     = var.proxmox_node
 
-  vm_id                   = 9011
-  vm_name                 = "opensearch-server"
+  vm_id                   = 9000
+  vm_name                 = "manager"
   template_description    = "Managed by terraform, built on ${formatdate("MM/DD/YYYY hh:mm:ss ZZZ", timestamp())}"
 
   os                      = "l26"
@@ -22,16 +22,16 @@ source "proxmox-iso" "logging" {
   cloud_init_storage_pool = var.storage_pool
 
   network_adapters {
-    bridge   = var.bridge
-    model    = "virtio"
-    vlan_tag = var.vlan_tag    
+    bridge = var.bridge
+    model  = "virtio"
+    vlan_tag    = var.vlan_tag    
   }
 
   disks {
-    disk_size    = "4G"
-    format       = "raw"
-    storage_pool = var.storage_pool
-    type         = "scsi"
+    disk_size         = "4G"
+    format            = "raw"
+    storage_pool      = var.storage_pool
+    type              = "scsi"
   }
 
   iso_file     = var.iso_file

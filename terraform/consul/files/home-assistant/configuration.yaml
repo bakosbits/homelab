@@ -1,4 +1,5 @@
 homeassistant:
+
   # Customization files
   customize: !include customize.yaml
   customize_domain:
@@ -17,23 +18,9 @@ history:
 
 http:
   use_x_forwarded_for: true
-  trusted_proxies:
-    - 127.0.0.1
-    - 192.168.2.0/24
+  trusted_proxies: !include trusted_proxies.yaml
   ip_ban_enabled: true
   login_attempts_threshold: 5
-
-tts:
-  - platform: google_translate
-
-amcrest:
-  - host: !secret amcrest_host
-    username: !secret amcrest_username
-    password: !secret amcrest_password
-    name: Front Door
-    binary_sensors:
-      motion_detected
-    stream_source: mjpeg
 
 google_assistant:
   project_id: !secret google_project_id
@@ -55,9 +42,13 @@ google_assistant:
     switch.living_room_fan_switch:
       expose: false
 
+tts:
+  - platform: google_translate
+
 ffmpeg:
   ffmpeg_bin: /usr/bin/ffmpeg
 
 cover: !include covers.yaml
 automation: !include automations.yaml
-light: !include lights.yamlsudo nano conf 
+script: !include scripts.yaml
+

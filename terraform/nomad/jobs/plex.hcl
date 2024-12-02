@@ -64,7 +64,7 @@ job "plex" {
       env {
         PLEX_UID   = "1010"
         PLEX_GID   = "1010"
-        PLEX_CLAIM = "claim-UfnzQyxu1GmSBGEwFW7W"
+        PLEX_CLAIM = "claim-xyHRu7NH_M4H6_skh9Y7"
       }
 
       resources {

@@ -1,6 +1,6 @@
 resource "proxmox_vm_qemu" "nomad-server" {
 
- depends_on = [resource.proxmox_vm_qemu.coredns]
+  depends_on = [resource.proxmox_vm_qemu.coredns]
 
   count       = 3
   name        = "server0${count.index+1}"

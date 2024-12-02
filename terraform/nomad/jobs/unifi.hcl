@@ -8,14 +8,6 @@ job "unifi" {
       port "http" { static = "8443" }
     }
 
-    volume "init-mongo" {
-      type            = "csi"
-      read_only       = true
-      source          = "init-mongo"
-      attachment_mode = "file-system"
-      access_mode     = "multi-node-reader-only"
-    } 
-
     volume "unifi" {
       type            = "csi"
       read_only       = false
@@ -49,11 +41,9 @@ job "unifi" {
         image        = "linuxserver/unifi-network-application:8.5.6"
         network_mode = "host"
         ports        = ["http"]
-      }
-
-      volume_mount {
-        volume      = "init-mongo"
-        destination = "/docker-entrypoint-initdb.d/init-mongo.sh:ro"
+        volumes = [
+          "/mnt/volumes/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro"
+        ]        
       }
 
       volume_mount {

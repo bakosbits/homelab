@@ -1,34 +1,35 @@
-source "proxmox-iso" "manager" {
+source "proxmox-iso" "dns" {
 
   proxmox_url              = var.proxmox_api_url
   username                 = var.proxmox_api_user
   password                 = var.proxmox_api_password
   node                     = var.proxmox_node
 
-  vm_id                   = 9000
-  vm_name                 = "overwatch"
+  vm_id                   = 9001
+  vm_name                 = "dns"
   template_description    = "Managed by terraform, built on ${formatdate("MM/DD/YYYY hh:mm:ss ZZZ", timestamp())}"
 
   os                      = "l26"
   cpu_type                = "host"
   sockets                 = 1
   cores                   = 2
-  memory                  = 4096
+  memory                  = 1024
   machine                 = "q35"
   bios                    = "seabios"
   scsi_controller         = "virtio-scsi-single"
   qemu_agent              = true
+
   cloud_init              = true
   cloud_init_storage_pool = var.storage_pool
 
   network_adapters {
     bridge = var.bridge
     model  = "virtio"
-    vlan_tag    = var.vlan_tag    
+    vlan_tag    = var.vlan_tag
   }
 
   disks {
-    disk_size         = "4G"
+    disk_size         = "2G"
     format            = "raw"
     storage_pool      = var.storage_pool
     type              = "scsi"

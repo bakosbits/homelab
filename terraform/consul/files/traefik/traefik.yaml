@@ -18,7 +18,10 @@ entryPoints:
     proxyProtocol:
       trustedIPs:
         - 192.168.2.1
-
+    transport:
+      respondingTimeouts:
+        readTimeout: 139s 
+        
   postgres:
     address: :5432
 

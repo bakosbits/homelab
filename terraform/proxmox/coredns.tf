@@ -22,7 +22,6 @@ resource "proxmox_vm_qemu" "coredns" {
   sshkeys    = var.proxmox_sshkeys
   ipconfig0  = "ip=192.168.2.2/24,gw=192.168.2.1"
 
-
   network {
     model  = "virtio"
     bridge = var.bridge

@@ -9,16 +9,17 @@ job "docker-registry" {
     }
 
     volume "docker-registry" {
-      type = "csi"
-      read_only = false
-      source = "docker-registry"
+      type            = "csi"
+      read_only       = false        
+      source          = "docker-registry"    
       attachment_mode = "file-system"
-      access_mode = "single-node-writer"
+      access_mode     = "single-node-writer"
     } 
 
     service {
       port = "http"
       name = "docker-registry"
+
       check {
         type     = "http"
         path     = "/"

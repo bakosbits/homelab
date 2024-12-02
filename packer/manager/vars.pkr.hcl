@@ -15,19 +15,9 @@ variable "proxmox_api_password" {
   description = "The password for the api user being used by the provider"
 }
 
-variable "overwatch_node" {
+variable "proxmox_node" {
   type        = string
-  description = "The proxmox node being deployed to" 
-}
-
-variable "graylog_node" {
-  type        = string
-  description = "The proxmox node being deployed to" 
-}
-
-variable "opensearch_node" {
-  type        = string
-  description = "The proxmox node being deployed to" 
+  description = "The proxmox node being deployed to"
 }
 
 variable "iso_file" {

@@ -1,5 +1,3 @@
-### cephrbd ###
-
 resource "nomad_csi_volume" "arcade_config" {
 
   lifecycle {
@@ -9,9 +7,8 @@ resource "nomad_csi_volume" "arcade_config" {
   plugin_id    = "cephrbd"
   volume_id    = "arcade_config"
   name         = "arcade_config"
-  capacity_min = "1G"
-  capacity_max = "5G"
-
+  capacity_min = "1GB"
+  capacity_max = "20GB"
 
   capability {
     access_mode     = "single-node-writer"
@@ -27,7 +24,7 @@ resource "nomad_csi_volume" "arcade_config" {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     pool          = "rbd"
     imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    mkfsOptions   = "-t ext4"    
   }
 }
 
@@ -40,9 +37,8 @@ resource "nomad_csi_volume" "arcade_data" {
   plugin_id    = "cephrbd"
   volume_id    = "arcade_data"
   name         = "arcade_data"
-  capacity_min = "1G"
-  capacity_max = "100G"
-
+  capacity_min = "1GB"
+  capacity_max = "20GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -58,7 +54,7 @@ resource "nomad_csi_volume" "arcade_data" {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     pool          = "rbd"
     imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    mkfsOptions   = "-t ext4"    
   }
 }
 
@@ -71,8 +67,8 @@ resource "nomad_csi_volume" "docker-registry" {
   plugin_id    = "cephrbd"
   volume_id    = "docker-registry"
   name         = "docker-registry"
-  capacity_min = "1G"
-  capacity_max = "5G"
+  capacity_min = "1GB"
+  capacity_max = "50GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -88,7 +84,7 @@ resource "nomad_csi_volume" "docker-registry" {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     pool          = "rbd"
     imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    mkfsOptions   = "-t ext4"    
   }
 }
 
@@ -101,9 +97,8 @@ resource "nomad_csi_volume" "vaultwarden" {
   plugin_id    = "cephrbd"
   volume_id    = "vaultwarden"
   name         = "vaultwarden"
-  capacity_min = "1G"
-  capacity_max = "5G"
-
+  capacity_min = "1GB"
+  capacity_max = "20GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -119,7 +114,7 @@ resource "nomad_csi_volume" "vaultwarden" {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     pool          = "rbd"
     imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    mkfsOptions   = "-t ext4"    
   }
 }
 
@@ -132,9 +127,8 @@ resource "nomad_csi_volume" "flaresolverr" {
   plugin_id    = "cephrbd"
   volume_id    = "flaresolverr"
   name         = "flaresolverr"
-  capacity_min = "1G"
-  capacity_max = "5G"
-
+  capacity_min = "1GB"
+  capacity_max = "10GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -150,7 +144,7 @@ resource "nomad_csi_volume" "flaresolverr" {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     pool          = "rbd"
     imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    mkfsOptions   = "-t ext4"    
   }
 }
 
@@ -163,9 +157,8 @@ resource "nomad_csi_volume" "grafana" {
   plugin_id    = "cephrbd"
   volume_id    = "grafana"
   name         = "grafana"
-  capacity_min = "1G"
-  capacity_max = "10G"
-
+  capacity_min = "1GB"
+  capacity_max = "50GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -181,7 +174,7 @@ resource "nomad_csi_volume" "grafana" {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     pool          = "rbd"
     imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    mkfsOptions   = "-t ext4"    
   }
 }
 
@@ -194,9 +187,8 @@ resource "nomad_csi_volume" "influxdb_config" {
   plugin_id    = "cephrbd"
   volume_id    = "influxdb_config"
   name         = "influxdb_config"
-  capacity_min = "1G"
-  capacity_max = "5G"
-
+  capacity_min = "1GB"
+  capacity_max = "10GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -212,7 +204,7 @@ resource "nomad_csi_volume" "influxdb_config" {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     pool          = "rbd"
     imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    mkfsOptions   = "-t ext4"    
   }
 }
 
@@ -225,9 +217,8 @@ resource "nomad_csi_volume" "influxdb_data" {
   plugin_id    = "cephrbd"
   volume_id    = "influxdb_data"
   name         = "influxdb_data"
-  capacity_min = "1G"
-  capacity_max = "10G"
-
+  capacity_min = "1GB"
+  capacity_max = "100GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -243,7 +234,7 @@ resource "nomad_csi_volume" "influxdb_data" {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     pool          = "rbd"
     imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    mkfsOptions   = "-t ext4"    
   }
 }
 
@@ -256,9 +247,8 @@ resource "nomad_csi_volume" "mongo" {
   plugin_id    = "cephrbd"
   volume_id    = "mongo"
   name         = "mongo"
-  capacity_min = "1G"
-  capacity_max = "25G"
-
+  capacity_min = "10GB"
+  capacity_max = "200GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -274,7 +264,97 @@ resource "nomad_csi_volume" "mongo" {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     pool          = "rbd"
     imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    mkfsOptions   = "-t ext4"    
+  }
+}
+
+resource "nomad_csi_volume" "mosquitto-config" {
+
+  lifecycle {
+    prevent_destroy = true
+  }
+
+  plugin_id    = "cephrbd"
+  volume_id    = "mosquitto-config"
+  name         = "mosquitto-config"
+  capacity_min = "1GB"
+  capacity_max = "10GB"  
+
+  capability {
+    access_mode     = "single-node-writer"
+    attachment_mode = "file-system"
+  }
+
+  secrets = {
+    userID  = var.ceph_userid
+    userKey = var.ceph_userkey
+  }
+
+  parameters = {
+    clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
+    pool          = "rbd"
+    imageFeatures = "layering"
+    mkfsOptions   = "-t ext4"    
+  }
+}
+
+resource "nomad_csi_volume" "mosquitto-data" {
+
+  lifecycle {
+    prevent_destroy = true
+  }
+
+  plugin_id    = "cephrbd"
+  volume_id    = "mosquitto-data"
+  name         = "mosquitto-data"
+  capacity_min = "1GB"
+  capacity_max = "10GB"  
+
+  capability {
+    access_mode     = "single-node-writer"
+    attachment_mode = "file-system"
+  }
+
+  secrets = {
+    userID  = var.ceph_userid
+    userKey = var.ceph_userkey
+  }
+
+  parameters = {
+    clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
+    pool          = "rbd"
+    imageFeatures = "layering"
+    mkfsOptions   = "-t ext4"    
+  }
+}
+
+resource "nomad_csi_volume" "mosquitto-log" {
+
+  lifecycle {
+    prevent_destroy = true
+  }
+
+  plugin_id    = "cephrbd"
+  volume_id    = "mosquitto-log"
+  name         = "mosquitto-log"
+  capacity_min = "1GB"
+  capacity_max = "10GB"  
+
+  capability {
+    access_mode     = "single-node-writer"
+    attachment_mode = "file-system"
+  }
+
+  secrets = {
+    userID  = var.ceph_userid
+    userKey = var.ceph_userkey
+  }
+
+  parameters = {
+    clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
+    pool          = "rbd"
+    imageFeatures = "layering"
+    mkfsOptions   = "-t ext4"    
   }
 }
 
@@ -287,9 +367,8 @@ resource "nomad_csi_volume" "loki" {
   plugin_id    = "cephrbd"
   volume_id    = "loki"
   name         = "loki"
-  capacity_min = "1G"
-  capacity_max = "25G"
-
+  capacity_min = "10GB"
+  capacity_max = "200GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -305,7 +384,7 @@ resource "nomad_csi_volume" "loki" {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     pool          = "rbd"
     imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    mkfsOptions   = "-t ext4"    
   }
 }
 
@@ -318,9 +397,8 @@ resource "nomad_csi_volume" "plex" {
   plugin_id    = "cephrbd"
   volume_id    = "plex"
   name         = "plex"
-  capacity_min = "5G"
-  capacity_max = "25G"
-
+  capacity_min = "10GB"
+  capacity_max = "100GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -336,7 +414,7 @@ resource "nomad_csi_volume" "plex" {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     pool          = "rbd"
     imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    mkfsOptions   = "-t ext4"    
   }
 }
 
@@ -349,9 +427,8 @@ resource "nomad_csi_volume" "postgres" {
   plugin_id    = "cephrbd"
   volume_id    = "postgres"
   name         = "postgres"
-  capacity_min = "1G"
-  capacity_max = "1000G"
-
+  capacity_min = "20GB"
+  capacity_max = "200GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -377,12 +454,11 @@ resource "nomad_csi_volume" "prowlarr" {
     prevent_destroy = true
   }
 
-  plugin_id    = "cephrbd"
+  plugin_id    = "cephfs"
   volume_id    = "prowlarr"
   name         = "prowlarr"
-  capacity_min = "1G"
-  capacity_max = "10G"
-
+  #capacity_min = "1GB"
+  #capacity_max = "10GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -390,15 +466,14 @@ resource "nomad_csi_volume" "prowlarr" {
   }
 
   secrets = {
-    userID  = var.ceph_userid
-    userKey = var.ceph_userkey
+    # Change to user for rbd
+    adminID  = var.ceph_userid
+    adminKey = var.ceph_userkey
   }
 
   parameters = {
-    clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
-    pool          = "rbd"
-    imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    clusterID = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
+    fsName    = "cephfs"
   }
 }
 
@@ -408,12 +483,11 @@ resource "nomad_csi_volume" "radarr" {
     prevent_destroy = true
   }
 
-  plugin_id    = "cephrbd"
+  plugin_id    = "cephfs"
   volume_id    = "radarr"
   name         = "radarr"
-  capacity_min = "2G"
-  capacity_max = "25G"
-
+  # capacity_min = "1GB"
+  # capacity_max = "20GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -421,15 +495,14 @@ resource "nomad_csi_volume" "radarr" {
   }
 
   secrets = {
-    userID  = var.ceph_userid
-    userKey = var.ceph_userkey
+    # Change to user for rbd
+    adminID  = var.ceph_userid
+    adminKey = var.ceph_userkey
   }
 
   parameters = {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
-    pool          = "rbd"
-    imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    fsName          = "cephfs"
   }
 }
 
@@ -443,9 +516,8 @@ resource "nomad_csi_volume" "sonarr" {
   plugin_id    = "cephrbd"
   volume_id    = "sonarr"
   name         = "sonarr"
-  capacity_min = "1G"
-  capacity_max = "10G"
-
+  capacity_min = "1GB"
+  capacity_max = "20GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -461,7 +533,7 @@ resource "nomad_csi_volume" "sonarr" {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     pool          = "rbd"
     imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    mkfsOptions   = "-t ext4"    
   }
 }
 
@@ -475,9 +547,8 @@ resource "nomad_csi_volume" "jellyfin" {
   plugin_id    = "cephrbd"
   volume_id    = "jellyfin"
   name         = "jellyfin"
-  capacity_min = "1G"
-  capacity_max = "10G"
-
+  capacity_min = "10GB"
+  capacity_max = "100GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -493,7 +564,7 @@ resource "nomad_csi_volume" "jellyfin" {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     pool          = "rbd"
     imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    mkfsOptions   = "-t ext4"    
   }
 }
 
@@ -505,10 +576,9 @@ resource "nomad_csi_volume" "sabnzbd" {
 
   plugin_id    = "cephrbd"
   volume_id    = "sabnzbd"
-  name         = "sabnzdb"
-  capacity_min = "1G"
-  capacity_max = "10G"
-
+  name         = "sabnzbd"
+  capacity_min = "1GB"
+  capacity_max = "10GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -524,7 +594,7 @@ resource "nomad_csi_volume" "sabnzbd" {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     pool          = "rbd"
     imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    mkfsOptions   = "-t ext4"    
   }
 }
 
@@ -533,13 +603,12 @@ resource "nomad_csi_volume" "samba" {
   lifecycle {
     prevent_destroy = true
   }
-
+  
   plugin_id    = "cephrbd"
   volume_id    = "samba"
   name         = "samba"
-  capacity_min = "1G"
-  capacity_max = "10G"
-
+  capacity_min = "1GB"
+  capacity_max = "10GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -555,7 +624,7 @@ resource "nomad_csi_volume" "samba" {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     pool          = "rbd"
     imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    mkfsOptions   = "-t ext4"    
   }
 }
 
@@ -565,12 +634,11 @@ resource "nomad_csi_volume" "transmission" {
     prevent_destroy = true
   }
 
-  plugin_id    = "cephrbd"
+  plugin_id    = "cephfs"
   volume_id    = "transmission"
   name         = "transmission"
-  capacity_min = "1G"
-  capacity_max = "10G"
-
+  #capacity_min = "1GB"
+  #capacity_max = "10GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -578,15 +646,14 @@ resource "nomad_csi_volume" "transmission" {
   }
 
   secrets = {
-    userID  = var.ceph_userid
-    userKey = var.ceph_userkey
+    #change to user for rbd
+    adminID  = var.ceph_userid
+    adminKey = var.ceph_userkey
   }
 
   parameters = {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
-    pool          = "rbd"
-    imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    fsName        = "cephfs"
   }
 }
 
@@ -599,9 +666,8 @@ resource "nomad_csi_volume" "unifi" {
   plugin_id    = "cephrbd"
   volume_id    = "unifi"
   name         = "unifi"
-  capacity_min = "1G"
-  capacity_max = "10G"
-
+  capacity_min = "1GB"
+  capacity_max = "20GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -617,7 +683,7 @@ resource "nomad_csi_volume" "unifi" {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     pool          = "rbd"
     imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    mkfsOptions   = "-t ext4"    
   }
 }
 
@@ -630,9 +696,8 @@ resource "nomad_csi_volume" "wikijs" {
   plugin_id    = "cephrbd"
   volume_id    = "wikijs"
   name         = "wikijs"
-  capacity_min = "1G"
-  capacity_max = "10G"
-
+  capacity_min = "1GB"
+  capacity_max = "10GB"  
 
   capability {
     access_mode     = "single-node-writer"
@@ -648,11 +713,9 @@ resource "nomad_csi_volume" "wikijs" {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     pool          = "rbd"
     imageFeatures = "layering"
-    mkfsOptions   = "-t ext4"
+    mkfsOptions   = "-t ext4"    
   }
 }
-
-### cephfs ###
 
 resource "nomad_csi_volume" "media" {
 
@@ -677,20 +740,18 @@ resource "nomad_csi_volume" "media" {
   parameters = {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     fsName        = "cephfs"
-    pool          = "cephfs_data"
-    imageFeatures = "layering"
   }
 }
 
-resource "nomad_csi_volume" "certs" {
+resource "nomad_csi_volume" "certificates" {
 
   lifecycle {
     prevent_destroy = true
   }
 
   plugin_id = "cephfs"
-  volume_id = "certs"
-  name      = "certs"
+  volume_id = "certificates"
+  name      = "certificates"
 
 
   capability {
@@ -706,8 +767,6 @@ resource "nomad_csi_volume" "certs" {
   parameters = {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     fsName        = "cephfs"
-    pool          = "cephfs_data"
-    imageFeatures = "layering"
   }
 }
 
@@ -735,36 +794,6 @@ resource "nomad_csi_volume" "hass" {
   parameters = {
     clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
     fsName        = "cephfs"
-    pool          = "cephfs_data"
-    imageFeatures = "layering"
   }
 }
 
-resource "nomad_csi_volume" "init-mongo" {
-
-  lifecycle {
-    prevent_destroy = true
-  }
-
-  plugin_id = "cephfs"
-  volume_id = "init-mongo"
-  name      = "init-mongo"
-
-
-  capability {
-    access_mode     = "multi-node-reader-only"
-    attachment_mode = "file-system"
-  }
-
-  secrets = {
-    adminID  = var.ceph_userid
-    adminKey = var.ceph_userkey
-  }
-
-  parameters = {
-    clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
-    fsName        = "cephfs"
-    pool          = "cephfs_data"
-    imageFeatures = "layering"
-  }
-}

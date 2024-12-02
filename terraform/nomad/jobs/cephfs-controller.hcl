@@ -1,6 +1,6 @@
 job "cephfs-controller" {
   datacenters = ["dc1"]
-  type        = "service"
+  type        = "system"
 
   group "cephfs-controller" {
     

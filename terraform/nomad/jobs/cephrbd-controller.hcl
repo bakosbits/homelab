@@ -1,6 +1,6 @@
 job "cephrbd-controller" {
   datacenters = ["dc1"]
-  type        = "service"
+  type        = "system"
 
   group "cephrbd-controller" {
     

@@ -1,12 +1,12 @@
 tls:
   certificates:
-    - certFile: "/etc/traefik/certs/bakos.me.crt"
-      keyFile: "/etc/traefik/certs/bakos.me.key"
+    - certFile: "/etc/traefik/certificates/bakos.me.crt"
+      keyFile: "/etc/traefik/certificates/bakos.me.key"
   stores:
     default:
       defaultCertificate:
-        certFile: "/etc/traefik/certs/bakos.me.crt"
-        keyFile: "/etc/traefik/certs/bakos.me.key"
+        certFile: "/etc/traefik/certificates/bakos.me.crt"
+        keyFile: "/etc/traefik/certificates/bakos.me.key"
 
 http:
   routers:
@@ -14,7 +14,7 @@ http:
       service: nomad
       rule: Host(`nomad.bakos.me`)
       entrypoints:
-        - websecure
+        - websecure      
       middlewares:
         - auth
 

@@ -15,19 +15,19 @@ job "emulatorjs" {
     }
 
     volume "arcade_config" {
-      type = "csi"
-      read_only = false
-      source = "arcade_config"
+      type            = "csi"
+      read_only       = false
+      source          = "arcade_config"
       attachment_mode = "file-system"
-      access_mode = "single-node-writer"
+      access_mode     = "single-node-writer"
     }  
 
     volume "arcade_data" {
-      type = "csi"
-      read_only = false
-      source = "arcade_data"
+      type            = "csi"
+      read_only       = false
+      source          = "arcade_data"
       attachment_mode = "file-system"
-      access_mode = "single-node-writer"
+      access_mode     = "single-node-writer"
     } 
     
     service {

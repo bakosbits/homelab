@@ -13,7 +13,7 @@ job "prowlarr" {
       read_only       = false
       source          = "prowlarr"
       attachment_mode = "file-system"
-      access_mode      = "single-node-writer"
+      access_mode     = "single-node-writer"
     } 
 
     volume "media" {

@@ -10,10 +10,10 @@ job "traefik" {
       port "postgres" { static = "5432" }
     }
 
-    volume "certs" {
+    volume "certificates" {
       type            = "csi"
       read_only       = true
-      source          = "certs"
+      source          = "certificates"
       attachment_mode = "file-system"
       access_mode     = "multi-node-reader-only"
     } 
@@ -50,8 +50,8 @@ job "traefik" {
       }
 
       volume_mount {
-        volume      = "certs"
-        destination = "/etc/traefik/certs"
+        volume      = "certificates"
+        destination = "/etc/traefik/certificates"
       }
 
       resources {
