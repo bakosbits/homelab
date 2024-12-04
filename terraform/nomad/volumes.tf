@@ -238,6 +238,36 @@ resource "nomad_csi_volume" "influxdb_data" {
   }
 }
 
+resource "nomad_csi_volume" "matter" {
+
+  lifecycle {
+    prevent_destroy = true
+  }
+
+  plugin_id    = "cephrbd"
+  volume_id    = "matter"
+  name         = "matter"
+  capacity_min = "1GB"
+  capacity_max = "10GB"  
+
+  capability {
+    access_mode     = "single-node-writer"
+    attachment_mode = "file-system"
+  }
+
+  secrets = {
+    userID  = var.ceph_userid
+    userKey = var.ceph_userkey
+  }
+
+  parameters = {
+    clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
+    pool          = "rbd"
+    imageFeatures = "layering"
+    mkfsOptions   = "-t ext4"    
+  }
+}
+
 resource "nomad_csi_volume" "mongo" {
 
   lifecycle {

@@ -62,6 +62,10 @@ resource "nomad_job" "loki" {
   jobspec = file("${path.module}/jobs/loki.hcl") 
 }
 
+resource "nomad_job" "matter" {
+  jobspec = file("${path.module}/jobs/matter.hcl") 
+}
+
 resource "nomad_job" "mongo" {
   jobspec = file("${path.module}/jobs/mongo.hcl") 
 }
