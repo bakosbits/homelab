@@ -67,8 +67,8 @@ resource "nomad_csi_volume" "docker-registry" {
   plugin_id    = "cephrbd"
   volume_id    = "docker-registry"
   name         = "docker-registry"
-  capacity_min = "1GB"
-  capacity_max = "50GB"  
+  capacity_min = "5GB"
+  capacity_max = "100GB"  
 
   capability {
     access_mode     = "single-node-writer"
