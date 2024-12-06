@@ -6,7 +6,7 @@ My lab runs on a 3 node [Proxmox](https://www.proxmox.com/en/) cluster. Terrafor
 
 ## Workloads
 
-[Traefik](https://traefik.io) is being used as a reverse proxy. My network hardware is all [Unifi](https://ui.com) equiptment and I make extensive use of [Home Assistant](https://home-assistant.io). 
+[Traefik](https://traefik.io) is being used as a reverse proxy. My network hardware is all [Unifi](https://ui.com) equipment and I make extensive use of [Home Assistant](https://home-assistant.io). 
 
 A full list of workloads [here](terraform/nomad/jobs/).
 
