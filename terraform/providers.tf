@@ -1,7 +1,7 @@
 provider "nomad" {
-  address = "http://server03.bakos.lan:4646"
+  address = "http://server03.bakos.me:4646"
 }
 
 provider "consul" {
-  address = "http://server03.bakos.lan:8500"
+  address = "http://server03.bakos.me:8500"
 }

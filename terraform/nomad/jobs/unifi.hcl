@@ -2,19 +2,16 @@ job "unifi" {
   datacenters = ["dc1"]
   type        = "service"
 
+  constraint {
+    attribute = "${attr.unique.hostname}"
+    value     = "client01"
+  }    
+
   group "unifi" {
 
     network {
       port "http" { static = "8443" }
     }
-
-    volume "unifi" {
-      type            = "csi"
-      read_only       = false
-      source          = "unifi"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-    }  
 
     service {
       name = "unifi"
@@ -42,13 +39,9 @@ job "unifi" {
         network_mode = "host"
         ports        = ["http"]
         volumes = [
-          "/mnt/volumes/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro"
+          "/mnt/unifi:/config",
+          "/mnt/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro"
         ]        
-      }
-
-      volume_mount {
-        volume      = "unifi"
-        destination = "/config"
       }
 
       resources {

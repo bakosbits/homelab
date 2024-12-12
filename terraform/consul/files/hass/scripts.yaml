@@ -26,7 +26,7 @@ turn_on_evening_lights:
   - action: light.turn_on
     metadata: {}
     data:
-      brightness_pct: 25
+      brightness_pct: 30
     target:
       entity_id: light.sink_light
   description: ''

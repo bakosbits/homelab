@@ -2,19 +2,16 @@ job "home-assistant" {
   datacenters = ["dc1"]
   type        = "service"
 
+  constraint {
+    attribute = "${attr.unique.hostname}"
+    value     = "client03"
+  }    
+
   group "home-assistant" {
 
     network {
       port "http" { static = "8123" }
     }
-
-    volume "hass" {
-      type            = "csi"
-      read_only       = false
-      source          = "hass"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-    } 
 
     service {
       name = "home-assistant"
@@ -41,6 +38,7 @@ job "home-assistant" {
         ports        = ["http"]
         network_mode = "host"
         volumes = [
+          "/mnt/hass:/config",
           "local/automations.yaml:/config/automations.yaml",
           "local/binary_sensors.yaml:/config/binary_sensors.yaml",
           "local/configuration.yaml:/config/configuration.yaml",
@@ -55,11 +53,6 @@ job "home-assistant" {
           "local/switches.yaml:/config/switches.yaml",
           "local/trusted_proxies.yaml:/config/trusted_proxies.yaml",
         ]        
-      }
-
-      volume_mount {
-        volume      = "hass"
-        destination = "/config"
       }
 
       env {

@@ -8,14 +8,6 @@ job "prometheus" {
       port "http" { static = "9090" }
     }
 
-    volume "prometheus" {
-      type            = "csi"
-      read_only       = false
-      source          = "prometheus"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-    } 
-
     service {
       name = "prometheus"
       port = "http"
@@ -46,9 +38,9 @@ job "prometheus" {
         ]
       }
 
-      volume_mount {
-        volume      = "postgres"
-        destination = "/opt/prometheus"
+      resources {
+        cpu    = 1000
+        memory = 512
       }
 
       template {
@@ -56,14 +48,9 @@ job "prometheus" {
         change_mode   = "signal"
         change_signal = "SIGHUP"
         data          = <<-EOF
-        {{- key "homelab/coredns/prometheus"}}
+        {{- key "homelab/prometheus"}}
         EOF
-      }
-
-      resources {
-        cpu    = 1000
-        memory = 512
-      }
+      }      
     }
   }
 }

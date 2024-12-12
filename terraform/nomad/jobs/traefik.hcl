@@ -10,14 +10,6 @@ job "traefik" {
       port "postgres" { static = "5432" }
     }
 
-    volume "certificates" {
-      type            = "csi"
-      read_only       = true
-      source          = "certificates"
-      attachment_mode = "file-system"
-      access_mode     = "multi-node-reader-only"
-    } 
-
     service {
       name = "traefik"
       port = "http"
@@ -44,14 +36,10 @@ job "traefik" {
         ports        = ["http", "https", "postgres"]
         network_mode = "host"
         volumes = [
+          "/mnt/certs:/etc/traefik/tls",
           "local/traefik.yaml:/etc/traefik/traefik.yaml",
           "local/dynamic.yaml:/etc/traefik/dynamic/dynamic.yaml"
         ]
-      }
-
-      volume_mount {
-        volume      = "certificates"
-        destination = "/etc/traefik/certificates"
       }
 
       resources {

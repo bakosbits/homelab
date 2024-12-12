@@ -24,7 +24,6 @@ job "telegraf" {
 
       config {
         image      = "telegraf:1.31.2"
-        privileged = "true"
         ports      = ["http"]
         args = [
           "--config=/local/config.yaml",

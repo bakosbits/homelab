@@ -3,8 +3,7 @@ fan.bedroom_fan:
 fan.living_room_fan:
   assumed_state: false
 fan.family_room_fan:
-  assumed_statue: false
+  assumed_state: false
 light.living_room_fan:
   assumed_state: false
-cover.garage_door:
-  device_class: garage
+

@@ -8,22 +8,6 @@ job "sonarr" {
       port "http" { static = "8989" }
     }
 
-    volume "sonarr" {
-      type            = "csi"
-      read_only       = false
-      source          = "sonarr"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-    } 
-
-    volume "media" {
-      type            = "csi"
-      read_only       = false
-      source          = "media"
-      attachment_mode = "file-system"
-      access_mode     = "multi-node-multi-writer"
-    }
-
     service {
       name = "sonarr"
       port = "http"
@@ -45,19 +29,12 @@ job "sonarr" {
       driver = "docker"
 
       config {
-        image        = "linuxserver/sonarr:4.0.9"
-        ports        = ["http"]
-        network_mode = "host"
-      }
-
-      volume_mount {
-        volume      = "sonarr"
-        destination = "/config"
-      }
-
-      volume_mount {
-        volume      = "media"
-        destination = "/data"
+        image   = "linuxserver/sonarr:4.0.9"
+        ports   = ["http"]
+        volumes = [
+          "/mnt/sonarr:/config",
+          "/mnt/media:/data"
+        ]
       }
 
       env {

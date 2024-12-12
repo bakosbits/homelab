@@ -1,18 +1,18 @@
-resource "nomad_job" "cephrbd-controller" {
-  jobspec = file("${path.module}/jobs/cephrbd-controller.hcl")
-}
+# resource "nomad_job" "cephrbd-controller" {
+#   jobspec = file("${path.module}/jobs/cephrbd-controller.hcl")
+# }
 
-resource "nomad_job" "cephrbd-node" {
-  jobspec = file("${path.module}/jobs/cephrbd-node.hcl")
-}
+# resource "nomad_job" "cephrbd-node" {
+#   jobspec = file("${path.module}/jobs/cephrbd-node.hcl")
+# }
 
-resource "nomad_job" "cephfs-controller" {
-  jobspec = file("${path.module}/jobs/cephfs-controller.hcl")
-}
+# resource "nomad_job" "cephfs-controller" {
+#   jobspec = file("${path.module}/jobs/cephfs-controller.hcl")
+# }
 
-resource "nomad_job" "cephfs-node" {
-  jobspec = file("${path.module}/jobs/cephfs-node.hcl")
-}
+# resource "nomad_job" "cephfs-node" {
+#   jobspec = file("${path.module}/jobs/cephfs-node.hcl")
+# }
 
 resource "nomad_job" "auth" {
   jobspec = file("${path.module}/jobs/auth.hcl")

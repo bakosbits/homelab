@@ -1,10 +1,14 @@
 - platform: group
   name: Exterior lights
+  unique_id: exterior_lights
   entities:
     - switch.front_porch_lights
     - switch.back_pation_light
     - switch.side_door_light
+
+- platform: group
   name: Interior switches
+  unique_id: interior_switches
   entities:
     - switch.garage_light
     - switch.guest_bath_fan
@@ -18,6 +22,8 @@
 - platform: template
   switches:
     kitchen_sensor:
+      friendly_name: Kitchen sensor
+      unique_id: kitchen_sensor_switch    
       value_template: "{{ is_state('automation.motion_toggle_kitchen_lights', 'on') }}"
       turn_on:
         action: homeassistant.turn_on
@@ -28,6 +34,8 @@
         target:
           entity_id: automation.motion_toggle_kitchen_lights
     loft_sensor:
+      friendly_name: Loft sensor
+      unique_id: loft_sensor_switch
       value_template: "{{ is_state('automation.motion_toggle_loft_lights', 'on') }}"
       turn_on:
         action: homeassistant.turn_on
@@ -38,6 +46,8 @@
         target:
           entity_id: automation.motion_toggle_loft_lights
     living_room_sensor:
+      friendly_name: Living room sensor
+      unique_id: living_room_sensor_switch
       value_template: "{{ is_state('automation.motion_toggle_living_room_lights', 'on') }}"
       turn_on:
         action: homeassistant.turn_on
@@ -48,6 +58,8 @@
         target:
           entity_id: automation.motion_toggle_living_room_lights
     family_room_sensor:
+      friendly_name: Family room sensor
+      unique_id: family_room_sensor_switch
       value_template: "{{ is_state('automation.motion_toggle_family_room_lights', 'on') }}"
       turn_on:
         action: homeassistant.turn_on
@@ -56,4 +68,4 @@
       turn_off:
         action: homeassistant.turn_off
         target:
-          entity_id: automation.motion_toggle_family_room_lights            
+          entity_id: automation.motion_toggle_family_room_lights

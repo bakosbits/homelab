@@ -5,18 +5,8 @@ job "grafana" {
   group "grafana" {
 
     network {
-      port "http" {
-        to = 3000
-      }
+      port "http" { to = 3000 }
     }
-
-    volume "grafana" {
-      type            = "csi"
-      read_only       = false
-      source          = "grafana"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-    } 
 
     service {
       name = "grafana"
@@ -40,14 +30,11 @@ job "grafana" {
       user   = "root"
 
       config {
-        image        = "grafana/grafana-oss:11.1.3"
-        network_mode = "bridge"
-        ports        = ["http"]
-      }
-
-      volume_mount {
-        volume      = "grafana"
-        destination = "/var/lib/grafana"
+        image   = "grafana/grafana-oss:11.1.3"
+        ports   = ["http"]
+        volumes = [
+          "/mnt/grafana:/var/lib/grafana"
+        ]
       }
 
       resources {

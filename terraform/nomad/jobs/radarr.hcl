@@ -8,22 +8,6 @@ job "radarr" {
       port "http" { static = "7878" }
     }
 
-    volume "radarr" {
-      type            = "csi"
-      read_only       = false
-      source          = "radarr"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-    } 
-
-    volume "media" {
-      type            = "csi"
-      read_only       = false
-      source          = "media"
-      attachment_mode = "file-system"
-      access_mode     = "multi-node-multi-writer"
-    }
-
     service {
       name = "radarr"
       port = "http"
@@ -48,16 +32,10 @@ job "radarr" {
         image        = "linuxserver/radarr:5.14.0"
         ports        = ["http"]
         network_mode = "host"
-      }
-
-      volume_mount {
-        volume      = "radarr"
-        destination = "/config"
-      }
-
-      volume_mount {
-        volume      = "media"
-        destination = "/data"
+        volumes      = [
+          "/mnt/radarr:/config",
+          "/mnt/media:/data"
+        ]
       }
 
       env {
