@@ -8,14 +8,6 @@ job "vaultwarden" {
       port "http" { to = 8089 }
     }
 
-    volume "vaultwarden" {
-      type            = "csi"
-      read_only       = false
-      source          = "vaultwarden"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-    }   
-
     service {
       name = "vaultwarden"
       port = "http"
@@ -41,21 +33,17 @@ job "vaultwarden" {
       }
 
       config {
-        image        = "vaultwarden/server:1.31.0"
-        network_mode = "host"
-        ports        = ["http"]
-      }
-
-      volume_mount {
-        volume      = "vaultwarden"
-        destination = "/data"
+        image   = "vaultwarden/server:1.31.0"
+        ports   = ["http"]
+        volumes = [
+          "/mnt/vaultwarden:/data"
+        ]
       }
 
       resources {
         cpu    = 250
         memory = 256
       }
-
     }
   }
 }

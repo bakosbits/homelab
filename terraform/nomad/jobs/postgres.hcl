@@ -8,14 +8,6 @@ job "postgres" {
       port "postgres" { to = "5432" }
     }
 
-    volume "postgres" {
-      type            = "csi"
-      read_only       = false
-      source          = "postgres"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-    }   
-
     service {
       name = "postgres"
       port = "postgres"
@@ -37,14 +29,17 @@ job "postgres" {
     task "postgres" {
       driver = "docker"
 
-      volume_mount {
-        volume      = "postgres"
-        destination = "/var/lib/pgsql/db"
-      }
-
       config {
         image = "postgres:16.4"
         ports = ["postgres"]
+        volumes = [
+          "/mnt/postgres:/var/lib/pgsql/data",
+        ]
+      }
+
+      resources {
+        cpu    = 1000
+        memory = 1024
       }
 
       template {
@@ -57,11 +52,6 @@ job "postgres" {
           {{- end }}
         {{- end }}
         EOF
-      }
-
-      resources {
-        cpu    = 1000
-        memory = 1024
       }
     }
   }

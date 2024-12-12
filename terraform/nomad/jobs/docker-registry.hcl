@@ -8,14 +8,6 @@ job "docker-registry" {
       port "http" { static = "5000" }
     }
 
-    volume "docker-registry" {
-      type            = "csi"
-      read_only       = false        
-      source          = "docker-registry"    
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-    } 
-
     service {
       port = "http"
       name = "docker-registry"
@@ -33,13 +25,11 @@ job "docker-registry" {
 
       config {
         image        = "registry:2.8.3"
-        ports        = ["http"]
         network_mode = "host"
-      }
-
-      volume_mount {
-        volume      = "docker-registry"
-        destination = "/data"
+        ports        = ["http"]
+        volumes      = [
+          "/mnt/docker-registry:/data"
+        ]
       }
 
       env {

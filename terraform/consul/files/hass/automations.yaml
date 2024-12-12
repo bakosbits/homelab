@@ -3,7 +3,7 @@
   description: Turn on the outside lights each night after sunset
   triggers:
   - event: sunset
-    offset: '+1:00:00'
+    offset: +00:30:00
     trigger: sun
   conditions: []
   actions:
@@ -16,12 +16,13 @@
       - switch.side_door_light
       - switch.back_patio_light
   mode: restart
+
 - id: '1728520859935'
   alias: 'Lights: evening lights on at sunset'
   description: Turn on evening lights prior to sunset
   triggers:
   - event: sunset
-    offset: -01:00:00
+    offset: -00:30:00
     trigger: sun
   conditions: []
   actions:
@@ -29,6 +30,7 @@
     metadata: {}
     data: {}
   mode: restart
+
 - id: '1728521120958'
   alias: 'Motion: toggle kitchen lights'
   description: Turn on kitchen lights after dark if motion is detected
@@ -65,12 +67,8 @@
       entity_id:
       - light.kitchen_lights
       - light.dining_light
-  - action: switch.turn_off
-    metadata: {}
-    data: {}
-    target:
-      entity_id: switch.laundry_light
   mode: restart
+
 - id: '1728521312650'
   alias: 'Motion: toggle living room lights'
   description: Turn on living room lights after dark if motion is detected
@@ -86,8 +84,7 @@
   actions:
   - action: light.turn_on
     metadata: {}
-    data:
-      brightness_pct: 30
+    data: {}
     target:
       entity_id: light.living_room_lamp
   - wait_for_trigger:
@@ -108,6 +105,7 @@
       - light.living_room_fan_light
       - light.mantle_lights
   mode: restart
+
 - id: '1728521542519'
   alias: 'Motion: toggle loft lights'
   description: Turn on loft lights after dark if motion is detected
@@ -142,6 +140,7 @@
     target:
       entity_id: light.loft_lights
   mode: restart
+
 - id: '1728521658861'
   alias: 'Motion: toggle hall lights'
   description: Turn on hall lights after dark if motion is detected
@@ -177,6 +176,7 @@
       - light.hall_lights
       - light.stairway_lights
   mode: restart
+
 - id: '1728522023418'
   alias: 'Lights: on when occupied'
   description: Turn on the evening lights if the house has become occupied after sunset
@@ -190,14 +190,27 @@
     - person.rich_bakos
     to: home
   conditions:
-  - condition: state
-    entity_id: sun.sun
-    state: below_horizon
+  - condition: and
+    conditions:
+    - condition: time
+      before: 00:00:00
+      weekday:
+      - sat
+      - fri
+      - thu
+      - wed
+      - tue
+      - mon
+      - sun
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
   actions:
   - action: script.turn_on_evening_lights
     metadata: {}
     data: {}
   mode: restart
+
 - id: '1728522273863'
   alias: 'Exhaust fans: toggle guest bath fan with vanity'
   description: Turn on exhaust fan when bathroom is occupied
@@ -224,6 +237,7 @@
     target:
       entity_id: switch.guest_bath_fan
   mode: single
+
 - id: '1728523914113'
   alias: 'House: off when vacant'
   description: Shut down the house when it becomes vacant
@@ -242,7 +256,7 @@
     to: 'off'
     for:
       hours: 0
-      minutes: 30
+      minutes: 20
       seconds: 0
   conditions:
   - condition: and
@@ -255,7 +269,7 @@
       state: 'off'
       for:
         hours: 0
-        minutes: 30
+        minutes: 20
         seconds: 0
   actions:
   - action: fan.turn_off
@@ -285,6 +299,7 @@
       - water_closet
       - master_bedroom
   mode: restart
+
 - id: '1728525357081'
   alias: 'Ceiling fans: on when house is occupied'
   description: Turn on the ceiling fans when the house becomes occupied
@@ -303,6 +318,7 @@
       entity_id:
       - fan.ceiling_fans
   mode: restart
+
 - id: '1730526398272'
   alias: 'Motion: toggle family room lights'
   description: Turn on family room lights if motion is detectged after sunset
@@ -340,6 +356,7 @@
       - light.family_room_fan_light
       - light.mantle_lights
   mode: restart
+
 - id: '1731984583348'
   alias: 'Lights: garage light on when door opens'
   description: Turn of the garage light as the door opens if I arrive at home after
@@ -360,6 +377,7 @@
     target:
       entity_id: switch.garage_light
   mode: restart
+
 - id: '1732076354656'
   alias: 'Exhaust fans: toggle nook fan with vanity'
   description: Turn on exhaust fan when bathroom is occupied
@@ -386,6 +404,7 @@
     target:
       entity_id: switch.nook_bath_fan
   mode: restart
+
 - id: '1732076438388'
   alias: 'Exhaust fans: toggle water closet fan with light'
   description: Turn on exhaust fan when bathroom is occupied
@@ -412,6 +431,7 @@
     target:
       entity_id: switch.water_closet_fan
   mode: single
+
 - id: '1732287454096'
   alias: 'Lights: exterior lights off at sunrise'
   description: Turn off the outside lights each morning before sunrise
@@ -430,6 +450,7 @@
       - switch.side_door_light
       - switch.back_patio_light
   mode: restart
+
 - id: '1732287589929'
   alias: 'Lights: evening lights off at sunrise'
   description: Turn off evening lights prior to sunrise
@@ -447,6 +468,7 @@
       - light.evening_lights
       - light.color_lights
   mode: restart
+
 - id: '1732538845532'
   alias: 'Timers: laundry light off'
   description: Turn off the laundry light when it's been left on
@@ -467,6 +489,7 @@
     target:
       entity_id: switch.laundry_light
   mode: single
+
 - id: '1732538962270'
   alias: 'Timers: entry light off'
   description: Turn off the emtry light when it's been left on
@@ -487,6 +510,7 @@
     target:
       entity_id: light.entry_light
   mode: single
+
 - id: '1732539928941'
   alias: 'Media players: bedroom TV off'
   description: Turn off the bedroom TV when it's idle
@@ -523,6 +547,7 @@
     target:
       entity_id: media_player.bedroom_tv
   mode: single
+
 - id: '1732610522189'
   alias: 'Motion: toggle garage lights'
   description: Turn on garage lights after dark if motion is detected
@@ -557,6 +582,7 @@
     target:
       entity_id: switch.garage_light
   mode: restart
+
 - id: '1732613084127'
   alias: 'Ceiling fans: sync bedroom fan switch'
   description: Keep the wall switch in sync with the bond controlled fan
@@ -581,6 +607,7 @@
       - fan.bedroom_fan
       - switch.bedroom_fan_switch
   mode: single
+
 - id: '1732613358867'
   alias: 'Ceiling fans: sync living room fan switch'
   description: Keep the wall switch in sync with the bond controlled fan
@@ -605,6 +632,7 @@
       - fan.living_room_fan
       - fan.living_room_fan_switch
   mode: single
+
 - id: '1732613539790'
   alias: 'Ceiling fans: sync family room fan switch'
   description: Keep the wall switch in sync with the bond controlled fan
@@ -629,6 +657,7 @@
       - fan.family_room_fan
       - switch.family_room_fan_switch
   mode: single
+
 - id: '1732706022664'
   alias: 'Timers: color lights off'
   description: Turn off the color light at 1am
@@ -643,6 +672,7 @@
     target:
       entity_id: light.color_lights
   mode: single
+
 - id: '1732709441528'
   alias: 'Timers: guest room off'
   description: Turn off the guest room when it's been left on
@@ -668,6 +698,7 @@
       - light.guest_lamp_1
       - light.guest_lamp_2
   mode: single
+
 - id: '1732709525678'
   alias: 'Timers: spare room off'
   description: Turn off the spare room when it's been left on
@@ -688,6 +719,7 @@
     target:
       entity_id: light.spare_room_light
   mode: single
+
 - id: '1732875843905'
   alias: 'Media players: tv off for spotify'
   description: Turn off the tv when Spotify is playing
@@ -695,7 +727,7 @@
   - trigger: state
     entity_id:
     - media_player.home_theater
-    attribute: app_id
+    attribute: app_name
     to: 'Spotify '
   conditions: []
   actions:
@@ -705,6 +737,7 @@
     target:
       entity_id: media_player.sony_bravia
   mode: single
+
 - id: '1732931352619'
   alias: 'Media players: home theater off'
   description: Turn off the home theater when not in use
@@ -733,6 +766,14 @@
       hours: 0
       minutes: 30
       seconds: 0
+  - trigger: state
+    entity_id:
+    - media_player.denon_avr
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
   conditions: []
   actions:
   - action: media_player.turn_off
@@ -744,6 +785,7 @@
       - media_player.denon_avr
       - media_player.home_theater
   mode: single
+
 - id: '1732933447261'
   alias: 'Motion: toggle master vanity'
   description: Turn on master vanity after dark if motion is detected
@@ -776,6 +818,7 @@
       entity_id:
       - light.master_bath_vanity
   mode: restart
+
 - id: '1732934583231'
   alias: 'Motion: toggle guest vanity'
   description: Turn on guest vanity after dark if motion is detected
@@ -810,6 +853,7 @@
       entity_id:
       - light.guest_bath_vanity
   mode: single
+
 - id: '1732934997741'
   alias: 'Motion: toggle water closet lights'
   description: Turn on water closet lights after dark if motion is detected
@@ -844,6 +888,7 @@
       entity_id:
       - light.water_closet_light
   mode: single
+
 - id: '1732935549290'
   alias: 'Motion: toggle nook vanity'
   description: Turn on nook bath vanity after dark if motion is detected
@@ -878,6 +923,7 @@
       entity_id:
       - light.nook_bath_vanity
   mode: single
+  
 - id: '1732987546288'
   alias: 'Timers: master light off'
   description: Turn off the Master fan light when it's been left on

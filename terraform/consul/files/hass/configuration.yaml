@@ -1,6 +1,4 @@
 homeassistant:
-
-  # Customization files
   customize: !include customize.yaml
   customize_domain:
     automation:
@@ -8,19 +6,19 @@ homeassistant:
 
 frontend:
 config:
-system_health:
 sun:
 dhcp:
 zeroconf:
 logbook:
 stream:
 history:
+media_source:
 
 http:
   use_x_forwarded_for: true
   trusted_proxies: !include trusted_proxies.yaml
   ip_ban_enabled: true
-  login_attempts_threshold: 5
+  login_attempts_threshold: 3
 
 google_assistant: !include google_assistant.yaml
 
@@ -30,11 +28,12 @@ tts:
 ffmpeg:
   ffmpeg_bin: /usr/bin/ffmpeg
 
-light: !include: lights.yaml
-switch: !include switch.yaml
+binary_sensor: !include binary_sensors.yaml
+fan: !include fans.yaml
+light: !include lights.yaml
+switch: !include switches.yaml
 cover: !include covers.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
-scene: !include scenes.yaml
 media_player: !include media_players.yaml
 

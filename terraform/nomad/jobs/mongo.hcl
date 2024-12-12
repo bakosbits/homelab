@@ -8,15 +8,6 @@ job "mongo" {
       port "mongo" { static = "27017" }
     }
 
-
-    volume "mongo" {
-      type            = "csi"
-      read_only       = false
-      source          = "mongo"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-    }  
-
     service {
       name = "mongo"
       port = "mongo"
@@ -30,13 +21,9 @@ job "mongo" {
         network_mode = "host"
         ports        = ["mongo"]
         volumes = [
-          "/mnt/volumes/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro"
+          "/mnt/mongo/db:/data/db",
+          "/mnt/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro"
         ]
-      }
-
-      volume_mount {
-        volume      = "mongo"
-        destination = "/data/db"
       }
 
       resources {

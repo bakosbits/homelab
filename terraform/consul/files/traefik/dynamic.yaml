@@ -1,12 +1,12 @@
 tls:
   certificates:
-    - certFile: "/etc/traefik/certificates/bakos.me.crt"
-      keyFile: "/etc/traefik/certificates/bakos.me.key"
+    - certFile: "/etc/traefik/tls/bakos.me.crt"
+      keyFile: "/etc/traefik/tls/bakos.me.key"
   stores:
     default:
       defaultCertificate:
-        certFile: "/etc/traefik/certificates/bakos.me.crt"
-        keyFile: "/etc/traefik/certificates/bakos.me.key"
+        certFile: "/etc/traefik/tls/bakos.me.crt"
+        keyFile: "/etc/traefik/tls/bakos.me.key"
 
 http:
   routers:
@@ -16,7 +16,7 @@ http:
       entrypoints:
         - websecure      
       middlewares:
-        - auth
+        - auth@file
 
     consul:
       service: consul
@@ -62,22 +62,29 @@ http:
     nomad:
       loadbalancer:
         servers:
-          - url: http://server01.bakos.lan:4646
+          - url: http://server01.bakos.me:4646
+          - url: http://server02.bakos.me:4646
+          - url: http://server03.bakos.me:4646                    
 
     consul:
       loadbalancer:
         servers:
-          - url: http://server01.bakos.lan:8500
+          - url: http://server01.bakos.me:8500
+          - url: http://server02.bakos.me:8500
+          - url: http://server03.bakos.me:8500
 
     pfsense:
       loadbalancer:
         servers:
-          - url: https://192.168.1.1:8443
+          - url: https://192.168.1.1:443
     
     pve:
       loadbalancer:
         servers:
           - url: https://192.168.1.10:8006
+          - url: https://192.168.1.11:8006
+          - url: https://192.168.1.12:8006
+
 
     pve-backup:
       loadbalancer:

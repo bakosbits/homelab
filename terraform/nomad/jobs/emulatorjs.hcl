@@ -13,22 +13,6 @@ job "emulatorjs" {
         to = 3000
       }
     }
-
-    volume "arcade_config" {
-      type            = "csi"
-      read_only       = false
-      source          = "arcade_config"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-    }  
-
-    volume "arcade_data" {
-      type            = "csi"
-      read_only       = false
-      source          = "arcade_data"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-    } 
     
     service {
       name = "arcade"
@@ -68,19 +52,12 @@ job "emulatorjs" {
       driver = "docker"
 
       config {
-        image        = "linuxserver/emulatorjs:latest"
-        network_mode = "bridge"
-        ports        = ["http", "admin"]
-      }
-
-      volume_mount {
-        volume      = "arcade_config"
-        destination = "/config"
-      }
-
-      volume_mount {
-        volume      = "arcade_data"
-        destination = "/data"
+        image   = "linuxserver/emulatorjs:latest"
+        ports   = ["http", "admin"]
+        volumes = [
+          "/mnt/emulatorjs/config:/config",
+          "/mnt/emulatorjs/data:/data"
+        ]
       }
 
       env {

@@ -8,22 +8,6 @@ job "transmission" {
       port "http" { static = 9091 }
     }
 
-    volume "transmission" {
-      type            = "csi"
-      read_only       = false
-      source          = "transmission"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-    } 
-
-    volume "media" {
-      type            = "csi"
-      read_only       = false
-      source          = "media"
-      attachment_mode = "file-system"
-      access_mode     = "multi-node-multi-writer"
-    }
-
     service {
       name = "transmission"
       port = "http"
@@ -44,19 +28,12 @@ job "transmission" {
       driver = "docker"
 
       config {
-        image        = "lscr.io/linuxserver/transmission:4.0.6"
-        ports        = ["http"]
-        network_mode = "host"
-      }
-
-      volume_mount {
-        volume      = "transmission"
-        destination = "/config"
-      }
-
-      volume_mount {
-        volume      = "media"
-        destination = "/data"
+        image    = "lscr.io/linuxserver/transmission:latest"
+        ports    = ["http"]
+        volumes  = [
+          "/mnt/transmission:/config",
+          "/mnt/media:/data"
+        ]
       }
 
       env {

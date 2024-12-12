@@ -13,7 +13,7 @@ job "nomad-cleanup" {
 
       config {
         command = "nomad"
-        args    = ["system", "gc", "--address", "http://server01.bakos.lan:4646"]
+        args    = ["system", "gc", "--address", "http://server01.bakos.me:4646"]
       }
     }
   }

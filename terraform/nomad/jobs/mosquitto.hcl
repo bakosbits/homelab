@@ -10,30 +10,6 @@ job "mosquitto" {
 
     }
 
-    volume "mosquitto-config" {
-      type            = "csi"
-      read_only       = false
-      source          = "mosquitto-config"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-    }    
-
-    volume "mosquitto-data" {
-      type            = "csi"
-      read_only       = false
-      source          = "mosquitto-data"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-    }    
-
-    volume "mosquitto-log" {
-      type            = "csi"
-      read_only       = false
-      source          = "mosquitto-log"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-    }    
-
     service {
       name = "mosquitto"
       port = "mqtt"
@@ -54,27 +30,12 @@ job "mosquitto" {
         ports        = ["mqtt", "websocket"]
         network_mode = "host"
         volumes = [
+          "/mnt/mosquitto/data:/mosquitto/data",
+          "/mnt/mosquitto/config:/mosquitto/config",          
+          "/mnt/mosquitto/log:/mosquitto/log",
           "local/mosquitto.conf:/mosquitto/config/mosquitto.conf",
-          "local/password.txt:/mosquitto/config/password.txt",          
+          "local/password.txt:/mosquitto/config/password.txt",
         ]        
-      }
-
-      volume_mount {
-        volume      = "mosquitto-config"
-        destination = "/mosquitto/config"
-        read_only   = false
-      }
-
-      volume_mount {
-        volume      = "mosquitto-data"
-        destination = "/mosquitto/data"
-        read_only   = false
-      }
-
-      volume_mount {
-        volume      = "mosquitto-log"
-        destination = "/mosquitto/log"
-        read_only   = false
       }
 
       env {

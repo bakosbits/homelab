@@ -2,26 +2,15 @@ job "plex" {
   datacenters = ["dc1"]
   type        = "service"
 
+  constraint {
+    attribute = "${attr.unique.hostname}"
+    value     = "client03"
+  }  
+
   group "plex" {
 
     network {
       port "http" { static = 32400 }
-    }
-
-    volume "plex" {
-      type            = "csi"
-      read_only       = false
-      source          = "plex"
-      attachment_mode = "file-system"
-      access_mode     = "single-node-writer"
-    }    
-
-    volume "media" {
-      type            = "csi"
-      read_only       = false
-      source          = "media"
-      attachment_mode = "file-system"
-      access_mode     = "multi-node-multi-writer"
     }
 
     service {
@@ -48,23 +37,16 @@ job "plex" {
         image        = "plexinc/pms-docker:latest"
         ports        = ["http"]
         network_mode = "host"
-      }
-
-      volume_mount {
-        volume      = "plex"
-        destination = "/config"
-        read_only   = false
-      }
-
-      volume_mount {
-        volume      = "media"
-        destination = "/data"
+        volumes = [
+          "/mnt/plex:/config",
+          "/mnt/media:/data"
+        ]
       }
 
       env {
         PLEX_UID   = "1010"
         PLEX_GID   = "1010"
-        PLEX_CLAIM = "claim-xyHRu7NH_M4H6_skh9Y7"
+        PLEX_CLAIM = "claim-YWsN7f_sXjqvefsVZMXx"
       }
 
       resources {

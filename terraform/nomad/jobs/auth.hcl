@@ -19,6 +19,7 @@ job "auth" {
         "traefik.http.middlewares.auth.forwardauth.authResponseHeaders=X-Forwarded-User",
         "traefik.http.routers.auth.middlewares=auth"
       ]
+
       check {
         type     = "http"
         path     = "/"
@@ -35,6 +36,11 @@ job "auth" {
         network_mode = "host"
         ports        = ["http"]
       }
+
+      resources {
+        cpu    = 200
+        memory = 256
+      }
       
       template {
         env         = true
@@ -46,12 +52,7 @@ job "auth" {
             {{- end }}
           {{- end }}
         EOF
-      }
-
-      resources {
-        cpu    = 200
-        memory = 256
-      }
+      }      
     }
   }
 }
