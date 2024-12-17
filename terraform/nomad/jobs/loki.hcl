@@ -28,12 +28,12 @@ job "loki" {
         image        = "grafana/loki:2.9.10"
         network_mode = "host"
         ports        = ["http"]
-        args         = [
+        args = [
           "-config.file",
           "local/loki/local-config.yaml",
         ]
         volumes = [
-          "/mnt/loki:/loki"
+          "/mnt/volumes/loki:/loki"
         ]
       }
 

@@ -28,11 +28,11 @@ job "jellyfin" {
       driver = "docker"
 
       config {
-        image   = "linuxserver/jellyfin:10.9.8"
-        ports   = ["http"]
+        image = "linuxserver/jellyfin:10.9.8"
+        ports = ["http"]
         volumes = [
-          "/mnt/jellyfin:/config/cache",
-          "/mnt/media:/data"
+          "/mnt/volumes/jellyfin:/config/cache",
+          "/mnt/volumes/media:/data"
         ]
       }
 

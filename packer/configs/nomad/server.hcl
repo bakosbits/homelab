@@ -1,14 +1,13 @@
 bind_addr   = "0.0.0.0"
 data_dir    = "/opt/nomad/"
 datacenter  = "dc1"
-region      = "home"
 log_level   = "warn"
 
 server {
   enabled = true
   bootstrap_expect = 3
-  heartbeat_grace = "300s"
-  min_heartbeat_ttl = "20s"
+  # heartbeat_grace = "300s"
+  # min_heartbeat_ttl = "20s"
 }
 
 advertise {

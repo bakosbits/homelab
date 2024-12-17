@@ -29,11 +29,11 @@ job "sabnzbd" {
       driver = "docker"
 
       config {
-        image   = "linuxserver/sabnzbd:4.3.2"
-        ports   = ["http"]
+        image = "linuxserver/sabnzbd:4.3.2"
+        ports = ["http"]
         volumes = [
-          "/mnt/sabnzbd:/config",
-          "/mnt/media:/data"
+          "/mnt/volumes/sabnzbd:/config",
+          "/mnt/volumes/media:/data"
         ]
       }
 

@@ -29,12 +29,12 @@ job "influxdb" {
       driver = "docker"
 
       config {
-        image   = "influxdb:2.7.8-alpine"
-        ports   = ["http"]
+        image = "influxdb:2.7.8-alpine"
+        ports = ["http"]
         volumes = [
-          "/mnt/influxdb/data:/var/lib/influxdb2",
-          "/mnt/influxdb/config:/etc/influxdb2"
-          
+          "/mnt/volumes/influxdb/data:/var/lib/influxdb2",
+          "/mnt/volumes/influxdb/config:/etc/influxdb2"
+
         ]
       }
 

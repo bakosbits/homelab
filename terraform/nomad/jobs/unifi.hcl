@@ -4,8 +4,8 @@ job "unifi" {
 
   constraint {
     attribute = "${attr.unique.hostname}"
-    value     = "client01"
-  }    
+    value     = "nomad-cli01"
+  }
 
   group "unifi" {
 
@@ -39,9 +39,9 @@ job "unifi" {
         network_mode = "host"
         ports        = ["http"]
         volumes = [
-          "/mnt/unifi:/config",
-          "/mnt/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro"
-        ]        
+          "/mnt/volumes/unifi:/config",
+          "/mnt/volumes/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro"
+        ]
       }
 
       resources {

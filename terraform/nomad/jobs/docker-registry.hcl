@@ -18,7 +18,7 @@ job "docker-registry" {
         interval = "10s"
         timeout  = "2s"
       }
-    }    
+    }
 
     task "docker-registry" {
       driver = "docker"
@@ -27,15 +27,15 @@ job "docker-registry" {
         image        = "registry:2.8.3"
         network_mode = "host"
         ports        = ["http"]
-        volumes      = [
-          "/mnt/docker-registry:/data"
+        volumes = [
+          "/mnt/volumes/docker-registry:/data"
         ]
       }
 
       env {
         REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY = "/data"
-        REGISTRY_HTTP_ADDR       = "${NOMAD_ADDR_http}"
-        REGISTRY_PROXY_REMOTEURL = "https://registry-1.docker.io"
+        REGISTRY_HTTP_ADDR                        = "${NOMAD_ADDR_http}"
+        REGISTRY_PROXY_REMOTEURL                  = "https://registry-1.docker.io"
       }
 
       resources {

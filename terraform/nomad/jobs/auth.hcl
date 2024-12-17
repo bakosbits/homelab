@@ -1,6 +1,5 @@
 job "auth" {
   datacenters = ["dc1"]
-  type        = "service"
 
   group "auth" {
 
@@ -41,7 +40,7 @@ job "auth" {
         cpu    = 200
         memory = 256
       }
-      
+
       template {
         env         = true
         destination = "secrets/auth.env"
@@ -52,7 +51,7 @@ job "auth" {
             {{- end }}
           {{- end }}
         EOF
-      }      
+      }
     }
   }
 }

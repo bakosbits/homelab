@@ -1,50 +1,32 @@
-source "proxmox-iso" "dns" {
+source "proxmox-clone" "dns" {
 
-  proxmox_url              = var.proxmox_api_url
-  username                 = var.proxmox_api_user
-  password                 = var.proxmox_api_password
-  node                     = var.proxmox_node
+  proxmox_url          = var.proxmox_url
+  username             = var.proxmox_user
+  password             = var.proxmox_password
 
-  vm_id                   = 9001
-  vm_name                 = "dns"
-  template_description    = "Managed by terraform, built on ${formatdate("MM/DD/YYYY hh:mm:ss ZZZ", timestamp())}"
+  vm_id                = 9001
+  vm_name              = "dns-tpl"
+  template_description = "CoreDNS template"
 
-  os                      = "l26"
-  cpu_type                = "host"
-  sockets                 = 1
-  cores                   = 2
-  memory                  = 1024
-  machine                 = "q35"
-  bios                    = "seabios"
-  scsi_controller         = "virtio-scsi-single"
-  qemu_agent              = true
+  clone_vm    = "base-tpl"
+  full_clone  = true
+  node        = var.proxmox_node
+  
+  os      = "l26"
+  sockets = 1
+  cores   = 1
+  memory  = 1024
+  
+  network_adapters {
+    bridge   = "vmbr2"
+    vlan_tag = 20
+    model    = "virtio"
+  }
 
   cloud_init              = true
-  cloud_init_storage_pool = var.storage_pool
-
-  network_adapters {
-    bridge = var.bridge
-    model  = "virtio"
-    vlan_tag    = var.vlan_tag
-  }
-
-  disks {
-    disk_size         = "2G"
-    format            = "raw"
-    storage_pool      = var.storage_pool
-    type              = "scsi"
-  }
-
-  iso_file     = var.iso_file
-  unmount_iso  = true
-
-  http_directory = "../http"
-  http_port_min  = 8100
-  http_port_max  = 8100
-  boot_wait      = "10s"
-  boot_command   = ["<esc><wait>auto url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<enter>"]
+  cloud_init_storage_pool = "rbd"
 
   ssh_username = var.ssh_username
   ssh_password = var.ssh_password
-  ssh_timeout  = "20m"
+  
 }

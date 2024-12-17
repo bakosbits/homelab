@@ -11,7 +11,7 @@ job "samba" {
     service {
       name = "samba"
       port = "smb"
-      
+
       check {
         type     = "tcp"
         interval = "10s"
@@ -27,7 +27,7 @@ job "samba" {
         ports        = ["smb"]
         network_mode = "host"
         volumes = [
-          "/mnt/samba:/shares/homelab"
+          "/mnt/volumes/samba:/shares/homelab"
         ]
       }
 

@@ -28,11 +28,11 @@ job "transmission" {
       driver = "docker"
 
       config {
-        image    = "lscr.io/linuxserver/transmission:latest"
-        ports    = ["http"]
-        volumes  = [
-          "/mnt/transmission:/config",
-          "/mnt/media:/data"
+        image = "lscr.io/linuxserver/transmission:latest"
+        ports = ["http"]
+        volumes = [
+          "/mnt/volumes/transmission:/config",
+          "/mnt/volumes/media:/data"
         ]
       }
 

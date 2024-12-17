@@ -1,5 +1,5 @@
 build {
-  sources = ["source.proxmox-iso.dns"]
+  sources = ["source.proxmox-clone.dns"]
 
   # Copy configs up to tmp
   provisioner "file" {
@@ -10,7 +10,7 @@ build {
   # Copy provisioner up to tmp
   provisioner "file" {
     destination = "/tmp"
-    source      = "./scripts"
+    source      = "${path.root}/scripts"
   }
 
   # Provision

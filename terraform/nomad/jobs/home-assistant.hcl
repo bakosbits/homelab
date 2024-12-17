@@ -4,8 +4,8 @@ job "home-assistant" {
 
   constraint {
     attribute = "${attr.unique.hostname}"
-    value     = "client03"
-  }    
+    value     = "nomad-cli03"
+  }
 
   group "home-assistant" {
 
@@ -38,7 +38,7 @@ job "home-assistant" {
         ports        = ["http"]
         network_mode = "host"
         volumes = [
-          "/mnt/hass:/config",
+          "/mnt/volumes/hass:/config",
           "local/automations.yaml:/config/automations.yaml",
           "local/binary_sensors.yaml:/config/binary_sensors.yaml",
           "local/configuration.yaml:/config/configuration.yaml",
@@ -52,7 +52,7 @@ job "home-assistant" {
           "local/service_account.json:/config/service_account.json",
           "local/switches.yaml:/config/switches.yaml",
           "local/trusted_proxies.yaml:/config/trusted_proxies.yaml",
-        ]        
+        ]
       }
 
       env {
@@ -76,21 +76,21 @@ job "home-assistant" {
         data        = <<-EOF
         {{- key "homelab/hass/binary_sensors.yaml" }}
         EOF
-      }    
+      }
 
       template {
         destination = "local/configuration.yaml"
         data        = <<-EOF
         {{- key "homelab/hass/configuration.yaml" }}
         EOF
-      }    
+      }
 
       template {
         destination = "local/covers.yaml"
         data        = <<-EOF
         {{- key "homelab/hass/covers.yaml" }}
         EOF
-      }          
+      }
 
       template {
         destination = "local/customize.yaml"

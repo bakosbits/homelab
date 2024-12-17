@@ -10,7 +10,7 @@ job "telegraf" {
 
     task "telegraf" {
       driver = "docker"
-      
+
       service {
         name = "telegraf"
         port = "http"
@@ -23,8 +23,8 @@ job "telegraf" {
       }
 
       config {
-        image      = "telegraf:1.31.2"
-        ports      = ["http"]
+        image = "telegraf:1.31.2"
+        ports = ["http"]
         args = [
           "--config=/local/config.yaml",
         ]

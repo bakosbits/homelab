@@ -7,7 +7,7 @@ job "matter" {
     network {
       port "websocket" { static = 5580 }
 
-    }  
+    }
 
     service {
       name = "matter"
@@ -15,7 +15,7 @@ job "matter" {
 
       check {
         type     = "tcp"
-        port     = "websocket" 
+        port     = "websocket"
         interval = "10s"
         timeout  = "2s"
       }
@@ -25,17 +25,17 @@ job "matter" {
       driver = "docker"
 
       config {
-        image   = "ghcr.io/home-assistant-libs/python-matter-server:stable"
-        ports   = ["websocket"]
+        image = "ghcr.io/home-assistant-libs/python-matter-server:stable"
+        ports = ["websocket"]
         volumes = [
-          "/mnt/matter:/data"
-        ]     
+          "/mnt/volumes/matter:/data"
+        ]
       }
 
       resources {
         cpu    = 300
         memory = 256
-      }    
+      }
     }
   }
 }

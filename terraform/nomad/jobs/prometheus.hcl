@@ -13,7 +13,7 @@ job "prometheus" {
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.prometheus.entrypoints=websecure",             				
+        "traefik.http.routers.prometheus.entrypoints=websecure",
         "traefik.http.routers.prometheus.middlewares=auth"
       ]
       check {
@@ -50,7 +50,7 @@ job "prometheus" {
         data          = <<-EOF
         {{- key "homelab/prometheus"}}
         EOF
-      }      
+      }
     }
   }
 }

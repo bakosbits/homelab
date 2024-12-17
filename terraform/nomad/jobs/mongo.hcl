@@ -21,8 +21,8 @@ job "mongo" {
         network_mode = "host"
         ports        = ["mongo"]
         volumes = [
-          "/mnt/mongo/db:/data/db",
-          "/mnt/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro"
+          "/mnt/volumes/mongo/db:/data/db",
+          "/mnt/volumes/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro"
         ]
       }
 

@@ -33,7 +33,7 @@ job "postgres" {
         image = "postgres:16.4"
         ports = ["postgres"]
         volumes = [
-          "/mnt/postgres:/var/lib/pgsql/data",
+          "/mnt/volumes/postgres:/var/lib/pgsql/data",
         ]
       }
 

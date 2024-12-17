@@ -1,5 +1,5 @@
 job "wikijs" {
-  datacenters = ["dc1"]  
+  datacenters = ["dc1"]
   type        = "service"
 
   group "wikijs" {
@@ -29,10 +29,10 @@ job "wikijs" {
       driver = "docker"
 
       config {
-        image   = "linuxserver/wikijs:2.5.303"
-        ports   = ["http"]
+        image = "linuxserver/wikijs:2.5.303"
+        ports = ["http"]
         volumes = [
-          "/mnt/wikijs:/config"
+          "/mnt/volumes/wikijs:/config"
         ]
       }
 

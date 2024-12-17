@@ -11,7 +11,7 @@ job "flaresolverr" {
     service {
       name = "flaresolverr"
       port = "http"
-      
+
       check {
         type     = "tcp"
         interval = "10s"
@@ -27,8 +27,8 @@ job "flaresolverr" {
         ports        = ["http"]
         network_mode = "host"
         volumes = [
-          "/mnt/flaresolverr:/config",
-          "/mnt/media:/data"
+          "/mnt/volumes/flaresolverr:/config",
+          "/mnt/volumes/media:/data"
         ]
       }
 

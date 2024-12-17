@@ -1,0 +1,10 @@
+*.tfplan
+*.tfstate
+*.tfvars
+*.backup
+*.pkrvars*
+*.secret
+*.keyring
+*.tfstate.lock.info
+.terraform/
+mosquitto/

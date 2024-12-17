@@ -4,8 +4,8 @@ job "plex" {
 
   constraint {
     attribute = "${attr.unique.hostname}"
-    value     = "client03"
-  }  
+    value     = "nomad-cli03"
+  }
 
   group "plex" {
 
@@ -19,12 +19,12 @@ job "plex" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.plex.entrypoints=websecure",
-        "traefik.http.routers.plex.middlewares=auth"        
+        "traefik.http.routers.plex.middlewares=auth"
       ]
 
       check {
         type     = "http"
-        path     = "/web" 
+        path     = "/web"
         interval = "10s"
         timeout  = "2s"
       }
@@ -38,8 +38,8 @@ job "plex" {
         ports        = ["http"]
         network_mode = "host"
         volumes = [
-          "/mnt/plex:/config",
-          "/mnt/media:/data"
+          "/mnt/volumes/plex:/config",
+          "/mnt/volumes/media:/data"
         ]
       }
 

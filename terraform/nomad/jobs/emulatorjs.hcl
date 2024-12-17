@@ -13,7 +13,7 @@ job "emulatorjs" {
         to = 3000
       }
     }
-    
+
     service {
       name = "arcade"
       port = "http"
@@ -52,11 +52,11 @@ job "emulatorjs" {
       driver = "docker"
 
       config {
-        image   = "linuxserver/emulatorjs:latest"
-        ports   = ["http", "admin"]
+        image = "linuxserver/emulatorjs:latest"
+        ports = ["http", "admin"]
         volumes = [
-          "/mnt/emulatorjs/config:/config",
-          "/mnt/emulatorjs/data:/data"
+          "/mnt/volumes/emulatorjs/config:/config",
+          "/mnt/volumes/emulatorjs/data:/data"
         ]
       }
 

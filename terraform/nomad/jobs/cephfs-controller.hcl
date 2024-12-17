@@ -3,11 +3,11 @@ job "cephfs-controller" {
   type        = "system"
 
   group "cephfs-controller" {
-    
-    network { 
-      port "metrics" {} 
+
+    network {
+      port "metrics" {}
     }
-   
+
     service {
       name = "cephfs-controller"
       port = "metrics"
@@ -33,7 +33,7 @@ job "cephfs-controller" {
 
         volumes = [
           "./local/config.json:/etc/ceph-csi-config/config.json",
-          "/lib/modules:/lib/modules"          
+          "/lib/modules:/lib/modules"
         ]
 
         mounts = [
@@ -47,7 +47,7 @@ job "cephfs-controller" {
           }
         ]
       }
-      
+
       csi_plugin {
         id        = "cephfs"
         type      = "controller"

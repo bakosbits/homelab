@@ -40,10 +40,10 @@ resource "nomad_job" "flaresolverr" {
 
 resource "nomad_job" "grafana" {
   jobspec = file("${path.module}/jobs/grafana.hcl")
-}  
+}
 
 resource "nomad_job" "home-assistant" {
-  jobspec = file("${path.module}/jobs/home-assistant.hcl")  
+  jobspec = file("${path.module}/jobs/home-assistant.hcl")
 }
 
 resource "nomad_job" "influxdb" {
@@ -59,19 +59,19 @@ resource "nomad_job" "journalctl-cleanup" {
 }
 
 resource "nomad_job" "loki" {
-  jobspec = file("${path.module}/jobs/loki.hcl") 
+  jobspec = file("${path.module}/jobs/loki.hcl")
 }
 
 resource "nomad_job" "matter" {
-  jobspec = file("${path.module}/jobs/matter.hcl") 
+  jobspec = file("${path.module}/jobs/matter.hcl")
 }
 
 resource "nomad_job" "mongo" {
-  jobspec = file("${path.module}/jobs/mongo.hcl") 
+  jobspec = file("${path.module}/jobs/mongo.hcl")
 }
 
 resource "nomad_job" "mosquitto" {
-  jobspec = file("${path.module}/jobs/mosquitto.hcl") 
+  jobspec = file("${path.module}/jobs/mosquitto.hcl")
 }
 
 resource "nomad_job" "nomad-cleanup" {

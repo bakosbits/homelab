@@ -30,10 +30,10 @@ job "grafana" {
       user   = "root"
 
       config {
-        image   = "grafana/grafana-oss:11.1.3"
-        ports   = ["http"]
+        image = "grafana/grafana-oss:11.1.3"
+        ports = ["http"]
         volumes = [
-          "/mnt/grafana:/var/lib/grafana"
+          "/mnt/volumes/grafana:/var/lib/grafana"
         ]
       }
 

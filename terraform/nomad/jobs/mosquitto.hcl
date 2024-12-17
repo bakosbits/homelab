@@ -16,7 +16,7 @@ job "mosquitto" {
 
       check {
         type     = "tcp"
-        port     = "mqtt" 
+        port     = "mqtt"
         interval = "10s"
         timeout  = "2s"
       }
@@ -31,17 +31,17 @@ job "mosquitto" {
         network_mode = "host"
         volumes = [
           "/mnt/mosquitto/data:/mosquitto/data",
-          "/mnt/mosquitto/config:/mosquitto/config",          
-          "/mnt/mosquitto/log:/mosquitto/log",
+          "/mnt/volumes/mosquitto/config:/mosquitto/config",
+          "/mnt/volumes/mosquitto/log:/mosquitto/log",
           "local/mosquitto.conf:/mosquitto/config/mosquitto.conf",
           "local/password.txt:/mosquitto/config/password.txt",
-        ]        
+        ]
       }
 
       env {
         PUID = "1010"
         PGID = "1010"
-        TZ   = "America/Denver" 
+        TZ   = "America/Denver"
       }
 
       resources {
@@ -55,14 +55,14 @@ job "mosquitto" {
         data        = <<-EOF
         {{- key "homelab/mosquitto/mosquitto.conf" }}
         EOF
-      }      
+      }
 
       template {
         destination = "local/password.txt"
         data        = <<-EOF
         {{- key "homelab/mosquitto/password.txt" }}
         EOF
-      }      
+      }
 
     }
   }

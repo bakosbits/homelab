@@ -1,5 +1,5 @@
 job "traefik" {
-  datacenters = ["dc1"]  
+  datacenters = ["dc1"]
   type        = "system"
 
   group "traefik" {
@@ -36,7 +36,7 @@ job "traefik" {
         ports        = ["http", "https", "postgres"]
         network_mode = "host"
         volumes = [
-          "/mnt/certs:/etc/traefik/tls",
+          "/mnt/volumes/certs:/etc/traefik/tls",
           "local/traefik.yaml:/etc/traefik/traefik.yaml",
           "local/dynamic.yaml:/etc/traefik/dynamic/dynamic.yaml"
         ]

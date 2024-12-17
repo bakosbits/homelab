@@ -53,4 +53,3 @@ resource "consul_key_prefix" "vector" {
     "vector.toml" = file("${path.module}/files/vector/vector.toml"),
   }
 }
-
