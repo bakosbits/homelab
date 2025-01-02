@@ -2,6 +2,13 @@ locals {
   jobs = "${path.module}/jobs"
 }
 
+resource "nomad_job" "auth" {
+  jobspec = templatefile("${local.jobs}/auth.hcl",
+  {
+    consul_domain = var.consul_domain
+  })
+}
+
 resource "nomad_job" "cephrbd-controller" {
   jobspec = file("${local.jobs}/cephrbd-controller.hcl")
 }
@@ -16,13 +23,6 @@ resource "nomad_job" "cephfs-controller" {
 
 resource "nomad_job" "cephfs-node" {
   jobspec = file("${local.jobs}/cephfs-node.hcl")
-}
-
-resource "nomad_job" "auth" {
-  jobspec = templatefile("${local.jobs}/auth.hcl",
-  {
-    consul_domain = var.consul_domain
-  })
 }
 
 resource "nomad_job" "docker-registry" {
