@@ -1,12 +1,26 @@
 job "jellyfin" {
   datacenters = ["dc1"]
   type        = "service"
-
+  
   group "jellyfin" {
 
     network {
       port "http" { static = 8096 }
     }
+
+    volume "jellyfin" {
+      type            = "csi"
+      source          = "jellyfin"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    } 
+
+    volume "media" {
+      type            = "csi"
+      source          = "media"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
+    } 
 
     service {
       name = "jellyfin"
@@ -28,12 +42,18 @@ job "jellyfin" {
       driver = "docker"
 
       config {
-        image = "linuxserver/jellyfin:10.9.8"
-        ports = ["http"]
-        volumes = [
-          "/mnt/volumes/jellyfin:/config/cache",
-          "/mnt/volumes/media:/data"
-        ]
+        image   = "linuxserver/jellyfin:10.9.8"
+        ports   = ["http"]
+      }
+
+      volume_mount {
+        volume      = "jellyfin"
+        destination = "/config/cache"
+      }
+
+      volume_mount {
+        volume      = "media"
+        destination = "/data"
       }
 
       env {

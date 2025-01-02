@@ -1,141 +1,144 @@
-# resource "nomad_job" "cephrbd-controller" {
-#   jobspec = file("${path.module}/jobs/cephrbd-controller.hcl")
-# }
+locals {
+  jobs = "${path.module}/jobs"
+}
 
-# resource "nomad_job" "cephrbd-node" {
-#   jobspec = file("${path.module}/jobs/cephrbd-node.hcl")
-# }
+resource "nomad_job" "cephrbd-controller" {
+  jobspec = file("${local.jobs}/cephrbd-controller.hcl")
+}
 
-# resource "nomad_job" "cephfs-controller" {
-#   jobspec = file("${path.module}/jobs/cephfs-controller.hcl")
-# }
+resource "nomad_job" "cephrbd-node" {
+  jobspec = file("${local.jobs}/cephrbd-node.hcl")
+}
 
-# resource "nomad_job" "cephfs-node" {
-#   jobspec = file("${path.module}/jobs/cephfs-node.hcl")
-# }
+resource "nomad_job" "cephfs-controller" {
+  jobspec = file("${local.jobs}/cephfs-controller.hcl")
+}
+
+resource "nomad_job" "cephfs-node" {
+  jobspec = file("${local.jobs}/cephfs-node.hcl")
+}
 
 resource "nomad_job" "auth" {
-  jobspec = file("${path.module}/jobs/auth.hcl")
+  jobspec = templatefile("${local.jobs}/auth.hcl",
+  {
+    consul_domain = var.consul_domain
+  })
 }
 
 resource "nomad_job" "docker-registry" {
-  jobspec = file("${path.module}/jobs/docker-registry.hcl")
+  jobspec = file("${local.jobs}/docker-registry.hcl")
 }
 
 resource "nomad_job" "docker-cleanup" {
-  jobspec = file("${path.module}/jobs/docker-cleanup.hcl")
+  jobspec = file("${local.jobs}/docker-cleanup.hcl")
 }
 
 resource "nomad_job" "drawio" {
-  jobspec = file("${path.module}/jobs/drawio.hcl")
+  jobspec = file("${local.jobs}/drawio.hcl")
 }
 
 resource "nomad_job" "emulatorjs" {
-  jobspec = file("${path.module}/jobs/emulatorjs.hcl")
+  jobspec = file("${local.jobs}/emulatorjs.hcl")
 }
 
 resource "nomad_job" "flaresolverr" {
-  jobspec = file("${path.module}/jobs/flaresolverr.hcl")
+  jobspec = file("${local.jobs}/flaresolverr.hcl")
 }
 
 resource "nomad_job" "grafana" {
-  jobspec = file("${path.module}/jobs/grafana.hcl")
+  jobspec = file("${local.jobs}/grafana.hcl")
 }
 
 resource "nomad_job" "home-assistant" {
-  jobspec = file("${path.module}/jobs/home-assistant.hcl")
+  jobspec = file("${local.jobs}/home-assistant.hcl")
 }
 
 resource "nomad_job" "influxdb" {
-  jobspec = file("${path.module}/jobs/influxdb.hcl")
+  jobspec = file("${local.jobs}/influxdb.hcl")
 }
 
 resource "nomad_job" "jellyfin" {
-  jobspec = file("${path.module}/jobs/jellyfin.hcl")
+  jobspec = file("${local.jobs}/jellyfin.hcl")
 }
 
 resource "nomad_job" "journalctl-cleanup" {
-  jobspec = file("${path.module}/jobs/journalctl-cleanup.hcl")
+  jobspec = file("${local.jobs}/journalctl-cleanup.hcl")
 }
 
 resource "nomad_job" "loki" {
-  jobspec = file("${path.module}/jobs/loki.hcl")
+  jobspec = file("${local.jobs}/loki.hcl")
 }
 
 resource "nomad_job" "matter" {
-  jobspec = file("${path.module}/jobs/matter.hcl")
+  jobspec = file("${local.jobs}/matter.hcl")
 }
 
 resource "nomad_job" "mongo" {
-  jobspec = file("${path.module}/jobs/mongo.hcl")
+  jobspec = file("${local.jobs}/mongo.hcl")
 }
 
 resource "nomad_job" "mosquitto" {
-  jobspec = file("${path.module}/jobs/mosquitto.hcl")
+  jobspec = file("${local.jobs}/mosquitto.hcl")
 }
 
 resource "nomad_job" "nomad-cleanup" {
-  jobspec = file("${path.module}/jobs/nomad-cleanup.hcl")
+  jobspec = file("${local.jobs}/nomad-cleanup.hcl")
 }
 
 resource "nomad_job" "pgweb" {
-  jobspec = file("${path.module}/jobs/pgweb.hcl")
+  jobspec = file("${local.jobs}/pgweb.hcl")
 }
 
 resource "nomad_job" "plex" {
-  jobspec = file("${path.module}/jobs/plex.hcl")
+  jobspec = file("${local.jobs}/plex.hcl")
 }
 
 resource "nomad_job" "postgres" {
-  jobspec = file("${path.module}/jobs/postgres.hcl")
+  jobspec = file("${local.jobs}/postgres.hcl")
 }
 
 resource "nomad_job" "prowlarr" {
-  jobspec = file("${path.module}/jobs/prowlarr.hcl")
+  jobspec = file("${local.jobs}/prowlarr.hcl")
 }
 
 resource "nomad_job" "radarr" {
-  jobspec = file("${path.module}/jobs/radarr.hcl")
+  jobspec = file("${local.jobs}/radarr.hcl")
 }
 
 resource "nomad_job" "sabnzbd" {
-  jobspec = file("${path.module}/jobs/sabnzbd.hcl")
+  jobspec = file("${local.jobs}/sabnzbd.hcl")
 }
 
 resource "nomad_job" "samba" {
-  jobspec = file("${path.module}/jobs/samba.hcl")
+  jobspec = file("${local.jobs}/samba.hcl")
 }
 
 resource "nomad_job" "sonarr" {
-  jobspec = file("${path.module}/jobs/sonarr.hcl")
+  jobspec = file("${local.jobs}/sonarr.hcl")
 }
 
 resource "nomad_job" "telegraf" {
-  jobspec = file("${path.module}/jobs/telegraf.hcl")
+  jobspec = file("${local.jobs}/telegraf.hcl")
 }
 
 resource "nomad_job" "traefik" {
-  jobspec = file("${path.module}/jobs/traefik.hcl")
+  jobspec = file("${local.jobs}/traefik.hcl")
 }
 
 resource "nomad_job" "transmission" {
-  jobspec = file("${path.module}/jobs/transmission.hcl")
+  jobspec = file("${local.jobs}/transmission.hcl")
 }
 
 resource "nomad_job" "unifi" {
-  jobspec    = file("${path.module}/jobs/unifi.hcl")
+  jobspec    = file("${local.jobs}/unifi.hcl")
   depends_on = [resource.nomad_job.mongo]
 }
 
 resource "nomad_job" "vaultwarden" {
-  jobspec = file("${path.module}/jobs/vaultwarden.hcl")
+  jobspec = file("${local.jobs}/vaultwarden.hcl")
 }
 
-# resource "nomad_job" "vector" {
-#   jobspec = file("${path.module}/jobs/vector.hcl")
-# }
 
 resource "nomad_job" "wikijs" {
-  jobspec = file("${path.module}/jobs/wikijs.hcl")
+  jobspec = file("${local.jobs}/wikijs.hcl")
 }
-

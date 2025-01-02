@@ -1,14 +1,3 @@
-resource "nomad_scheduler_config" "config" {
-  scheduler_algorithm             = "spread"
-  memory_oversubscription_enabled = false
-  preemption_config = {
-    system_scheduler_enabled   = true
-    batch_scheduler_enabled    = true
-    service_scheduler_enabled  = true
-    sysbatch_scheduler_enabled = true
-  }
-}
-
 resource "nomad_variable" "unifi" {
   path = "nomad/jobs/unifi"
   items = {
@@ -86,5 +75,13 @@ resource "nomad_variable" "influxdb" {
     DOCKER_INFLUXDB_INIT_ORG      = "home"
     DOCKER_INFLUXDB_INIT_PASSWORD = var.influxdb_password
     DOCKER_INFLUXDB_INIT_USERNAME = var.influxdb_user
+  }
+}
+
+resource "nomad_variable" "mqtt" {
+  path = "nomad/jobs/mqtt"
+  items = {
+    USER      = var.mqtt_user
+    PASSWORD  = var.mqtt_password
   }
 }

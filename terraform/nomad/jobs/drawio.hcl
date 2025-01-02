@@ -1,9 +1,9 @@
 job "drawio" {
   datacenters = ["dc1"]
   type        = "service"
-
+  
   group "drawio" {
-
+    
     network {
       port "http" { to = 8080 }
     }
@@ -12,7 +12,7 @@ job "drawio" {
       name = "drawio"
       port = "http"
       tags = [
-        "traefik.enable=true",
+        "traefik.enable=true",     
         "traefik.http.routers.drawio.entrypoints=websecure",
         "traefik.http.routers.drawio.middlewares=auth"
       ]

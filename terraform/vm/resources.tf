@@ -1,5 +1,6 @@
 resource "proxmox_vm_qemu" "vm" {
 
+  vmid        = var.vmid
   name        = var.name
   target_node = var.target_node
   clone       = var.clone
@@ -19,7 +20,7 @@ resource "proxmox_vm_qemu" "vm" {
   ciuser     = var.ciuser
   cipassword = var.cipassword
   sshkeys    = var.sshkeys
-  ipconfig0  = "ip=dhcp"
+  ipconfig0  = var.ipconfig
 
   network {
     id     = 0
@@ -49,10 +50,6 @@ resource "proxmox_vm_qemu" "vm" {
     }
   }
 
-  lifecycle {
-    ignore_changes = all
-  }
-
   connection {
     type     = "ssh"
     user     = var.ciuser
@@ -62,13 +59,13 @@ resource "proxmox_vm_qemu" "vm" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo cloud-init status --wait"
+      "sudo cloud-init status --wait",
+      "sudo reboot now"
     ]
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo reboot now"
-    ]
-  }  
+  lifecycle {
+    ignore_changes = all
+  }
+
 }

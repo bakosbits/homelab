@@ -4,13 +4,13 @@ build {
   # Copy configs up to tmp
   provisioner "file" {
     destination = "/tmp"
-    source      = "../configs"
+    source      = "./configs"
   }
 
   # Copy provisioner up to tmp
   provisioner "file" {
     destination = "/tmp"
-    source      = "${path.root}/scripts"
+    source      = "./scripts"
   }
 
   # Provision

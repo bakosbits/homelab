@@ -1,4 +1,17 @@
-# Forward auth
+variable "consul_domain" {
+  type        = string
+  description = "The consul domain"
+}
+
+variable "ceph_userkey" {
+  type        = string
+  description = "The secret for the ceph user"
+}
+
+variable "ceph_userid" {
+  type        = string
+  description = "The ceph use assigned to jobs"
+}
 
 variable "auth_domain" {
   type        = string
@@ -102,3 +115,15 @@ variable "mongo_initdb_root_password" {
   type        = string
   description = "The mongo password for the auth db"
 }
+
+variable "mqtt_user" {
+  type        = string
+  description = "The mqtt user for mosquitto"
+}
+
+variable "mqtt_password" {
+  type        = string
+  description = "The mqtt password for mosquitto"
+}
+
+

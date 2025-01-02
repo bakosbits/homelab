@@ -2,8 +2,7 @@
 
 set -o errexit
 
-# Remove any distro installed Docker
-for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+DEBIAN_FRONTEND=noninteractive
 
 # Add Docker's official GPG key:
 sudo apt-get update
@@ -21,7 +20,7 @@ sudo apt-get update
 # Add Hashicorp repo
 wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-sudo apt update
+sudo apt-get update
 
 # Finish
 exit 0

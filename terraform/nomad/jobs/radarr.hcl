@@ -1,11 +1,25 @@
 job "radarr" {
   datacenters = ["dc1"]
   type        = "service"
-
+  
   group "radarr" {
 
     network {
       port "http" { static = "7878" }
+    }
+
+    volume "radarr" {
+      type            = "csi"
+      source          = "radarr"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    } 
+
+    volume "media" {
+      type            = "csi"
+      source          = "media"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
     }
 
     service {
@@ -32,10 +46,16 @@ job "radarr" {
         image        = "linuxserver/radarr:5.14.0"
         ports        = ["http"]
         network_mode = "host"
-        volumes = [
-          "/mnt/volumes/radarr:/config",
-          "/mnt/volumes/media:/data"
-        ]
+      }
+
+      volume_mount {
+        volume      = "radarr"
+        destination = "/config"
+      }
+
+      volume_mount {
+        volume      = "media"
+        destination = "/data"
       }
 
       env {

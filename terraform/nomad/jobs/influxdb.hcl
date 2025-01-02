@@ -1,12 +1,26 @@
 job "influxdb" {
   datacenters = ["dc1"]
   type        = "service"
-
+  
   group "influxdb" {
 
     network {
       port "http" { to = "8086" }
     }
+
+    volume "influxdb_config" {
+      type            = "csi"
+      source          = "influxdb_config"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    } 
+
+    volume "influxdb_data" {
+      type            = "csi"
+      source          = "influxdb_data"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    } 
 
     service {
       name = "influxdb"
@@ -29,15 +43,20 @@ job "influxdb" {
       driver = "docker"
 
       config {
-        image = "influxdb:2.7.8-alpine"
-        ports = ["http"]
-        volumes = [
-          "/mnt/volumes/influxdb/data:/var/lib/influxdb2",
-          "/mnt/volumes/influxdb/config:/etc/influxdb2"
-
-        ]
+        image   = "influxdb:2.7.8-alpine"
+        ports   = ["http"]
       }
 
+      volume_mount {
+        volume      = "influxdb_data"
+        destination = "/var/lib/influxdb2"
+      }
+
+      volume_mount {
+        volume      = "influxdb_config"
+        destination = "/etc/influxdb2"
+      }
+      
       resources {
         cpu    = 500
         memory = 512

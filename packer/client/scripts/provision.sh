@@ -8,7 +8,7 @@ DEBIAN_FRONTEND=noninteractive
 sudo apt-get update
 sudo apt-get install -y ceph-common docker-ce consul nomad cloud-init cloud-utils
 
-# Configure registry proxy
+# Configure docker and registry proxy
 sudo cp /tmp/configs/docker/daemon.json /etc/docker/daemon.json
 
 # Configure consul and nomad
@@ -19,8 +19,8 @@ sudo systemctl enable consul nomad
 
 # Configure ceph
 sudo cp /tmp/configs/ceph/ceph.conf /etc/ceph/ceph.conf
-sudo cp /tmp/configs/ceph/admin.secret /etc/ceph/admin.secret
-sudo echo "192.168.1.10,192.168.1.11,192.168.1.12:/ /mnt ceph name=admin,secretfile=/etc/ceph/admin.secret,fs=cephfs,noatime,_netdev,x-systemd.automount 0 0" >> /etc/fstab
+sudo cp /tmp/configs/ceph/ceph.client.admin.keyring /etc/ceph/ceph.client.admin.keyring
+sudo echo "192.168.1.10,192.168.1.11,192.168.1.12:/ /mnt ceph name=admin,secret=AQD1yylngu+3IxAAFKhcBp9ufX6sZNDkLJxyHw==,fs=cephfs,relatime,_netdev 0 0" >> /etc/fstab
 
 # Add a media user
 sudo /sbin/groupadd -g 1010 media

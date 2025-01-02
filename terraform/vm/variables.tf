@@ -1,3 +1,8 @@
+variable "vmid" {
+  type        = string
+  description = "The id of the host"
+}
+
 variable "name" {
   type        = string
   description = "The name of the host"
@@ -38,16 +43,25 @@ variable "disk_size" {
 variable "storage_pool" {
   type        = string
   description = "The storage pool for the system"
+  default     = "rbd"
 }
 
 variable "bridge" {
   type        = string
   description = "The network bridge used by the virtual machines"
+  default     = "vmbr2"
 }
 
 variable "vlan" {
   type        = number
   description = "The vlan used by the virtual machines"
+  default     = 20
+}
+
+variable "ipconfig" {
+  type        = string
+  description = "The ip used by the virtual machines"
+  default     = "ip=dhcp"
 }
 
 variable "ciuser" {

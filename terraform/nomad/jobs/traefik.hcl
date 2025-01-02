@@ -1,5 +1,5 @@
 job "traefik" {
-  datacenters = ["dc1"]
+  datacenters = ["dc1"]  
   type        = "system"
 
   group "traefik" {
@@ -10,6 +10,13 @@ job "traefik" {
       port "postgres" { static = "5432" }
     }
 
+    volume "certs" {
+      type            = "csi"
+      source          = "certs"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
+    }
+
     service {
       name = "traefik"
       port = "http"
@@ -18,7 +25,7 @@ job "traefik" {
         "traefik.http.routers.api.entrypoints=websecure",
         "traefik.http.routers.api.service=api@internal",
         "traefik.http.services.dummy.loadbalancer.server.port=9000",
-        "traefik.http.routers.api.middlewares=auth"
+        "traefik.http.routers.api.middlewares=auth",
       ]
 
       check {
@@ -32,14 +39,18 @@ job "traefik" {
       driver = "docker"
 
       config {
-        image        = "traefik:3.1.5"
+        image        = "traefik:3.2.3"
         ports        = ["http", "https", "postgres"]
         network_mode = "host"
         volumes = [
-          "/mnt/volumes/certs:/etc/traefik/tls",
           "local/traefik.yaml:/etc/traefik/traefik.yaml",
           "local/dynamic.yaml:/etc/traefik/dynamic/dynamic.yaml"
         ]
+      }
+
+      volume_mount {
+        volume      = "certs"
+        destination = "/etc/traefik/certs"
       }
 
       resources {

@@ -1,25 +1,27 @@
-job "home-assistant" {
+job "hass" {
   datacenters = ["dc1"]
   type        = "service"
 
-  constraint {
-    attribute = "${attr.unique.hostname}"
-    value     = "nomad-cli03"
-  }
 
-  group "home-assistant" {
+  group "hass" {
 
     network {
       port "http" { static = "8123" }
     }
 
+    volume "hass" {
+      type            = "csi"
+      source          = "hass"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    } 
+
     service {
-      name = "home-assistant"
+      name = "hass"
       port = "http"
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.hass.entrypoints=websecure",
-        "traefik.http.routers.hass.rule=Host(`home-assistant.bakos.me`) || Host(`hass.bakos.me`)"
       ]
 
       check {
@@ -30,15 +32,14 @@ job "home-assistant" {
       }
     }
 
-    task "home-assistant" {
+    task "hass" {
       driver = "docker"
 
       config {
-        image        = "homeassistant/home-assistant:2024.11.3"
+        image        = "homeassistant/home-assistant:2024.12.5"
         ports        = ["http"]
         network_mode = "host"
         volumes = [
-          "/mnt/volumes/hass:/config",
           "local/automations.yaml:/config/automations.yaml",
           "local/binary_sensors.yaml:/config/binary_sensors.yaml",
           "local/configuration.yaml:/config/configuration.yaml",
@@ -46,13 +47,18 @@ job "home-assistant" {
           "local/customize.yaml:/config/customize.yaml",
           "local/fans.yaml:/config/fans.yaml",
           "local/lights.yaml:/config/lights.yaml",
-          "local/media_players.yaml:/config/media_players.yaml",
+          "local/google_assistant.yaml:/config/google_assistant.yaml",
           "local/scripts.yaml:/config/scripts.yaml",
           "local/secrets.yaml:/config/secrets.yaml",
           "local/service_account.json:/config/service_account.json",
           "local/switches.yaml:/config/switches.yaml",
           "local/trusted_proxies.yaml:/config/trusted_proxies.yaml",
-        ]
+        ]        
+      }
+
+      volume_mount {
+        volume      = "hass"
+        destination = "/config"
       }
 
       env {
@@ -76,21 +82,21 @@ job "home-assistant" {
         data        = <<-EOF
         {{- key "homelab/hass/binary_sensors.yaml" }}
         EOF
-      }
+      }    
 
       template {
         destination = "local/configuration.yaml"
         data        = <<-EOF
         {{- key "homelab/hass/configuration.yaml" }}
         EOF
-      }
+      }    
 
       template {
         destination = "local/covers.yaml"
         data        = <<-EOF
         {{- key "homelab/hass/covers.yaml" }}
         EOF
-      }
+      }          
 
       template {
         destination = "local/customize.yaml"
@@ -114,9 +120,9 @@ job "home-assistant" {
       }
 
       template {
-        destination = "local/media_players.yaml"
+        destination = "local/google_assistant.yaml"
         data        = <<-EOF
-        {{- key "homelab/hass/media_players.yaml" }}
+        {{- key "homelab/hass/google_assistant.yaml" }}
         EOF
       }
 
@@ -154,7 +160,6 @@ job "home-assistant" {
         {{- key "homelab/hass/trusted_proxies.yaml" }}
         EOF
       }
-
     }
   }
 }

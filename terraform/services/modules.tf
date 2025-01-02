@@ -1,10 +1,23 @@
 module "consul" {
   source = "../consul"
+  
+  domain         = var.domain
+  consul_domain  = var.consul_domain 
+  nomad_url      = var.nomad_url
+  consul_url     = var.consul_url
+  pfsense_url    = var.pfsense_url
+  pve_url        = var.pve_url
+  pve_backup_url = var.pve_backup_url  
 }
 
 module "nomad" {
   source     = "../nomad"
   depends_on = [module.consul]
+
+  consul_domain = var.consul_domain
+
+  ceph_userid  = var.ceph_userid
+  ceph_userkey = var.ceph_userkey 
 
   auth_domain          = var.auth_domain
   auth_client_id       = var.auth_client_id
@@ -30,4 +43,8 @@ module "nomad" {
   samba_uid      = var.samba_uid
   samba_password = var.samba_password
   samba_share    = var.samba_share
+
+  mqtt_user     = var.mqtt_user
+  mqtt_password = var.mqtt_password
+
 }

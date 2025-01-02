@@ -1,5 +1,6 @@
 job "auth" {
   datacenters = ["dc1"]
+  type        = "service"
 
   group "auth" {
 
@@ -13,12 +14,12 @@ job "auth" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.auth.entrypoints=websecure",
-        "traefik.http.middlewares.auth.forwardauth.address=http://auth.service.consul:4181/",
+        "traefik.http.middlewares.auth.forwardauth.address=http://auth.${consul_domain}:4181/",
         "traefik.http.middlewares.auth.forwardauth.trustForwardHeader=true",
         "traefik.http.middlewares.auth.forwardauth.authResponseHeaders=X-Forwarded-User",
-        "traefik.http.routers.auth.middlewares=auth"
+        "traefik.http.routers.auth.middlewares=auth",    
       ]
-
+      
       check {
         type     = "http"
         path     = "/"
@@ -35,12 +36,7 @@ job "auth" {
         network_mode = "host"
         ports        = ["http"]
       }
-
-      resources {
-        cpu    = 200
-        memory = 256
-      }
-
+      
       template {
         env         = true
         destination = "secrets/auth.env"
@@ -51,6 +47,11 @@ job "auth" {
             {{- end }}
           {{- end }}
         EOF
+      }
+
+      resources {
+        cpu    = 200
+        memory = 256
       }
     }
   }

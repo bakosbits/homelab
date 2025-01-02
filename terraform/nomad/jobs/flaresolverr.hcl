@@ -1,17 +1,31 @@
 job "flaresolverr" {
   datacenters = ["dc1"]
   type        = "service"
-
+  
   group "flaresolverr" {
 
     network {
       port "http" { static = "8191" }
     }
 
+    volume "flaresolverr" {
+      type            = "csi"
+      source          = "flaresolverr"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    }    
+
+    volume "media" {
+      type            = "csi"
+      source          = "media"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
+    }
+
     service {
       name = "flaresolverr"
       port = "http"
-
+      
       check {
         type     = "tcp"
         interval = "10s"
@@ -26,10 +40,16 @@ job "flaresolverr" {
         image        = "flaresolverr/flaresolverr:latest"
         ports        = ["http"]
         network_mode = "host"
-        volumes = [
-          "/mnt/volumes/flaresolverr:/config",
-          "/mnt/volumes/media:/data"
-        ]
+      }
+
+      volume_mount {
+        volume      = "flaresolverr"
+        destination = "/config"
+      }
+
+      volume_mount {
+        volume      = "media"
+        destination = "/data"
       }
 
       env {

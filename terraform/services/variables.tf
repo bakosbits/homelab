@@ -1,5 +1,3 @@
-# ForwardAuth
-
 variable "nomad_server" {
   type        = string
   description = "The url of the nomad server"
@@ -8,6 +6,16 @@ variable "nomad_server" {
 variable "consul_server" {
   type        = string
   description = "The usl of the consul server"
+}
+
+variable "ceph_userkey" {
+  type        = string
+  description = "The secret for the ceph user"
+}
+
+variable "ceph_userid" {
+  type        = string
+  description = "The ceph use assigned to jobs"
 }
 
 variable "auth_domain" {
@@ -111,4 +119,65 @@ variable "mongo_initdb_root_username" {
 variable "mongo_initdb_root_password" {
   type        = string
   description = "The mongo password for the auth db"
+}
+
+variable "mqtt_user" {
+  type        = string
+  description = "The mqtt user for mosquitto"
+}
+
+variable "mqtt_password" {
+  type        = string
+  description = "The mqtt password for mosquitto"
+}
+
+variable "consul_domain" {
+  type        = string
+  description = "The defult consul doman e.g. service.consul"
+  default     = "service.consul"
+}
+
+variable "domain" {
+  type        = string
+  description = "The domain used to host the services"
+}
+
+variable "nomad_url" {
+  type        = string
+  description = "The url used to reach the nomad UI"
+}
+
+variable "consul_url" {
+  type        = string
+  description = "The url used to reach the consul UI"
+}
+
+variable "pfsense_url" {
+  type        = string
+  description = "The url used to reach the pfsense UI"
+}
+
+variable "pve_url" {
+  type        = string
+  description = "The url used to reach the proxmox UI"
+}
+
+variable "pve_backup_url" {
+  type        = string
+  description = "The url used to reach the proxmox backup UI"
+}
+
+variable "shared_volumes_media" {
+  type        = string
+  description = "The media volume shared with several services"
+}
+
+variable "hass_volumes_config" {
+  type        = string
+  description = "The config volume for home assistant"
+}
+
+variable "plex_volumes_config" {
+  type        = string
+  description = "The config volume for plex"
 }

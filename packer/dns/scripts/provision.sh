@@ -25,7 +25,7 @@ sudo mv /tmp/coredns /usr/local/bin
 sudo mkdir -p /opt/coredns /etc/coredns
 sudo useradd -d /var/lib/coredns -m coredns
 sudo chown coredns:coredns /opt/coredns
-sudo cp /tmp/configs/coredns/Corefile /etc/coredns/Corefile
+sudo cp /tmp/configs/coredns/corefile /etc/coredns/corefile
 sudo cp /tmp/configs/coredns/coredns.service /etc/systemd/system
 sudo chmod 755 /etc/systemd/system/coredns.service
 sudo systemctl enable coredns

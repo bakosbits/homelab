@@ -1,11 +1,25 @@
 job "sonarr" {
   datacenters = ["dc1"]
   type        = "service"
-
+  
   group "sonarr" {
 
     network {
       port "http" { static = "8989" }
+    }
+
+    volume "sonarr" {
+      type            = "csi"
+      source          = "sonarr"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    } 
+
+    volume "media" {
+      type            = "csi"
+      source          = "media"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
     }
 
     service {
@@ -29,12 +43,18 @@ job "sonarr" {
       driver = "docker"
 
       config {
-        image = "linuxserver/sonarr:4.0.9"
-        ports = ["http"]
-        volumes = [
-          "/mnt/volumes/sonarr:/config",
-          "/mnt/volumes/media:/data"
-        ]
+        image   = "linuxserver/sonarr:4.0.9"
+        ports   = ["http"]
+      }
+
+      volume_mount {
+        volume      = "sonarr"
+        destination = "/config"
+      }
+
+      volume_mount {
+        volume      = "media"
+        destination = "/data"
       }
 
       env {

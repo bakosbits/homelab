@@ -1,12 +1,19 @@
 job "postgres" {
   datacenters = ["dc1"]
   type        = "service"
-
+  
   group "postgres" {
 
     network {
       port "postgres" { to = "5432" }
     }
+
+    volume "postgres" {
+      type            = "csi"
+      source          = "postgres"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    }   
 
     service {
       name = "postgres"
@@ -31,10 +38,12 @@ job "postgres" {
 
       config {
         image = "postgres:16.4"
-        ports = ["postgres"]
-        volumes = [
-          "/mnt/volumes/postgres:/var/lib/pgsql/data",
-        ]
+        ports = ["postgres"]      
+      }
+
+      volume_mount {
+        volume      = "postgres"
+        destination = "/var/lib/pgsql/db"
       }
 
       resources {

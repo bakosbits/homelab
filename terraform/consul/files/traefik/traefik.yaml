@@ -18,10 +18,7 @@ entryPoints:
     proxyProtocol:
       trustedIPs:
         - 192.168.2.1
-    transport:
-      respondingTimeouts:
-        readTimeout: 139s 
-        
+
   postgres:
     address: :5432
 
@@ -32,7 +29,7 @@ providers:
     
   consulCatalog:
     exposedByDefault: false
-    defaultRule: Host(`{{ normalize .Name }}.bakos.me`)
+    defaultRule: Host(`{{ normalize .Name }}.${domain}`)
     endpoint:
       address: 127.0.0.1:8500
 

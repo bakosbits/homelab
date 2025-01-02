@@ -45,9 +45,12 @@ variable "vlan" {
 
 variable "dns" {
   type = list(object({
+    vmid        = string
     name        = string
+    ipconfig    = string
     target_node = string
     clone       = string
+    sockets     = number
     cores       = number
     memory      = number
     disk_size   = string
@@ -57,9 +60,11 @@ variable "dns" {
 
 variable "servers" {
   type = list(object({
+    vmid        = string    
     name        = string
     target_node = string
     clone       = string
+    sockets     = number
     cores       = number
     memory      = number
     disk_size   = string
@@ -69,9 +74,11 @@ variable "servers" {
 
 variable "clients" {
   type = list(object({
+    vmid        = string    
     name        = string
     target_node = string
     clone       = string
+    sockets     = number    
     cores       = number
     memory      = number
     disk_size   = string

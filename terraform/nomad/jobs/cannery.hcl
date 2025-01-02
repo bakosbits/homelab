@@ -19,7 +19,7 @@ job "cannery" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.cannery.entrypoints=websecure",
-        "traefik.http.routers.cannery.middlewares=forward-auth"
+        "traefik.http.routers.cannery.middlewares=auth"
       ]
 
       check {

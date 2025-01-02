@@ -1,5 +1,5 @@
 job "vector" {
-  datacenters = ["dc1"]
+  datacenters = ["dc1"]  
   type        = "system"
 
   group "vector" {
@@ -47,6 +47,11 @@ job "vector" {
         VECTOR_REQUIRE_HEALTHY = "false"
       }
 
+      resources {
+        cpu    = 500
+        memory = 500
+      }
+
       template {
         destination   = "local/vector.toml"
         change_mode   = "signal"
@@ -55,10 +60,7 @@ job "vector" {
         {{- key "homelab/vector/vector.toml"}}
         EOF
       }
-      resources {
-        cpu    = 500
-        memory = 500
-      }
+
     }
   }
 }

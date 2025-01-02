@@ -1,59 +1,59 @@
 tls:
   certificates:
-    - certFile: "/etc/traefik/tls/bakos.me.crt"
-      keyFile: "/etc/traefik/tls/bakos.me.key"
+    - certFile: "/etc/traefik/certs/bakos.me.crt"
+      keyFile: "/etc/traefik/certs/bakos.me.key"
   stores:
     default:
       defaultCertificate:
-        certFile: "/etc/traefik/tls/bakos.me.crt"
-        keyFile: "/etc/traefik/tls/bakos.me.key"
+        certFile: "/etc/traefik/certs/bakos.me.crt"
+        keyFile: "/etc/traefik/certs/bakos.me.key"
 
 http:
   routers:
     nomad:
       service: nomad
-      rule: Host(`nomad.bakos.me`)
+      rule: Host(`nomad.${domain}`)
       entrypoints:
-        - websecure      
+        - websecure
       middlewares:
-        - auth@file
+        - auth
 
     consul:
       service: consul
-      rule: Host(`consul.bakos.me`)
+      rule: Host(`consul.${domain}`)
       entrypoints:
         - websecure
       middlewares:
-        - auth@file   
+        - auth
 
     pfsense:
       service: pfsense
-      rule: Host(`pfsense.bakos.me`)
+      rule: Host(`pfsense.${domain}`)
       entrypoints:
         - websecure
       middlewares:
-        - auth@file   
+        - auth
 
     pve:
       service: pve
-      rule: Host(`pve.bakos.me`)
+      rule: Host(`pve.${domain}`)
       entrypoints:
         - websecure
       middlewares:
-        - auth@file   
+        - auth
 
     pve-backup:
       service: pve-backup
-      rule: Host(`pve-backup.bakos.me`)
+      rule: Host(`pve-backup.${domain}`)
       entrypoints:
         - websecure
       middlewares:
-        - auth@file   
+        - auth
 
   middlewares:
     auth:
       forwardAuth:
-        address: http://auth.service.consul:4181
+        address: http://auth.${consul_domain}:4181
         authResponseHeaders:
           - X-Forwarded-User
         trustForwardHeader: true
@@ -62,32 +62,25 @@ http:
     nomad:
       loadbalancer:
         servers:
-          - url: http://server01.bakos.lan:4646
-          - url: http://server02.bakos.lan:4646
-          - url: http://server03.bakos.lan:4646                    
+          - url: ${nomad_url} 
 
     consul:
       loadbalancer:
         servers:
-          - url: http://server01.bakos.lan:8500
-          - url: http://server02.bakos.lan:8500
-          - url: http://server03.bakos.lan:8500
+          - url: ${consul_url}
 
     pfsense:
       loadbalancer:
         servers:
-          - url: https://192.168.1.1:443
+          - url: ${pfsense_url}
     
     pve:
       loadbalancer:
         servers:
-          - url: https://192.168.1.10:8006
-          - url: https://192.168.1.11:8006
-          - url: https://192.168.1.12:8006
-
+          - url: ${pve_url}
 
     pve-backup:
       loadbalancer:
         servers:
-          - url: https://192.168.1.13:8007
+          - url: ${pve_backup_url}
                     

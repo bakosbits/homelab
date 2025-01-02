@@ -1,12 +1,19 @@
 job "mongo" {
   datacenters = ["dc1"]
   type        = "service"
-
+  
   group "mongo" {
 
     network {
       port "mongo" { static = "27017" }
     }
+
+    volume "mongo" {
+      type            = "csi"
+      source          = "mongo"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    }  
 
     service {
       name = "mongo"
@@ -21,11 +28,15 @@ job "mongo" {
         network_mode = "host"
         ports        = ["mongo"]
         volumes = [
-          "/mnt/volumes/mongo/db:/data/db",
           "/mnt/volumes/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro"
         ]
       }
 
+      volume_mount {
+        volume      = "mongo"
+        destination = "/data/db"
+      }
+      
       resources {
         cpu    = 500
         memory = 512

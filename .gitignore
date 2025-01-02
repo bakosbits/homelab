@@ -5,6 +5,4 @@
 *.pkrvars*
 *.secret
 *.keyring
-*.tfstate.lock.info
 .terraform/
-mosquitto/

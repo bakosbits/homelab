@@ -1,7 +1,7 @@
 job "mosquitto" {
   datacenters = ["dc1"]
   type        = "service"
-
+  
   group "moquitto" {
 
     network {
@@ -10,13 +10,34 @@ job "mosquitto" {
 
     }
 
+    volume "mosquitto-config" {
+      type            = "csi"
+      source          = "mosquitto-config"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    }    
+
+    volume "mosquitto-data" {
+      type            = "csi"
+      source          = "mosquitto-data"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    }    
+
+    volume "mosquitto-log" {
+      type            = "csi"
+      source          = "mosquitto-log"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    }   
+
     service {
       name = "mosquitto"
       port = "mqtt"
 
       check {
         type     = "tcp"
-        port     = "mqtt"
+        port     = "mqtt" 
         interval = "10s"
         timeout  = "2s"
       }
@@ -30,18 +51,30 @@ job "mosquitto" {
         ports        = ["mqtt", "websocket"]
         network_mode = "host"
         volumes = [
-          "/mnt/mosquitto/data:/mosquitto/data",
-          "/mnt/volumes/mosquitto/config:/mosquitto/config",
-          "/mnt/volumes/mosquitto/log:/mosquitto/log",
           "local/mosquitto.conf:/mosquitto/config/mosquitto.conf",
-          "local/password.txt:/mosquitto/config/password.txt",
-        ]
+          "secrets/password.txt:/mosquitto/config/password.txt",
+        ]        
       }
 
+      volume_mount {
+        volume      = "mosquitto-config"
+        destination = "/mosquitto/config"
+      }
+
+      volume_mount {
+        volume      = "mosquitto-data"
+        destination = "/mosquitto/data"
+      }
+
+      volume_mount {
+        volume      = "mosquitto-log"
+        destination = "/mosquitto/log"
+      }
+      
       env {
         PUID = "1010"
         PGID = "1010"
-        TZ   = "America/Denver"
+        TZ   = "America/Denver" 
       }
 
       resources {
@@ -53,16 +86,19 @@ job "mosquitto" {
       template {
         destination = "local/mosquitto.conf"
         data        = <<-EOF
-        {{- key "homelab/mosquitto/mosquitto.conf" }}
+        {{- key "homelab/mqtt/mosquitto.conf" }}
         EOF
-      }
+      }      
+
 
       template {
-        destination = "local/password.txt"
+        destination = "secrets/password.txt"
         data        = <<-EOF
-        {{- key "homelab/mosquitto/password.txt" }}
+        {{- with nomadVar "nomad/jobs/mqtt" }}
+          {{ .USER }}:{{ .PASSWORD }}
+        {{- end }}        
         EOF
-      }
+      }   
 
     }
   }

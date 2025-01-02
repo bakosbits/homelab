@@ -1,32 +1,36 @@
 source "proxmox-clone" "dns" {
 
-  proxmox_url          = var.proxmox_url
-  username             = var.proxmox_user
-  password             = var.proxmox_password
+  proxmox_url = var.proxmox_url
+  username    = var.proxmox_user
+  password    = var.proxmox_password
+  node        = var.proxmox_node
+  
+  clone_vm = "base-tpl"
+  insecure_skip_tls_verify = true
 
   vm_id                = 9001
   vm_name              = "dns-tpl"
   template_description = "CoreDNS template"
 
-  clone_vm    = "base-tpl"
-  full_clone  = true
-  node        = var.proxmox_node
+  os              = "l26"
+  cpu_type        = "host" 
+  sockets         = 1
+  cores           = 2
+  memory          = 2048
+  machine         = "pc"
+  scsi_controller = "virtio-scsi-single"
+  qemu_agent      = true
   
-  os      = "l26"
-  sockets = 1
-  cores   = 1
-  memory  = 1024
-  
-  network_adapters {
-    bridge   = "vmbr2"
-    vlan_tag = 20
-    model    = "virtio"
-  }
-
   cloud_init              = true
   cloud_init_storage_pool = "rbd"
 
+  network_adapters {
+    model    = "virtio"    
+    bridge   = "vmbr2"
+    vlan_tag = "20"
+  }
+
   ssh_username = var.ssh_username
   ssh_password = var.ssh_password
-  
+  ssh_timeout  = "20m"
 }
