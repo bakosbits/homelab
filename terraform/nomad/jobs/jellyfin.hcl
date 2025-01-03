@@ -1,7 +1,7 @@
 job "jellyfin" {
   datacenters = ["dc1"]
   type        = "service"
-  
+
   group "jellyfin" {
 
     network {
@@ -13,14 +13,14 @@ job "jellyfin" {
       source          = "jellyfin"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    } 
+    }
 
     volume "media" {
       type            = "csi"
       source          = "media"
       attachment_mode = "file-system"
       access_mode     = "multi-node-multi-writer"
-    } 
+    }
 
     service {
       name = "jellyfin"
@@ -42,8 +42,8 @@ job "jellyfin" {
       driver = "docker"
 
       config {
-        image   = "linuxserver/jellyfin:10.9.8"
-        ports   = ["http"]
+        image = "linuxserver/jellyfin:10.9.8"
+        ports = ["http"]
       }
 
       volume_mount {

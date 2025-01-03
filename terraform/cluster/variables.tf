@@ -60,7 +60,7 @@ variable "dns" {
 
 variable "servers" {
   type = list(object({
-    vmid        = string    
+    vmid        = string
     name        = string
     target_node = string
     clone       = string
@@ -74,11 +74,11 @@ variable "servers" {
 
 variable "clients" {
   type = list(object({
-    vmid        = string    
+    vmid        = string
     name        = string
     target_node = string
     clone       = string
-    sockets     = number    
+    sockets     = number
     cores       = number
     memory      = number
     disk_size   = string

@@ -14,7 +14,7 @@ job "hass" {
       source          = "hass"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    } 
+    }
 
     service {
       name = "hass"
@@ -53,7 +53,7 @@ job "hass" {
           "local/service_account.json:/config/service_account.json",
           "local/switches.yaml:/config/switches.yaml",
           "local/trusted_proxies.yaml:/config/trusted_proxies.yaml",
-        ]        
+        ]
       }
 
       volume_mount {
@@ -82,21 +82,21 @@ job "hass" {
         data        = <<-EOF
         {{- key "homelab/hass/binary_sensors.yaml" }}
         EOF
-      }    
+      }
 
       template {
         destination = "local/configuration.yaml"
         data        = <<-EOF
         {{- key "homelab/hass/configuration.yaml" }}
         EOF
-      }    
+      }
 
       template {
         destination = "local/covers.yaml"
         data        = <<-EOF
         {{- key "homelab/hass/covers.yaml" }}
         EOF
-      }          
+      }
 
       template {
         destination = "local/customize.yaml"

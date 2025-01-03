@@ -1,7 +1,7 @@
 job "emulatorjs" {
   datacenters = ["dc1"]
   type        = "service"
-  
+
   group "emulatorjs" {
 
     network {
@@ -19,15 +19,15 @@ job "emulatorjs" {
       source          = "arcade_config"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    }  
+    }
 
     volume "arcade_data" {
       type            = "csi"
       source          = "arcade_data"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    } 
-        
+    }
+
     service {
       name = "arcade"
       port = "http"
@@ -66,8 +66,8 @@ job "emulatorjs" {
       driver = "docker"
 
       config {
-        image   = "linuxserver/emulatorjs:latest"
-        ports   = ["http", "admin"]
+        image = "linuxserver/emulatorjs:latest"
+        ports = ["http", "admin"]
       }
 
       volume_mount {

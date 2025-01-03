@@ -1,11 +1,11 @@
 job "plex" {
   datacenters = ["dc1"]
   type        = "service"
-  
+
   constraint {
     attribute = "$${attr.unique.hostname}"
     value     = "nomad-cli03"
-  }  
+  }
 
   group "plex" {
 
@@ -18,7 +18,7 @@ job "plex" {
       source          = "plex"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    }    
+    }
 
     volume "media" {
       type            = "csi"
@@ -31,14 +31,14 @@ job "plex" {
       name = "plex"
       port = "http"
       tags = [
-        "traefik.enable=true",  
+        "traefik.enable=true",
         "traefik.http.routers.plex.entrypoints=websecure",
-        "traefik.http.routers.plex.middlewares=auth"        
+        "traefik.http.routers.plex.middlewares=auth"
       ]
 
       check {
         type     = "http"
-        path     = "/web" 
+        path     = "/web"
         interval = "10s"
         timeout  = "2s"
       }

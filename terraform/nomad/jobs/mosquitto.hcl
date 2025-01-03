@@ -1,7 +1,7 @@
 job "mosquitto" {
   datacenters = ["dc1"]
   type        = "service"
-  
+
   group "moquitto" {
 
     network {
@@ -15,21 +15,21 @@ job "mosquitto" {
       source          = "mosquitto-config"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    }    
+    }
 
     volume "mosquitto-data" {
       type            = "csi"
       source          = "mosquitto-data"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    }    
+    }
 
     volume "mosquitto-log" {
       type            = "csi"
       source          = "mosquitto-log"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    }   
+    }
 
     service {
       name = "mosquitto"
@@ -37,7 +37,7 @@ job "mosquitto" {
 
       check {
         type     = "tcp"
-        port     = "mqtt" 
+        port     = "mqtt"
         interval = "10s"
         timeout  = "2s"
       }
@@ -53,7 +53,7 @@ job "mosquitto" {
         volumes = [
           "local/mosquitto.conf:/mosquitto/config/mosquitto.conf",
           "secrets/password.txt:/mosquitto/config/password.txt",
-        ]        
+        ]
       }
 
       volume_mount {
@@ -70,11 +70,11 @@ job "mosquitto" {
         volume      = "mosquitto-log"
         destination = "/mosquitto/log"
       }
-      
+
       env {
         PUID = "1010"
         PGID = "1010"
-        TZ   = "America/Denver" 
+        TZ   = "America/Denver"
       }
 
       resources {
@@ -88,7 +88,7 @@ job "mosquitto" {
         data        = <<-EOF
         {{- key "homelab/mqtt/mosquitto.conf" }}
         EOF
-      }      
+      }
 
 
       template {
@@ -98,7 +98,7 @@ job "mosquitto" {
           {{ .USER }}:{{ .PASSWORD }}
         {{- end }}        
         EOF
-      }   
+      }
 
     }
   }

@@ -1,7 +1,7 @@
 job "grafana" {
   datacenters = ["dc1"]
   type        = "service"
-  
+
   group "grafana" {
 
     network {
@@ -13,14 +13,14 @@ job "grafana" {
       source          = "grafana"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    } 
+    }
 
     service {
       name = "grafana"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.grafana.rule=Host(`grafana.bakos.me`)",         
+        "traefik.http.routers.grafana.rule=Host(`grafana.bakos.me`)",
         "traefik.http.routers.grafana.entrypoints=websecure",
         "traefik.http.routers.grafana.middlewares=auth"
       ]
@@ -38,8 +38,8 @@ job "grafana" {
       user   = "root"
 
       config {
-        image   = "grafana/grafana-oss:11.1.3"
-        ports   = ["http"]
+        image = "grafana/grafana-oss:11.1.3"
+        ports = ["http"]
 
       }
 
@@ -47,7 +47,7 @@ job "grafana" {
         volume      = "grafana"
         destination = "/var/lib/grafana"
       }
-      
+
       resources {
         cpu    = 200
         memory = 256

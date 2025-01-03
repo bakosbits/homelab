@@ -1,7 +1,7 @@
 job "loki" {
   datacenters = ["dc1"]
   type        = "service"
-  
+
   group "loki" {
 
     network {
@@ -13,7 +13,7 @@ job "loki" {
       source          = "loki"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    } 
+    }
 
     service {
       name = "loki"
@@ -35,7 +35,7 @@ job "loki" {
         image        = "grafana/loki:2.9.10"
         network_mode = "host"
         ports        = ["http"]
-        args         = [
+        args = [
           "-config.file",
           "local/loki/local-config.yaml",
         ]

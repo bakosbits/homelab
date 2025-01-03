@@ -1,13 +1,12 @@
 job "cephrbd-controller" {
   datacenters = ["dc1"]
-  type        = "system"
 
   group "cephrbd-controller" {
-    
-    network { 
-      port "metrics" {} 
+
+    network {
+      port "metrics" {}
     }
-   
+
     service {
       name = "cephrbd-controller"
       port = "metrics"
@@ -33,7 +32,7 @@ job "cephrbd-controller" {
 
         volumes = [
           "./local/config.json:/etc/ceph-csi-config/config.json",
-          "/lib/modules:/lib/modules"          
+          "/lib/modules:/lib/modules"
         ]
 
         mounts = [
@@ -47,7 +46,7 @@ job "cephrbd-controller" {
           }
         ]
       }
-      
+
       csi_plugin {
         id        = "cephrbd"
         type      = "controller"

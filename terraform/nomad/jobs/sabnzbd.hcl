@@ -1,7 +1,7 @@
 job "sabnzbd" {
   datacenters = ["dc1"]
   type        = "service"
-  
+
   group "sabnzbd" {
 
     network {
@@ -13,14 +13,14 @@ job "sabnzbd" {
       source          = "sabnzbd"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    }   
+    }
 
     volume "media" {
       type            = "csi"
       source          = "media"
       attachment_mode = "file-system"
       access_mode     = "multi-node-multi-writer"
-    } 
+    }
 
     service {
       port = "http"
@@ -43,8 +43,8 @@ job "sabnzbd" {
       driver = "docker"
 
       config {
-        image   = "linuxserver/sabnzbd:4.3.2"
-        ports   = ["http"]
+        image = "linuxserver/sabnzbd:4.3.2"
+        ports = ["http"]
       }
 
       volume_mount {

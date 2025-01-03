@@ -9,11 +9,11 @@ job "docker-registry" {
     }
 
     volume "docker-registry" {
-      type            = "csi"   
-      source          = "docker-registry"    
+      type            = "csi"
+      source          = "docker-registry"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    } 
+    }
 
     service {
       port = "http"
@@ -25,7 +25,7 @@ job "docker-registry" {
         interval = "10s"
         timeout  = "2s"
       }
-    }    
+    }
 
     task "docker-registry" {
       driver = "docker"
@@ -43,8 +43,8 @@ job "docker-registry" {
 
       env {
         REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY = "/data"
-        REGISTRY_HTTP_ADDR       = "${NOMAD_ADDR_http}"
-        REGISTRY_PROXY_REMOTEURL = "https://registry-1.docker.io"
+        REGISTRY_HTTP_ADDR                        = "${NOMAD_ADDR_http}"
+        REGISTRY_PROXY_REMOTEURL                  = "https://registry-1.docker.io"
       }
 
       resources {

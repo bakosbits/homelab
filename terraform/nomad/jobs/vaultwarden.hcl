@@ -1,7 +1,7 @@
 job "vaultwarden" {
   datacenters = ["dc1"]
   type        = "service"
-  
+
   group "vaultwarden" {
 
     network {
@@ -13,7 +13,7 @@ job "vaultwarden" {
       source          = "vaultwarden"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    }   
+    }
 
     service {
       name = "vaultwarden"
@@ -40,8 +40,8 @@ job "vaultwarden" {
       }
 
       config {
-        image   = "vaultwarden/server:1.31.0"
-        ports   = ["http"]
+        image = "vaultwarden/server:1.31.0"
+        ports = ["http"]
       }
 
       volume_mount {

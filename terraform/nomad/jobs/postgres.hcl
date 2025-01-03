@@ -1,7 +1,7 @@
 job "postgres" {
   datacenters = ["dc1"]
   type        = "service"
-  
+
   group "postgres" {
 
     network {
@@ -13,7 +13,7 @@ job "postgres" {
       source          = "postgres"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    }   
+    }
 
     service {
       name = "postgres"
@@ -38,7 +38,7 @@ job "postgres" {
 
       config {
         image = "postgres:16.4"
-        ports = ["postgres"]      
+        ports = ["postgres"]
       }
 
       volume_mount {

@@ -1,7 +1,7 @@
 job "prometheus" {
   datacenters = ["dc1"]
   type        = "service"
-  
+
   group "prometheus" {
 
     network {
@@ -13,14 +13,14 @@ job "prometheus" {
       source          = "prometheus"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    } 
+    }
 
     service {
       name = "prometheus"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.prometheus.entrypoints=websecure",             				
+        "traefik.http.routers.prometheus.entrypoints=websecure",
         "traefik.http.routers.prometheus.middlewares=auth"
       ]
       check {
@@ -49,7 +49,7 @@ job "prometheus" {
         volume      = "postgres"
         destination = "/opt/prometheus"
       }
-      
+
       resources {
         cpu    = 1000
         memory = 512
@@ -62,7 +62,7 @@ job "prometheus" {
         data          = <<-EOF
         {{- key "homelab/prometheus"}}
         EOF
-      }      
+      }
     }
   }
 }

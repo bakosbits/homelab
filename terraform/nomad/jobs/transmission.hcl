@@ -1,7 +1,7 @@
 job "transmission" {
   datacenters = ["dc1"]
   type        = "service"
-  
+
   group "transmission" {
 
     network {
@@ -13,7 +13,7 @@ job "transmission" {
       source          = "transmission"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    } 
+    }
 
     volume "media" {
       type            = "csi"
@@ -26,7 +26,7 @@ job "transmission" {
       name = "transmission"
       port = "http"
       tags = [
-        "traefik.enable=true",       
+        "traefik.enable=true",
         "traefik.http.routers.transmission.entrypoints=websecure",
         "traefik.http.routers.transmission.middlewares=auth"
       ]
@@ -42,8 +42,8 @@ job "transmission" {
       driver = "docker"
 
       config {
-        image    = "lscr.io/linuxserver/transmission:latest"
-        ports    = ["http"]
+        image = "lscr.io/linuxserver/transmission:latest"
+        ports = ["http"]
       }
 
       volume_mount {

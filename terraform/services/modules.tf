@@ -1,13 +1,13 @@
 module "consul" {
   source = "../consul"
-  
+
   domain         = var.domain
-  consul_domain  = var.consul_domain 
+  consul_domain  = var.consul_domain
   nomad_url      = var.nomad_url
   consul_url     = var.consul_url
   pfsense_url    = var.pfsense_url
   pve_url        = var.pve_url
-  pve_backup_url = var.pve_backup_url  
+  pve_backup_url = var.pve_backup_url
 }
 
 module "nomad" {
@@ -17,7 +17,7 @@ module "nomad" {
   consul_domain = var.consul_domain
 
   ceph_userid  = var.ceph_userid
-  ceph_userkey = var.ceph_userkey 
+  ceph_userkey = var.ceph_userkey
 
   auth_domain          = var.auth_domain
   auth_client_id       = var.auth_client_id

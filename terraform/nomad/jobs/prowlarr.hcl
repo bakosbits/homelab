@@ -1,7 +1,7 @@
 job "prowlarr" {
   datacenters = ["dc1"]
   type        = "service"
-  
+
   group "prowlarr" {
 
     network {
@@ -13,7 +13,7 @@ job "prowlarr" {
       source          = "prowlarr"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    } 
+    }
 
     volume "media" {
       type            = "csi"
@@ -26,7 +26,7 @@ job "prowlarr" {
       name = "prowlarr"
       port = "http"
       tags = [
-        "traefik.enable=true",       
+        "traefik.enable=true",
         "traefik.http.routers.prowlarr.entrypoints=websecure",
         "traefik.http.routers.prowlarr.middlewares=auth"
       ]

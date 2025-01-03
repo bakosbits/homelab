@@ -1,7 +1,7 @@
 job "flaresolverr" {
   datacenters = ["dc1"]
   type        = "service"
-  
+
   group "flaresolverr" {
 
     network {
@@ -13,7 +13,7 @@ job "flaresolverr" {
       source          = "flaresolverr"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    }    
+    }
 
     volume "media" {
       type            = "csi"
@@ -25,7 +25,7 @@ job "flaresolverr" {
     service {
       name = "flaresolverr"
       port = "http"
-      
+
       check {
         type     = "tcp"
         interval = "10s"

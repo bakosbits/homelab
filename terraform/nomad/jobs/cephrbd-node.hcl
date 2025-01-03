@@ -3,21 +3,21 @@ job "cephrbd-node" {
   type        = "system"
 
   group "cephrbd-node" {
-    
-    network { 
-      port "metrics" {} 
+
+    network {
+      port "metrics" {}
     }
-   
+
     service {
       name = "cephrbd-node"
       port = "metrics"
     }
-    
+
     task "cephrbd-node" {
       driver = "docker"
 
       config {
-        image = "quay.io/cephcsi/cephcsi:v3.13.0"
+        image      = "quay.io/cephcsi/cephcsi:v3.13.0"
         privileged = true
         args = [
           "--type=rbd",
@@ -34,8 +34,8 @@ job "cephrbd-node" {
 
         volumes = [
           "./local/config.json:/etc/ceph-csi-config/config.json",
-          "/lib/modules:/lib/modules"          
-        ]        
+          "/lib/modules:/lib/modules"
+        ]
 
         mounts = [
           {
@@ -66,7 +66,7 @@ job "cephrbd-node" {
         data        = <<-EOF
           [{"clusterID": "820b0f5c-cee3-40a7-b5d5-0aada0355612","monitors": ["192.168.1.10","192.168.1.11","192.168.1.12"] }]
         EOF
-      }  
+      }
     }
   }
 }

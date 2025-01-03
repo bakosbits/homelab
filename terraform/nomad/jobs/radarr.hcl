@@ -1,7 +1,7 @@
 job "radarr" {
   datacenters = ["dc1"]
   type        = "service"
-  
+
   group "radarr" {
 
     network {
@@ -13,7 +13,7 @@ job "radarr" {
       source          = "radarr"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    } 
+    }
 
     volume "media" {
       type            = "csi"

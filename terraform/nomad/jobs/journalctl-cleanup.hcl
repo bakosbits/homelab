@@ -1,5 +1,5 @@
 job "journalctl-cleanup" {
-  datacenters = ["dc1"]  
+  datacenters = ["dc1"]
   type        = "sysbatch"
 
   periodic {

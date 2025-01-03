@@ -1,3 +1,4 @@
+# Providers
 variable "nomad_server" {
   type        = string
   description = "The url of the nomad server"
@@ -8,6 +9,8 @@ variable "consul_server" {
   description = "The usl of the consul server"
 }
 
+# Ceph
+
 variable "ceph_userkey" {
   type        = string
   description = "The secret for the ceph user"
@@ -17,6 +20,8 @@ variable "ceph_userid" {
   type        = string
   description = "The ceph use assigned to jobs"
 }
+
+# Auth
 
 variable "auth_domain" {
   type        = string
@@ -60,6 +65,8 @@ variable "grafana_url" {
   description = "The URL of the grafana instance"
 }
 
+# Postgres
+
 variable "postgres_root_user" {
   type        = string
   description = "The root user for postgres"
@@ -99,7 +106,7 @@ variable "samba_uid" {
   description = "The UID for the samba user"
 }
 
-#Mongo
+# Mongo
 
 variable "mongo_password" {
   type        = string
@@ -121,6 +128,8 @@ variable "mongo_initdb_root_password" {
   description = "The mongo password for the auth db"
 }
 
+# MQTT
+
 variable "mqtt_user" {
   type        = string
   description = "The mqtt user for mosquitto"
@@ -131,11 +140,15 @@ variable "mqtt_password" {
   description = "The mqtt password for mosquitto"
 }
 
+# Consul templates - auth
+
 variable "consul_domain" {
   type        = string
   description = "The defult consul doman e.g. service.consul"
   default     = "service.consul"
 }
+
+# Consul templates - traefik
 
 variable "domain" {
   type        = string
@@ -165,19 +178,4 @@ variable "pve_url" {
 variable "pve_backup_url" {
   type        = string
   description = "The url used to reach the proxmox backup UI"
-}
-
-variable "shared_volumes_media" {
-  type        = string
-  description = "The media volume shared with several services"
-}
-
-variable "hass_volumes_config" {
-  type        = string
-  description = "The config volume for home assistant"
-}
-
-variable "plex_volumes_config" {
-  type        = string
-  description = "The config volume for plex"
 }

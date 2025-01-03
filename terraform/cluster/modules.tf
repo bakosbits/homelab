@@ -13,9 +13,9 @@ module "dns" {
   cores  = each.value.cores
   memory = each.value.memory
 
-  ipconfig  = each.value.ipconfig
-  bridge    = var.bridge
-  vlan      = var.vlan
+  ipconfig = each.value.ipconfig
+  bridge   = var.bridge
+  vlan     = var.vlan
 
   disk_size    = each.value.disk_size
   storage_pool = var.storage_pool
@@ -31,7 +31,7 @@ module "server" {
     for n, vm in var.servers : n + 1 => vm
   }
 
-  vmid        = each.value.vmid 
+  vmid        = each.value.vmid
   name        = each.value.name
   target_node = each.value.target_node
 

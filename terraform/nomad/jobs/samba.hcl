@@ -1,7 +1,7 @@
 job "samba" {
   datacenters = ["dc1"]
   type        = "service"
-  
+
   group "samba" {
 
     network {
@@ -13,12 +13,12 @@ job "samba" {
       source          = "samba"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    } 
+    }
 
     service {
       name = "samba"
       port = "smb"
-      
+
       check {
         type     = "tcp"
         interval = "10s"

@@ -1,11 +1,11 @@
 job "unifi" {
   datacenters = ["dc1"]
   type        = "service"
-  
+
   constraint {
     attribute = "${attr.unique.hostname}"
     value     = "nomad-cli03"
-  }    
+  }
 
   group "unifi" {
 
@@ -18,13 +18,13 @@ job "unifi" {
       source          = "unifi"
       attachment_mode = "file-system"
       access_mode     = "single-node-writer"
-    }  
+    }
 
     service {
       name = "unifi"
       port = "http"
       tags = [
-        "traefik.enable=true",      
+        "traefik.enable=true",
         "traefik.http.routers.unifi.entrypoints=websecure",
         "traefik.http.services.unifi.loadbalancer.server.scheme=https",
         "traefik.http.routers.unifi.middlewares=auth"
@@ -45,9 +45,6 @@ job "unifi" {
         image        = "linuxserver/unifi-network-application:8.6.9"
         network_mode = "host"
         ports        = ["http"]
-        volumes = [
-          "/mnt/volumes/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro"
-        ]        
       }
 
       volume_mount {
