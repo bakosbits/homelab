@@ -85,3 +85,4 @@ resource "nomad_variable" "mqtt" {
     PASSWORD  = var.mqtt_password
   }
 }
+

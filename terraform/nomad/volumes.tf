@@ -836,3 +836,29 @@ resource "nomad_csi_volume" "certs" {
   }
 }
 
+resource "nomad_csi_volume" "init_mongo" {
+
+  lifecycle {
+    prevent_destroy = true
+  }
+
+  plugin_id = "cephfs"
+  volume_id = "init_mongo"
+  name      = "init_mongo"
+
+
+  capability {
+    access_mode     = "single-node-writer"
+    attachment_mode = "file-system"
+  }
+
+  secrets = {
+    adminID  = var.ceph_userid
+    adminKey = var.ceph_userkey
+  }
+
+  parameters = {
+    clusterID     = "820b0f5c-cee3-40a7-b5d5-0aada0355612"
+    fsName        = "cephfs"
+  }
+}

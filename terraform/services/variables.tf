@@ -128,6 +128,16 @@ variable "mongo_initdb_root_password" {
   description = "The mongo password for the auth db"
 }
 
+variable "mongo_authsource" {
+  type        = string
+  description = "The mongo auth db"
+}
+
+variable "mongo_dbname" {
+  type        = string
+  description = "The DB name for unifi in mongo"
+}
+
 # MQTT
 
 variable "mqtt_user" {

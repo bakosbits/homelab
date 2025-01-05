@@ -1,7 +1,8 @@
 module "dns" {
   source = "../vm"
+
   for_each = {
-    for idx, vm in var.dns : idx + 1 => vm
+    for idx, vm in var.servers : idx + 1 => vm
   }
 
   vmid        = each.value.vmid
@@ -27,8 +28,9 @@ module "dns" {
 
 module "server" {
   source = "../vm"
+
   for_each = {
-    for n, vm in var.servers : n + 1 => vm
+    for idx, vm in var.servers : idx + 1 => vm
   }
 
   vmid        = each.value.vmid
@@ -54,6 +56,7 @@ module "server" {
 
 module "client" {
   source = "../vm"
+  
   for_each = {
     for idx, vm in var.clients : idx + 1 => vm
   }
