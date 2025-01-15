@@ -1,10 +1,10 @@
 # Providers
-variable "nomad_server" {
+variable "nomad_url" {
   type        = string
   description = "The url of the nomad server"
 }
 
-variable "consul_server" {
+variable "consul_url" {
   type        = string
   description = "The usl of the consul server"
 }

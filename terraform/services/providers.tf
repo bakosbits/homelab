@@ -12,10 +12,10 @@ terraform {
 }
 
 provider "nomad" {
-  address = var.nomad_server
+  address = var.nomad_url
 }
 
 provider "consul" {
-  address = var.consul_server
+  address = var.consul_url
 }
 

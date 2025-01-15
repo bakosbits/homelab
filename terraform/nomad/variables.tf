@@ -3,7 +3,7 @@ variable "consul_domain" {
   description = "The consul domain"
 }
 
-variable "nomad_server" {
+variable "nomad_url" {
   type        = string
   description = "The url to nomad, used for batch jobs"
 }

@@ -68,7 +68,7 @@ resource "nomad_job" "mosquitto" {
 resource "nomad_job" "nomad-cleanup" {
   jobspec = templatefile("${local.jobs}/nomad-cleanup.hcl",
   {
-    nomad_server = var.nomad_server
+    nomad_url = var.nomad_url
   })
 }
 

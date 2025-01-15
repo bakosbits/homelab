@@ -15,6 +15,7 @@ module "nomad" {
   depends_on = [module.consul]
 
   consul_domain = var.consul_domain
+  nomad_url  = var.nomad_url
 
   ceph_userid  = var.ceph_userid
   ceph_userkey = var.ceph_userkey
