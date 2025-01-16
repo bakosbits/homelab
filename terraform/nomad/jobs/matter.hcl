@@ -32,6 +32,7 @@ job "matter" {
       config {
         image   = "ghcr.io/home-assistant-libs/python-matter-server:stable"
         ports   = ["websocket"]
+        volumes = ["/mnt/volumes/matter:/data"]
       }
 
       resources {

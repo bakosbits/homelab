@@ -36,6 +36,7 @@ job "traefik" {
         ports        = ["http", "https", "postgres"]
         network_mode = "host"
         volumes      = [
+          "/mnt/volumes/certs:/etc/traefik/certs",
           "local/traefik.yaml:/etc/traefik/traefik.yaml",
           "local/dynamic.yaml:/etc/traefik/dynamic/dynamic.yaml"
         ]

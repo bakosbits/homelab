@@ -27,6 +27,9 @@ job "docker-registry" {
         image        = "registry:2.8.3"
         network_mode = "host"
         ports        = ["http"]
+        volumes = [
+          "/mnt/volumes/docker-registry:/data"
+        ]
       }
 
       env {

@@ -30,6 +30,10 @@ job "jellyfin" {
       config {
         image = "linuxserver/jellyfin:10.9.8"
         ports = ["http"]
+        volumes = [
+          "/mnt/volumes/jellyfin:/config/cache",
+          "/mnt/volumes/media:/data"
+        ]
       }
 
       env {

@@ -26,6 +26,10 @@ job "samba" {
         image        = "servercontainers/samba:smbd-only-a3.19.0-s4.18.9-r0"
         ports        = ["smb"]
         network_mode = "host"
+        volumes = [
+          "/mnt/volumes/samba:/shares/homelab",
+          "/mnt/volumes/media:/data"
+        ]
       }
 
       resources {
