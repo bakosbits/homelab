@@ -32,6 +32,9 @@ job "postgres" {
       config {
         image = "postgres:16.4"
         ports = ["postgres"]
+        volumes = [
+          "/mnt/volumes/postgres:/var/lib/pgsql/db"
+        ]
       }
 
       resources {
