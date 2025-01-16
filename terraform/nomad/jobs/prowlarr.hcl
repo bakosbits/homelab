@@ -31,10 +31,6 @@ job "prowlarr" {
         image        = "linuxserver/prowlarr:1.25.4"
         ports        = ["http"]
         network_mode = "host"
-        volumes = [
-          "/mnt/volumes/prowlarr:/config",
-          "/mnt/volumes/media:/data"
-        ]
       }
 
       env {

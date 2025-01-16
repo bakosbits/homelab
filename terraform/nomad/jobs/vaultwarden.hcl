@@ -35,9 +35,6 @@ job "vaultwarden" {
       config {
         image   = "vaultwarden/server:1.31.0"
         ports   = ["http"]
-        volumes = [
-          "/mnt/volumes/vaultwarden:/data"
-        ]
       }
 
       resources {

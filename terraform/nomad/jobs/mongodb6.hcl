@@ -25,10 +25,6 @@ job "mongodb6" {
         image        = "mongo:6.0.18"
         network_mode = "host"
         ports        = ["mongo"]      
-        volumes = [
-          "/mnt/volumes/mongodb6/data/db:/data/db",
-          "/mnt/volumes/mongodb6/data/config:/data/config"          
-        ]
       }
 
       resources {
