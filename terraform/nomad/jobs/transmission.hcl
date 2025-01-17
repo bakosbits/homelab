@@ -32,7 +32,8 @@ job "transmission" {
         ports   = ["http"]
         volumes = [
           "/mnt/volumes/transmission:/config",
-          "/mnt/volumes/media:/data"
+          "/mnt/volumes/media:/data",
+          "/mnt/volumes/media:/watch"
         ]
       }
 
