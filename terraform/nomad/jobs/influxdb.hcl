@@ -42,7 +42,7 @@ job "influxdb" {
         env         = true
         destination = "secrets/.env"
         data        = <<-EOF
-        {{- with nomadVar "nomad/jobs/$${NOMAD_JOB_NAME}" }}
+        {{- with nomadVar "nomad/jobs/influxdb" }}
           {{- range .Tuples }}
             {{ .K }}={{ .V }}
           {{- end }}
