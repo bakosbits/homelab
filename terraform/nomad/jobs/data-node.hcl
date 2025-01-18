@@ -48,7 +48,7 @@ job "data-node" {
         GRAYLOG_DATANODE_NODE_ID_FILE = "/var/lib/graylog-datanode/node-id"
         GRAYLOG_DATANODE_PASSWORD_SECRET = "somepasswordpepper"
         GRAYLOG_DATANODE_ROOT_PASSWORD_SHA2 = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
-        GRAYLOG_DATANODE_MONGODB_URI = "mongodb://mongodb6.service.consul:27017/graylog"
+        GRAYLOG_DATANODE_MONGODB_URI = "mongodb://${NOMAD_JOB_NAME}.${consul_domain}:27017/graylog"
         TZ = "America/Denver"           
       }
 

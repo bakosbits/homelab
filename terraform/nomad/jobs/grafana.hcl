@@ -13,7 +13,7 @@ job "grafana" {
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.grafana.rule=Host(`grafana.bakos.me`)",
+        "traefik.http.routers.grafana.rule=Host(`${NOMAD_JOB_NAME}.${domain}`)",
         "traefik.http.routers.grafana.entrypoints=websecure",
         "traefik.http.routers.grafana.middlewares=auth"
       ]

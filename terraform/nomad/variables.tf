@@ -1,3 +1,13 @@
+variable "job_volumes" {
+  type        = string
+  description = "The base path to the job volumes"
+}
+
+variable "domain" {
+  type        = string
+  description = "The domain used to host the services"
+}
+
 variable "consul_domain" {
   type        = string
   description = "The consul domain"
