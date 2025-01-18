@@ -32,8 +32,8 @@ job "prowlarr" {
         ports        = ["http"]
         network_mode = "host"
         volumes = [
-          "/mnt/volumes/prowlarr:/config",
-          "/mnt/volumes/media:/data"
+          "${job_volumes}/prowlarr:/config",
+          "${job_volumes}/media:/data"
         ]
       }
 

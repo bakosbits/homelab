@@ -36,7 +36,7 @@ job "vaultwarden" {
         image   = "vaultwarden/server:1.31.0"
         ports   = ["http"]
         volumes = [
-          "/mnt/volumes/vaultwarden:/data"
+          "${job_volumes}/$${NOMAD_JOB_NAME}:/data"
         ]
       }
 

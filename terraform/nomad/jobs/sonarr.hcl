@@ -32,8 +32,8 @@ job "sonarr" {
         image = "linuxserver/sonarr:4.0.9"
         ports = ["http"]
         volumes = [
-          "/mnt/volumes/sonarr:/config",
-          "/mnt/volumes/media:/data"
+          "${job_volumes}/sonarr:/config",
+          "${job_volumes}/media:/data"
         ]
       }
 

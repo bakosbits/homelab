@@ -33,7 +33,7 @@ job "loki" {
           "local/loki/local-config.yaml",
         ]
         volumes = [
-          "/mnt/volumes/loki:/loki"
+          "${job_volumes}/loki:/loki"
         ]
 
       }

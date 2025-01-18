@@ -3,7 +3,7 @@ job "unifi" {
   type        = "service"
 
   constraint {
-    attribute = "${attr.unique.hostname}"
+    attribute = "$${attr.unique.hostname}"
     value     = "nomadcli03"
   }
 
@@ -39,7 +39,7 @@ job "unifi" {
         network_mode = "host"
         ports        = ["http"]
         volumes      = [
-          "/mnt/volumes/unifi:/config"
+          "${job_volumes}/$${NOMAD_JOB_NAME}:/config"
         ]
       }
 

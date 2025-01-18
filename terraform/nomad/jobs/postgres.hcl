@@ -15,7 +15,7 @@ job "postgres" {
         "traefik.enable=true",
         "traefik.tcp.routers.postgres.entrypoints=postgres",
         "traefik.tcp.routers.postgres.rule=HostSNI(`*`)",
-        "traefik.tcp.services.postgres.loadBalancer.server.port=${NOMAD_HOST_PORT_postgres}"
+        "traefik.tcp.services.postgres.loadBalancer.server.port=$NOMAD_HOST_PORT_postgres"
       ]
 
       check {
@@ -33,7 +33,7 @@ job "postgres" {
         image = "postgres:16.4"
         ports = ["postgres"]
         volumes = [
-          "/mnt/volumes/postgres:/var/lib/pgsql/db"
+          "${job_volumes}/postgres:/var/lib/pgsql/db"
         ]
       }
 

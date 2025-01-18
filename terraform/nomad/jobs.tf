@@ -1,16 +1,23 @@
 locals {
-  jobs = "${path.module}/jobs"
+  jobs          = "${path.module}/jobs"
+  domain        = var.domain
+  consul_domain = var.consul_domain
+  job_volumes   = var.job_volumes
 }
 
 resource "nomad_job" "auth" {
   jobspec = templatefile("${local.jobs}/auth.hcl",
-  {
-    consul_domain = var.consul_domain
+  {   
+    consul_domain = local.consul_domain
   })
 }
 
 resource "nomad_job" "docker-registry" {
-  jobspec = file("${local.jobs}/docker-registry.hcl")
+  jobspec = templatefile("${local.jobs}/docker-registry.hcl",
+  {
+    http_addr   = "http://docker-registry.service.consul",
+    job_volumes = local.job_volumes
+  })
 }
 
 resource "nomad_job" "docker-cleanup" {
@@ -22,30 +29,46 @@ resource "nomad_job" "drawio" {
 }
 
 resource "nomad_job" "emulatorjs" {
-  jobspec = file("${local.jobs}/emulatorjs.hcl")
+  jobspec = templatefile("${local.jobs}/emulatorjs.hcl",
+  {
+    job_volumes = local.job_volumes
+  })
 }
 
 resource "nomad_job" "flaresolverr" {
-  jobspec = file("${local.jobs}/flaresolverr.hcl")
+  jobspec = templatefile("${local.jobs}/flaresolverr.hcl",
+  {
+    job_volumes = local.job_volumes
+  })
 }
 
 resource "nomad_job" "grafana" {
   jobspec = templatefile("${local.jobs}/grafana.hcl",
   {
-    domain = var.domain
+    domain      = local.domain,   
+    job_volumes = local.job_volumes
   })
 }
 
 resource "nomad_job" "home-assistant" {
-  jobspec = file("${local.jobs}/home-assistant.hcl")
+  jobspec = templatefile("${local.jobs}/home-assistant.hcl",
+  {
+    job_volumes = local.job_volumes
+  })
 }
 
 resource "nomad_job" "influxdb" {
-  jobspec = file("${local.jobs}/influxdb.hcl")
+  jobspec = templatefile("${local.jobs}/influxdb.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
 }
 
 resource "nomad_job" "jellyfin" {
-  jobspec = file("${local.jobs}/jellyfin.hcl")
+  jobspec = templatefile("${local.jobs}/jellyfin.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
 }
 
 resource "nomad_job" "journalctl-cleanup" {
@@ -53,19 +76,31 @@ resource "nomad_job" "journalctl-cleanup" {
 }
 
 resource "nomad_job" "loki" {
-  jobspec = file("${local.jobs}/loki.hcl")
+  jobspec = templatefile("${local.jobs}/loki.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
 }
 
 resource "nomad_job" "matter" {
-  jobspec = file("${local.jobs}/matter.hcl")
+  jobspec = templatefile("${local.jobs}/matter.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
 }
 
 resource "nomad_job" "mongodb7" {
-  jobspec = file("${local.jobs}/mongodb7.hcl")
+  jobspec = templatefile("${local.jobs}/mongodb7.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
 }
 
 resource "nomad_job" "mosquitto" {
-  jobspec = file("${local.jobs}/mosquitto.hcl")
+  jobspec = templatefile("${local.jobs}/mosquitto.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
 }
 
 resource "nomad_job" "nomad-cleanup" {
@@ -80,31 +115,52 @@ resource "nomad_job" "pgweb" {
 }
 
 resource "nomad_job" "plex" {
-  jobspec = file("${local.jobs}/plex.hcl")
+  jobspec = templatefile("${local.jobs}/plex.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
 }
 
 resource "nomad_job" "postgres" {
-  jobspec = file("${local.jobs}/postgres.hcl")
+  jobspec = templatefile("${local.jobs}/postgres.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
 }
 
 resource "nomad_job" "prowlarr" {
-  jobspec = file("${local.jobs}/prowlarr.hcl")
+  jobspec = templatefile("${local.jobs}/prowlarr.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
 }
 
 resource "nomad_job" "radarr" {
-  jobspec = file("${local.jobs}/radarr.hcl")
+  jobspec = templatefile("${local.jobs}/radarr.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
 }
 
 resource "nomad_job" "sabnzbd" {
-  jobspec = file("${local.jobs}/sabnzbd.hcl")
+  jobspec = templatefile("${local.jobs}/sabnzbd.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
 }
 
 resource "nomad_job" "samba" {
-  jobspec = file("${local.jobs}/samba.hcl")
+  jobspec = templatefile("${local.jobs}/samba.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
 }
 
 resource "nomad_job" "sonarr" {
-  jobspec = file("${local.jobs}/sonarr.hcl")
+  jobspec = templatefile("${local.jobs}/sonarr.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
 }
 
 resource "nomad_job" "telegraf" {
@@ -112,21 +168,36 @@ resource "nomad_job" "telegraf" {
 }
 
 resource "nomad_job" "traefik" {
-  jobspec = file("${local.jobs}/traefik.hcl")
+  jobspec = templatefile("${local.jobs}/traefik.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
 }
 
 resource "nomad_job" "transmission" {
-  jobspec = file("${local.jobs}/transmission.hcl")
+  jobspec = templatefile("${local.jobs}/transmission.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
 }
 
 resource "nomad_job" "unifi" {
-  jobspec    = file("${local.jobs}/unifi.hcl")
+  jobspec = templatefile("${local.jobs}/unifi.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
 }
 
 resource "nomad_job" "vaultwarden" {
-  jobspec = file("${local.jobs}/vaultwarden.hcl")
+  jobspec = templatefile("${local.jobs}/vaultwarden.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
 }
 
 resource "nomad_job" "wikijs" {
-  jobspec = file("${local.jobs}/wikijs.hcl")
+  jobspec = templatefile("${local.jobs}/wikijs.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
 }

@@ -13,7 +13,7 @@ job "grafana" {
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.grafana.rule=Host(`${NOMAD_JOB_NAME}.${domain}`)",
+        "traefik.http.routers.grafana.rule=Host(`grafana.${domain}`)",
         "traefik.http.routers.grafana.entrypoints=websecure",
         "traefik.http.routers.grafana.middlewares=auth"
       ]
@@ -34,7 +34,7 @@ job "grafana" {
         image = "grafana/grafana-oss:11.1.3"
         ports = ["http"]
         volumes = [
-          "/mnt/volumes/prowlarr:/var/lib/grafana"
+          "${job_volumes}/grafana:/var/lib/grafana"
         ]
 
       }

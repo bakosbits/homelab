@@ -30,9 +30,9 @@ job "mosquitto" {
         ports        = ["mqtt", "websocket"]
         network_mode = "host"
         volumes = [
-          "/mnt/volumes/mosquitto/config:/mosquitto/config",
-          "/mnt/volumes/mosquitto/data:/mosquitto/data",
-          "/mnt/volumes/mosquitto/log:/mosquitto/log",
+          "${job_volumes}/mosquitto/config:/mosquitto/config",
+          "${job_volumes}/mosquitto/data:/mosquitto/data",
+          "${job_volumes}/mosquitto/log:/mosquitto/log",
           "local/mosquitto.conf:/mosquitto/config/mosquitto.conf",
           "secrets/password.txt:/mosquitto/config/password.txt",
         ]

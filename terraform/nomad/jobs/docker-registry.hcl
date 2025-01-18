@@ -1,4 +1,4 @@
-job "docker-registry" {
+job docker-registry {
   datacenters = ["dc1"]
   type        = "service"
 
@@ -28,13 +28,13 @@ job "docker-registry" {
         network_mode = "host"
         ports        = ["http"]
         volumes = [
-          "/mnt/volumes/docker-registry:/data"
+          "${job_volumes}/docker_registry:/data"
         ]
       }
 
       env {
         REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY = "/data"
-        REGISTRY_HTTP_ADDR                        = "${NOMAD_ADDR_http}"
+        REGISTRY_HTTP_ADDR                        = "${http_addr}"
         REGISTRY_PROXY_REMOTEURL                  = "https://registry-1.docker.io"
       }
 

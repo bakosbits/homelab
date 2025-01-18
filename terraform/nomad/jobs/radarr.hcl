@@ -33,8 +33,8 @@ job "radarr" {
         ports        = ["http"]
         network_mode = "host"
         volumes = [
-          "/mnt/volumes/radarr:/config",
-          "/mnt/volumes/media:/data"
+          "${job_volumes}/radarr:/config",
+          "${job_volumes}/media:/data"
         ]
       }
 

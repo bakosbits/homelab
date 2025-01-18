@@ -31,11 +31,10 @@ job "graylog" {
         image        = "graylog/graylog:6.1"
         ports        = ["http"]
         network_mode = "host"
-        #entrypoint   = ["/usr/bin/tini -- wait-for-it data-node:9200 --  /docker-entrypoint.sh"]
         volumes      = [        
-          "/mnt/volumes/graylog/data:/usr/share/graylog/data/data",
-          "/mnt/volumes/graylog/config:/usr/share/graylog/data/config",
-          "/mnt/volumes/graylog/journal:/usr/share/graylog/data/journal"                    
+          "${job_volumes}/graylog/data:/usr/share/graylog/data/data",
+          "${job_volumes}/graylog/config:/usr/share/graylog/data/config",
+          "${job_volumes}/graylog/journal:/usr/share/graylog/data/journal"                    
         ]
       }
 

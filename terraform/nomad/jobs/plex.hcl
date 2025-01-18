@@ -38,8 +38,8 @@ job "plex" {
         ports        = ["http"]
         network_mode = "host"
         volumes = [
-          "/mnt/volumes/plex:/config",
-          "/mnt/volumes/media:/data"
+          "${job_volumes}/plex/config",
+          "${job_volumes}/media:/data"
         ]
       }
 
