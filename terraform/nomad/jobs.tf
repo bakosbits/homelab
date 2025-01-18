@@ -30,7 +30,10 @@ resource "nomad_job" "flaresolverr" {
 }
 
 resource "nomad_job" "grafana" {
-  jobspec = file("${local.jobs}/grafana.hcl")
+  jobspec = templatefile("${local.jobs}/grafana.hcl",
+  {
+    domain = var.domain
+  })
 }
 
 resource "nomad_job" "home-assistant" {
