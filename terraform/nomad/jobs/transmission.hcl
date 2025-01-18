@@ -9,12 +9,12 @@ job "transmission" {
     }
 
     service {
-      name = "transmission"
+      name = "$${NOMAD_JOB_NAME}"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.transmission.entrypoints=websecure",
-        "traefik.http.routers.transmission.middlewares=auth"
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
       ]
 
       check {

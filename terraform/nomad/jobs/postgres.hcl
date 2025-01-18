@@ -13,9 +13,9 @@ job "postgres" {
       port = "postgres"
       tags = [
         "traefik.enable=true",
-        "traefik.tcp.routers.postgres.entrypoints=postgres",
-        "traefik.tcp.routers.postgres.rule=HostSNI(`*`)",
-        "traefik.tcp.services.postgres.loadBalancer.server.port=$NOMAD_HOST_PORT_postgres"
+        "traefik.tcp.routers.$${NOMAD_JOB_NAME}.entrypoints=postgres",
+        "traefik.tcp.routers.$${NOMAD_JOB_NAME}.rule=HostSNI(`*`)",
+        "traefik.tcp.services.$${NOMAD_JOB_NAME}.loadBalancer.server.port=$${NOMAD_HOST_PORT_postgres}"
       ]
 
       check {
@@ -46,7 +46,7 @@ job "postgres" {
         env         = true
         destination = "secrets/postgres.env"
         data        = <<-EOF
-        {{- with nomadVar "nomad/jobs/postgres" }}
+        {{- with nomadVar "nomad/jobs/$${NOMAD_JOB_NAME}" }}
           {{- range .Tuples }}
             {{ .K }}={{ .V }}
           {{- end }}

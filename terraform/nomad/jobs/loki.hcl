@@ -9,7 +9,7 @@ job "loki" {
     }
 
     service {
-      name = "loki"
+      name = "$${NOMAD_JOB_NAME}"
       port = "http"
 
       check {

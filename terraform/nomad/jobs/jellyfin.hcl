@@ -9,12 +9,12 @@ job "jellyfin" {
     }
 
     service {
-      name = "jellyfin"
+      name = "$${NOMAD_JOB_NAME}"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.jellyfin.entrypoints=websecure",
-        "traefik.http.routers.jellyfin.middlewares=auth"
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
       ]
 
       check {
@@ -39,7 +39,7 @@ job "jellyfin" {
       env {
         PUID                        = "1010"
         PGID                        = "1010"
-        JELLYFIN_PublishedServerUrl = "https://jellyfin.bakos.me"
+        JELLYFIN_PublishedServerUrl = "https://$${NOMAD_JOB_NAME}.${domain}"
       }
 
       resources {

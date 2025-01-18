@@ -9,12 +9,12 @@ job "radarr" {
     }
 
     service {
-      name = "radarr"
+      name = "$${NOMAD_JOB_NAME}"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.radarr.entrypoints=websecure",
-        "traefik.http.routers.radarr.middlewares=auth"
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
       ]
 
       check {

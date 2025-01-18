@@ -9,7 +9,7 @@ job "mongodb7" {
     }
 
     service {
-      name = "mongodb7"
+      name = "$${NOMAD_JOB_NAME}"
       port = "mongo"
     }
 
@@ -35,7 +35,7 @@ job "mongodb7" {
         env         = true
         destination = "secrets/mongo.env"
         data        = <<-EOF
-        {{- with nomadVar "nomad/jobs/mongodb7" }}
+        {{- with nomadVar "nomad/jobs/$${NOMAD_JOB_NAME}" }}
           {{- range .Tuples }}
             {{ .K }}={{ .V }}
           {{- end }}

@@ -9,12 +9,12 @@ job "vaultwarden" {
     }
 
     service {
-      name = "vaultwarden"
+      name = "$${NOMAD_JOB_NAME}"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.vaultwarden.entrypoints=websecure",
-        "traefik.http.routers.vaultwarden.middlewares=auth"
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
       ]
 
       check {

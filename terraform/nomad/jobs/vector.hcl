@@ -15,7 +15,7 @@ job "vector" {
     }
 
     service {
-      name = "vector"
+      name = "$${NOMAD_JOB_NAME}"
       port = "api"
 
       check {
@@ -57,7 +57,7 @@ job "vector" {
         change_mode   = "signal"
         change_signal = "SIGHUP"
         data          = <<-EOF
-        {{- key "homelab/vector/vector.toml"}}
+        {{- key "homelab/$${NOMAD_JOB_NAME}/vector.toml"}}
         EOF
       }
 

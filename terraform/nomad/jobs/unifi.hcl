@@ -14,13 +14,13 @@ job "unifi" {
     }
 
     service {
-      name = "unifi"
+      name = "$${NOMAD_JOB_NAME}"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.unifi.entrypoints=websecure",
-        "traefik.http.services.unifi.loadbalancer.server.scheme=https",
-        "traefik.http.routers.unifi.middlewares=auth"
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
+        "traefik.http.services.$${NOMAD_JOB_NAME}.loadbalancer.server.scheme=https",
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
       ]
 
       check {
@@ -52,7 +52,7 @@ job "unifi" {
         env         = true
         destination = "secrets/unifi.env"
         data        = <<-EOF
-        {{- with nomadVar "nomad/jobs/unifi" }}
+        {{- with nomadVar "nomad/jobs/$${NOMAD_JOB_NAME}" }}
           {{- range .Tuples }}
             {{ .K }}={{ .V }}
           {{- end }}

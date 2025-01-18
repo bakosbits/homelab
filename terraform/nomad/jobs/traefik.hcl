@@ -11,7 +11,7 @@ job "traefik" {
     }
 
     service {
-      name = "traefik"
+      name = "$${NOMAD_JOB_NAME}"
       port = "http"
       tags = [
         "traefik.enable=true",

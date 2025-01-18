@@ -10,11 +10,11 @@ job "hass" {
     }
 
     service {
-      name = "hass"
+      name = "$${NOMAD_JOB_NAME}"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.hass.entrypoints=websecure",
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
       ]
 
       check {
