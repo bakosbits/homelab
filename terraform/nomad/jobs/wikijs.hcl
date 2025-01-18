@@ -17,12 +17,12 @@ job "wikijs" {
     }   
 
     service {
-      name = "wikijs"
+      name = "$${NOMAD_JOB_NAME}"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.wikijs.entrypoints=websecure",
-        "traefik.http.routers.wikijs.middlewares=auth"
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
       ]
 
       check {

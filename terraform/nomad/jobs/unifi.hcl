@@ -2,6 +2,11 @@ job "unifi" {
   datacenters = ["dc1"]
   type        = "service"
 
+  constraint {
+    attribute = "$${attr.unique.hostname}"
+    value     = "nomadcli03"
+  }
+
   group "unifi" {
 
     network {
@@ -25,13 +30,13 @@ job "unifi" {
     }  
 
     service {
-      name = "unifi"
+      name = "$${NOMAD_JOB_NAME}"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.unifi.entrypoints=websecure",
-        "traefik.http.services.unifi.loadbalancer.server.scheme=https",
-        "traefik.http.routers.unifi.middlewares=auth"
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
+        "traefik.http.services.$${NOMAD_JOB_NAME}.loadbalancer.server.scheme=https",
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
       ]
 
       check {

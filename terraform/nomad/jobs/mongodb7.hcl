@@ -25,7 +25,7 @@ job "mongodb7" {
     }  
 
     service {
-      name = "mongodb7"
+      name = "$${NOMAD_JOB_NAME}"
       port = "mongo"
     }
 

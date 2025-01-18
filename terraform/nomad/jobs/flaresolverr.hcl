@@ -25,7 +25,7 @@ job "flaresolverr" {
     } 
 
     service {
-      name = "flaresolverr"
+      name = "$${NOMAD_JOB_NAME}"
       port = "http"
       
       check {

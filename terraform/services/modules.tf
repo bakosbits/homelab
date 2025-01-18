@@ -14,8 +14,10 @@ module "nomad" {
   source     = "../nomad"
   depends_on = [module.consul]
 
+  domain = var.domain
   consul_domain = var.consul_domain
-  nomad_url  = var.nomad_url
+  job_volumes   = var.job_volumes
+  nomad_url     = var.nomad_url
 
   ceph_userid  = var.ceph_userid
   ceph_userkey = var.ceph_userkey

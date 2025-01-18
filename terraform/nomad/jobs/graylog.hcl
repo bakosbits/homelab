@@ -3,7 +3,7 @@ job "graylog" {
   type        = "service"
 
   constraint {
-    attribute = "${attr.unique.hostname}"
+    attribute = "$${attr.unique.hostname}"
     value     = "nomadcli01"
   }
 
@@ -14,7 +14,7 @@ job "graylog" {
     }
 
     service {
-      name = "graylog"
+      name = "$${NOMAD_JOB_NAME}"
       port = "http"
 
       check {

@@ -30,7 +30,10 @@ resource "nomad_job" "flaresolverr" {
 }
 
 resource "nomad_job" "grafana" {
-  jobspec = file("${local.jobs}/grafana.hcl")
+  jobspec = templatefile("${local.jobs}/grafana.hcl",
+  {
+    domain = var.domain
+  })
 }
 
 resource "nomad_job" "home-assistant" {
@@ -42,7 +45,10 @@ resource "nomad_job" "influxdb" {
 }
 
 resource "nomad_job" "jellyfin" {
-  jobspec = file("${local.jobs}/jellyfin.hcl")
+  jobspec = templatefile("${local.jobs}/jellyfin.hcl",
+  {
+    domain = var.domain
+  })
 }
 
 resource "nomad_job" "journalctl-cleanup" {

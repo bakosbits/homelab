@@ -25,12 +25,12 @@ job "sonarr" {
     }
 
     service {
-      name = "sonarr"
+      name = "$${NOMAD_JOB_NAME}"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.sonarr.entrypoints=websecure",
-        "traefik.http.routers.sonarr.middlewares=auth"
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
       ]
 
       check {

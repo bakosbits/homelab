@@ -1,3 +1,9 @@
+# path to the job volumes
+variable "job_volumes" {
+  type        = string
+  description = "The base path to the job volumes"
+}
+
 # Consul templates - auth
 
 variable "consul_domain" {

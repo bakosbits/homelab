@@ -25,12 +25,12 @@ job "prowlarr" {
     }
 
     service {
-      name = "prowlarr"
+      name = "$${NOMAD_JOB_NAME}"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.prowlarr.entrypoints=websecure",
-        "traefik.http.routers.prowlarr.middlewares=auth"
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
       ]
 
       check {

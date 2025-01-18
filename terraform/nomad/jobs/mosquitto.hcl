@@ -11,7 +11,7 @@ job "mosquitto" {
     }
 
     service {
-      name = "mosquitto"
+      name = "$${NOMAD_JOB_NAME}"
       port = "mqtt"
 
       check {

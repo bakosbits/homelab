@@ -9,15 +9,15 @@ job "auth" {
     }
 
     service {
-      name = "auth"
+      name = "$${NOMAD_JOB_NAME}"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.auth.entrypoints=websecure",
-        "traefik.http.middlewares.auth.forwardauth.address=http://auth.service.consul:4181/",
-        "traefik.http.middlewares.auth.forwardauth.trustForwardHeader=true",
-        "traefik.http.middlewares.auth.forwardauth.authResponseHeaders=X-Forwarded-User",
-        "traefik.http.routers.auth.middlewares=auth"
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
+        "traefik.http.middlewares.$${NOMAD_JOB_NAME}.forwardauth.address=http://$${NOMAD_JOB_NAME}.${consul_domain}:4181/",
+        "traefik.http.middlewares.$${NOMAD_JOB_NAME}.forwardauth.trustForwardHeader=true",
+        "traefik.http.middlewares.$${NOMAD_JOB_NAME}.forwardauth.authResponseHeaders=X-Forwarded-User",
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=$${NOMAD_JOB_NAME}",
       ]
       check {
         type     = "http"
