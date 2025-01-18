@@ -32,7 +32,7 @@ job "matter" {
       config {
         image   = "ghcr.io/home-assistant-libs/python-matter-server:stable"
         ports   = ["websocket"]
-        volumes = ["${job_volumes}/matter:/data"]
+        volumes = ["${job_volumes}/$${NOMAD_JOB_NAME}:/data"]
       }
 
       resources {

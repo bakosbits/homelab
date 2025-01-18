@@ -57,7 +57,7 @@ job "vector" {
         change_mode   = "signal"
         change_signal = "SIGHUP"
         data          = <<-EOF
-        {{- key "homelab/$${NOMAD_JOB_NAME}/vector.toml"}}
+        {{- key "homelab/vector/vector.toml"}}
         EOF
       }
 

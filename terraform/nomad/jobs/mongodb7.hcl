@@ -22,7 +22,7 @@ job "mongodb7" {
         ports        = ["mongo"]
         volumes = [
           "${job_volumes}/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro",
-          "${job_volumes}/mongodb7:/data/db"
+          "${job_volumes}/$${NOMAD_JOB_NAME}:/data/db"
         ]
       }
 
