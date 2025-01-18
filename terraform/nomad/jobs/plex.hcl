@@ -37,6 +37,10 @@ job "plex" {
         image        = "plexinc/pms-docker:latest"
         ports        = ["http"]
         network_mode = "host"
+        volumes = [
+          "/mnt/volumes/plex:/config",
+          "/mnt/volumes/media:/data"
+        ]
       }
 
       env {

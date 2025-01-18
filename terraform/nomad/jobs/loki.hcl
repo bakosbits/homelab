@@ -32,6 +32,10 @@ job "loki" {
           "-config.file",
           "local/loki/local-config.yaml",
         ]
+        volumes = [
+          "/mnt/volumes/loki:/loki"
+        ]
+
       }
 
       resources {

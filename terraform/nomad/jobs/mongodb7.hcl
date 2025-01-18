@@ -20,6 +20,10 @@ job "mongodb7" {
         image        = "mongo:7.0.14"
         network_mode = "host"
         ports        = ["mongo"]
+        volumes = [
+          "/mnt/volumes/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro",
+          "/mnt/volumes/mongodb7:/data/db"
+        ]
       }
 
       resources {
