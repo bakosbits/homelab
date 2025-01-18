@@ -3,7 +3,7 @@ job "drawio" {
   type        = "service"
 
   group "drawio" {
-
+    
     network {
       port "http" { to = 8080 }
     }
@@ -28,8 +28,9 @@ job "drawio" {
       driver = "docker"
 
       config {
-        image = "jgraph/drawio:24.7.5"
-        ports = ["http"]
+        image        = "jgraph/drawio:24.7.5"
+        network_mode = "bridge"
+        ports        = ["http"]
       }
 
       resources {

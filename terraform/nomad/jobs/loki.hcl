@@ -8,6 +8,14 @@ job "loki" {
       port "http" { static = 3100 }
     }
 
+    volume "loki" {
+      type            = "csi"
+      read_only       = false
+      source          = "loki"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    } 
+
     service {
       name = "loki"
       port = "http"
@@ -34,9 +42,9 @@ job "loki" {
         ]
       }
 
-      resources {
-        cpu    = 512
-        memory = 256
+      volume_mount {
+        volume      = "loki"
+        destination = "/loki"
       }
 
       template {
@@ -44,6 +52,11 @@ job "loki" {
         data        = <<-EOF
         {{- key "homelab/loki/loki.yaml"}}
         EOF
+      }
+
+      resources {
+        cpu    = 512
+        memory = 256
       }
     }
   }

@@ -8,6 +8,22 @@ job "prowlarr" {
       port "http" { static = "9696" }
     }
 
+    volume "prowlarr" {
+      type            = "csi"
+      read_only       = false
+      source          = "prowlarr"
+      attachment_mode = "file-system"
+      access_mode      = "single-node-writer"
+    } 
+
+    volume "media" {
+      type            = "csi"
+      read_only       = false
+      source          = "media"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
+    }
+
     service {
       name = "prowlarr"
       port = "http"
@@ -31,6 +47,16 @@ job "prowlarr" {
         image        = "linuxserver/prowlarr:1.25.4"
         ports        = ["http"]
         network_mode = "host"
+      }
+
+      volume_mount {
+        volume      = "prowlarr"
+        destination = "/config"
+      }
+
+      volume_mount {
+        volume      = "media"
+        destination = "/data"
       }
 
       env {

@@ -1,11 +1,20 @@
 job "wikijs" {
-  datacenters = ["dc1"]
+  datacenters = ["dc1"]  
+  type        = "service"
 
   group "wikijs" {
 
     network {
-      port "http" { to = 3000 }
+      port "http" { static = 3000 }
     }
+
+    volume "wikijs" {
+      type            = "csi"
+      read_only       = false
+      source          = "wikijs"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    }   
 
     service {
       name = "wikijs"
@@ -28,8 +37,14 @@ job "wikijs" {
       driver = "docker"
 
       config {
-        image   = "linuxserver/wikijs:2.5.303"
-        ports   = ["http"]
+        image        = "linuxserver/wikijs:2.5.303"
+        network_mode = "host"
+        ports        = ["http"]
+      }
+
+      volume_mount {
+        volume      = "wikijs"
+        destination = "/config"
       }
 
       env {

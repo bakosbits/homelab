@@ -8,6 +8,22 @@ job "mongodb7" {
       port "mongo" { static = "27017" }
     }
 
+    volume "init-mongo" {
+      type            = "csi"
+      read_only       = true
+      source          = "init-mongo"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-reader-only"
+    } 
+
+    volume "mongobd7" {
+      type            = "csi"
+      read_only       = false
+      source          = "mongodb7"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    }  
+
     service {
       name = "mongodb7"
       port = "mongo"
@@ -20,6 +36,16 @@ job "mongodb7" {
         image        = "mongo:7.0.14"
         network_mode = "host"
         ports        = ["mongo"]
+      }
+
+      volume_mount {
+        volume      = "init-mongo"
+        destination = "/docker-entrypoint-initdb.d/init-mongo.sh:ro"
+      }
+
+      volume_mount {
+        volume      = "mongodb7"
+        destination = "/data/db"
       }
 
       resources {

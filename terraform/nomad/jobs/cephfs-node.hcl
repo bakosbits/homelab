@@ -3,21 +3,21 @@ job "cephfs-node" {
   type        = "system"
 
   group "cephfs-node" {
-
-    network {
-      port "metrics" {}
+    
+    network { 
+      port "metrics" {} 
     }
-
+   
     service {
       name = "cephfs-node"
       port = "metrics"
     }
-
+    
     task "cephfs-node" {
       driver = "docker"
 
       config {
-        image      = "quay.io/cephcsi/cephcsi:v3.13.0"
+        image = "quay.io/cephcsi/cephcsi:v3.12.2"
         privileged = true
         args = [
           "--type=cephfs",
@@ -34,8 +34,8 @@ job "cephfs-node" {
 
         volumes = [
           "./local/config.json:/etc/ceph-csi-config/config.json",
-          "/lib/modules:/lib/modules"
-        ]
+          "/lib/modules:/lib/modules"          
+        ]        
 
         mounts = [
           {
@@ -66,7 +66,7 @@ job "cephfs-node" {
         data        = <<-EOF
           [{"clusterID": "820b0f5c-cee3-40a7-b5d5-0aada0355612","monitors": ["192.168.1.10","192.168.1.11","192.168.1.12"] }]
         EOF
-      }
+      }  
     }
   }
 }

@@ -2,16 +2,27 @@ job "unifi" {
   datacenters = ["dc1"]
   type        = "service"
 
-  constraint {
-    attribute = "${attr.unique.hostname}"
-    value     = "nomadcli03"
-  }
-
   group "unifi" {
 
     network {
       port "http" { static = "8443" }
     }
+
+    volume "init-mongo" {
+      type            = "csi"
+      read_only       = true
+      source          = "init-mongo"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-reader-only"
+    } 
+
+    volume "unifi" {
+      type            = "csi"
+      read_only       = false
+      source          = "unifi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    }  
 
     service {
       name = "unifi"
@@ -35,9 +46,19 @@ job "unifi" {
       driver = "docker"
 
       config {
-        image        = "linuxserver/unifi-network-application:8.6.9"
+        image        = "linuxserver/unifi-network-application:8.5.6"
         network_mode = "host"
         ports        = ["http"]
+      }
+
+      volume_mount {
+        volume      = "init-mongo"
+        destination = "/docker-entrypoint-initdb.d/init-mongo.sh:ro"
+      }
+
+      volume_mount {
+        volume      = "unifi"
+        destination = "/config"
       }
 
       resources {

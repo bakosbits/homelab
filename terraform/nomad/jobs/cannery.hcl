@@ -8,13 +8,18 @@ job "cannery" {
       port "http" { static = "4000" }
     }
 
+    volume "cannery" {
+      type   = "host"
+      source = "cannery"
+    }
+
     service {
       name = "cannery"
       port = "http"
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.cannery.entrypoints=websecure",
-        "traefik.http.routers.cannery.middlewares=auth"
+        "traefik.http.routers.cannery.middlewares=forward-auth"
       ]
 
       check {
@@ -31,6 +36,11 @@ job "cannery" {
         image        = "shibaobun/cannery:latest"
         network_mode = "host"
         ports        = ["http"]
+      }
+
+      volume_mount {
+        volume      = "cannery"
+        destination = "/config"
       }
 
       resources {

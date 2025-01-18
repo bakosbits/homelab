@@ -1,12 +1,13 @@
 job "cephfs-controller" {
   datacenters = ["dc1"]
+  type        = "service"
 
   group "cephfs-controller" {
-
-    network {
-      port "metrics" {}
+    
+    network { 
+      port "metrics" {} 
     }
-
+   
     service {
       name = "cephfs-controller"
       port = "metrics"
@@ -16,7 +17,7 @@ job "cephfs-controller" {
       driver = "docker"
 
       config {
-        image = "quay.io/cephcsi/cephcsi:v3.13.0"
+        image = "quay.io/cephcsi/cephcsi:v3.12.2"
         args = [
           "--type=cephfs",
           "--controllerserver=true",
@@ -32,7 +33,7 @@ job "cephfs-controller" {
 
         volumes = [
           "./local/config.json:/etc/ceph-csi-config/config.json",
-          "/lib/modules:/lib/modules"
+          "/lib/modules:/lib/modules"          
         ]
 
         mounts = [
@@ -46,7 +47,7 @@ job "cephfs-controller" {
           }
         ]
       }
-
+      
       csi_plugin {
         id        = "cephfs"
         type      = "controller"

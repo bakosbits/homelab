@@ -8,6 +8,22 @@ job "sabnzbd" {
       port "http" { to = "8080" }
     }
 
+    volume "sabnzbd" {
+      type            = "csi"
+      read_only       = false
+      source          = "sabnzbd"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    }   
+
+    volume "media" {
+      type            = "csi"
+      read_only       = false
+      source          = "media"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
+    } 
+
     service {
       port = "http"
       name = "sabnzbd"
@@ -29,8 +45,19 @@ job "sabnzbd" {
       driver = "docker"
 
       config {
-        image = "linuxserver/sabnzbd:4.3.2"
-        ports = ["http"]
+        image        = "linuxserver/sabnzbd:4.3.2"
+        ports        = ["http"]
+        network_mode = "bridge"
+      }
+
+      volume_mount {
+        volume      = "sabnzbd"
+        destination = "/config"
+      }
+
+      volume_mount {
+        volume      = "media"
+        destination = "/data"
       }
 
       env {

@@ -10,7 +10,7 @@ job "telegraf" {
 
     task "telegraf" {
       driver = "docker"
-
+      
       service {
         name = "telegraf"
         port = "http"
@@ -23,10 +23,11 @@ job "telegraf" {
       }
 
       config {
-        image = "telegraf:1.31.2"
-        ports = ["http"]
-        args  = [
-          "--config=/local/config.toml",
+        image      = "telegraf:1.31.2"
+        privileged = "true"
+        ports      = ["http"]
+        args = [
+          "--config=/local/config.yaml",
         ]
       }
 
@@ -36,11 +37,29 @@ job "telegraf" {
       }
 
       template {
-        destination = "local/config.toml"
-        env         = false        
         data        = <<-EOH
-        {{- key "homelab/telegraf/config.toml"}}
+        [global_tags]
+          realm = 'home'
+          role = 'nomad'
+        [agent]
+        [[outputs.prometheus_client]]
+          listen = ':9273'
+        [[inputs.cpu]]
+          percpu = true
+          totalcpu = true
+        [[inputs.disk]]
+          ignore_fs = ['tmpfs', 'devtmpfs']
+        [[inputs.diskio]]
+        [[inputs.kernel]]
+        [[inputs.mem]]
+        [[inputs.net]]
+        [[inputs.ntpq]]
+        [[inputs.processes]]
+        [[inputs.swap]]
+        [[inputs.system]]
         EOH
+        destination = "local/config.yaml"
+        env         = false
       }
     }
   }

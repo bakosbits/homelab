@@ -8,10 +8,18 @@ job "samba" {
       port "smb" { static = "445" }
     }
 
+    volume "samba" {
+      type            = "csi"
+      read_only       = false
+      source          = "samba"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+    } 
+
     service {
       name = "samba"
       port = "smb"
-
+      
       check {
         type     = "tcp"
         interval = "10s"
@@ -26,6 +34,11 @@ job "samba" {
         image        = "servercontainers/samba:smbd-only-a3.19.0-s4.18.9-r0"
         ports        = ["smb"]
         network_mode = "host"
+      }
+
+      volume_mount {
+        volume      = "samba"
+        destination = "/shares/homelab"
       }
 
       resources {
