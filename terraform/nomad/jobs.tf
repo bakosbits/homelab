@@ -67,7 +67,8 @@ resource "nomad_job" "influxdb" {
 resource "nomad_job" "jellyfin" {
   jobspec = templatefile("${local.jobs}/jellyfin.hcl",
   {
-    domain = var.domain
+    domain      = var.domain
+    job_volumes = local.job_volumes    
   })
 }
 
