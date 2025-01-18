@@ -38,7 +38,7 @@ job "plex" {
         ports        = ["http"]
         network_mode = "host"
         volumes = [
-          "${job_volumes}/plex/config",
+          "${job_volumes}/$${NOMAD_JOB_NAME}:/config",
           "${job_volumes}/media:/data"
         ]
       }

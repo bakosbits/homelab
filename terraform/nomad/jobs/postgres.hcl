@@ -46,7 +46,7 @@ job "postgres" {
         env         = true
         destination = "secrets/postgres.env"
         data        = <<-EOF
-        {{- with nomadVar "nomad/jobs/$${NOMAD_JOB_NAME}" }}
+        {{- with nomadVar "nomad/jobs/postgres" }}
           {{- range .Tuples }}
             {{ .K }}={{ .V }}
           {{- end }}

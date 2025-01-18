@@ -32,7 +32,7 @@ job "prowlarr" {
         ports        = ["http"]
         network_mode = "host"
         volumes = [
-          "${job_volumes}/prowlarr:/config",
+          "${job_volumes}/$${NOMAD_JOB_NAME}:/config",
           "${job_volumes}/media:/data"
         ]
       }
