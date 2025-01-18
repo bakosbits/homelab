@@ -52,7 +52,7 @@ job "unifi" {
         env         = true
         destination = "secrets/unifi.env"
         data        = <<-EOF
-        {{- with nomadVar "nomad/jobs/$${NOMAD_JOB_NAME}" }}
+        {{- with nomadVar "nomad/jobs/unifi" }}
           {{- range .Tuples }}
             {{ .K }}={{ .V }}
           {{- end }}
