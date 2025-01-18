@@ -45,7 +45,10 @@ resource "nomad_job" "influxdb" {
 }
 
 resource "nomad_job" "jellyfin" {
-  jobspec = file("${local.jobs}/jellyfin.hcl")
+  jobspec = templatefile("${local.jobs}/jellyfin.hcl",
+  {
+    domain = var.domain
+  })
 }
 
 resource "nomad_job" "journalctl-cleanup" {

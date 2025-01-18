@@ -44,7 +44,7 @@ job "grafana" {
         destination = "secrets/grafana.env"
         env         = true
         data        = <<-EOF
-        {{- with nomadVar "nomad/jobs/$${NOMAD_JOB_NAME}" }}
+        {{- with nomadVar "nomad/jobs/grafana" }}
           {{- range .Tuples }}
             {{ .K }}={{ .V }}
           {{- end }}
