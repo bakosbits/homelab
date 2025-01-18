@@ -33,10 +33,6 @@ job "grafana" {
       config {
         image = "grafana/grafana-oss:11.1.3"
         ports = ["http"]
-        volumes = [
-          "/mnt/volumes/prowlarr:/var/lib/grafana"
-        ]
-
       }
 
       resources {

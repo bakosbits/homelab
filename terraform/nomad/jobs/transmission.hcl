@@ -30,11 +30,6 @@ job "transmission" {
       config {
         image   = "lscr.io/linuxserver/transmission:latest"
         ports   = ["http"]
-        volumes = [
-          "/mnt/volumes/transmission:/config",
-          "/mnt/volumes/media:/data",
-          "/mnt/volumes/media:/watch"
-        ]
       }
 
       env {

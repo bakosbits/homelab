@@ -37,9 +37,6 @@ job "data-node" {
           memlock = "-1:-1"
           nofile  = "65536:65536"
         }      
-        volumes = [
-          "/mnt/volumes/data_node:/usr/share/data-node/data",
-        ]
       }
 
       env = {

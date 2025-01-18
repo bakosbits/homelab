@@ -38,9 +38,6 @@ job "unifi" {
         image        = "linuxserver/unifi-network-application:8.6.9"
         network_mode = "host"
         ports        = ["http"]
-        volumes      = [
-          "/mnt/volumes/unifi:/config"
-        ]
       }
 
       resources {

@@ -32,10 +32,6 @@ job "radarr" {
         image        = "linuxserver/radarr:5.14.0"
         ports        = ["http"]
         network_mode = "host"
-        volumes = [
-          "/mnt/volumes/radarr:/config",
-          "/mnt/volumes/media:/data"
-        ]
       }
 
       env {

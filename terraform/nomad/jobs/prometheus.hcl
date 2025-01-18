@@ -32,10 +32,6 @@ job "prometheus" {
         image        = "prometheus"
         network_mode = "host"
         ports        = ["http"]
-        volumes = [
-          "/mnt/volumes/prometheus:/opt/prometheus",
-          "local/prometheus.yml:/etc/prometheus/prometheus.yml",
-        ]
       }
 
       resources {
