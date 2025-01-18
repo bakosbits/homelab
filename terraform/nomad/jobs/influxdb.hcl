@@ -9,12 +9,12 @@ job "influxdb" {
     }
 
     service {
-      name = "influxdb"
+      name = "$${NOMAD_JOB_NAME}"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.influxdb.entrypoints=websecure",
-        "traefik.http.routers.influxdb.middlewares=auth"
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
       ]
 
       check {
@@ -42,7 +42,7 @@ job "influxdb" {
         env         = true
         destination = "secrets/.env"
         data        = <<-EOF
-        {{- with nomadVar "nomad/jobs/influxdb" }}
+        {{- with nomadVar "nomad/jobs/$${NOMAD_JOB_NAME}" }}
           {{- range .Tuples }}
             {{ .K }}={{ .V }}
           {{- end }}

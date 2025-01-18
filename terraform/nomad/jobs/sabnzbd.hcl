@@ -10,11 +10,11 @@ job "sabnzbd" {
 
     service {
       port = "http"
-      name = "sabnzbd"
+      name = "$${NOMAD_JOB_NAME}"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.sabnzbd.entrypoints=websecure",
-        "traefik.http.routers.sabnzbd.middlewares=auth"
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
       ]
 
       check {

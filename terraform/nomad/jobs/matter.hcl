@@ -11,11 +11,11 @@ job "matter" {
 
 
     service {
-      name = "matter"
+      name = "$${NOMAD_JOB_NAME}"
       port = "websocket"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.matter.entrypoints=websecure",
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
       ]
 
       check {

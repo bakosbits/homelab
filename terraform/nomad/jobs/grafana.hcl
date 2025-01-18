@@ -9,13 +9,13 @@ job "grafana" {
     }
 
     service {
-      name = "grafana"
+      name = "$${NOMAD_JOB_NAME}"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.grafana.rule=Host(`${NOMAD_JOB_NAME}.${domain}`)",
-        "traefik.http.routers.grafana.entrypoints=websecure",
-        "traefik.http.routers.grafana.middlewares=auth"
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.rule=Host(`$${NOMAD_JOB_NAME}.${domain}`)",
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
+        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
       ]
 
       check {
@@ -44,7 +44,7 @@ job "grafana" {
         destination = "secrets/grafana.env"
         env         = true
         data        = <<-EOF
-        {{- with nomadVar "nomad/jobs/grafana" }}
+        {{- with nomadVar "nomad/jobs/$${NOMAD_JOB_NAME}" }}
           {{- range .Tuples }}
             {{ .K }}={{ .V }}
           {{- end }}

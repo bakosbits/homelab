@@ -31,7 +31,7 @@ job "docker-registry" {
 
       env {
         REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY = "/data"
-        REGISTRY_HTTP_ADDR                        = "${NOMAD_ADDR_http}"
+        REGISTRY_HTTP_ADDR                        = "$${NOMAD_ADDR_http}"
         REGISTRY_PROXY_REMOTEURL                  = "https://registry-1.docker.io"
       }
 
