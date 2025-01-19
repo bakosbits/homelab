@@ -15,7 +15,6 @@ resource "nomad_job" "auth" {
 resource "nomad_job" "docker-registry" {
   jobspec = templatefile("${local.jobs}/docker-registry.hcl",
   {
-    http_addr   = "http://docker-registry.service.consul",
     job_volumes = local.job_volumes
   })
 }
