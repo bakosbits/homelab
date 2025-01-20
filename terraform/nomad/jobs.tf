@@ -103,6 +103,13 @@ resource "nomad_job" "mosquitto" {
   })  
 }
 
+resource "nomad_job" "n8n" {
+  jobspec = templatefile("${local.jobs}/n8n.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
+}
+
 resource "nomad_job" "nomad-cleanup" {
   jobspec = templatefile("${local.jobs}/nomad-cleanup.hcl",
   {

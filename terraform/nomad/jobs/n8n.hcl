@@ -17,9 +17,16 @@ job "n8n" {
       driver = "docker"
 
       config {
-        image        = "n8n:1.74"
-        ports        = ["http"]      
+        image        = "docker.n8n.io/n8nio/n8n"
+        ports        = ["http"]
+        volumes = [
+          "${job_volumes}/$${NOMAD_JOB_NAME}:/n8nio/n8n"
+        ]              
       }
+
+      env {
+        TZ = "America/Denver"
+      }      
 
       resources {
         cpu    = 512
