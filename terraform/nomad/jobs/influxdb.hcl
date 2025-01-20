@@ -32,8 +32,8 @@ job "influxdb" {
         image = "influxdb:2.7.8-alpine"
         ports = ["http"]
         volumes = [
-          "${job_volumes}/influxdb/config:/etc/influxdb2",
-          "${job_volumes}/influxdb/data:/var/lib/influxdb2"
+          "${job_volumes}/$${NOMAD_JOB_NAME}/config:/etc/influxdb2",
+          "${job_volumes}/$${NOMAD_JOB_NAME}/data:/var/lib/influxdb2"
         ]
       }
 

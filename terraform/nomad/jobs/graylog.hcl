@@ -32,9 +32,9 @@ job "graylog" {
         ports        = ["http"]
         network_mode = "host"
         volumes      = [        
-          "${job_volumes}/graylog/data:/usr/share/graylog/data/data",
-          "${job_volumes}/graylog/config:/usr/share/graylog/data/config",
-          "${job_volumes}/graylog/journal:/usr/share/graylog/data/journal"                    
+          "${job_volumes}/$${NOMAD_JOB_NAME}/data:/usr/share/graylog/data/data",
+          "${job_volumes}/$${NOMAD_JOB_NAME}:/usr/share/graylog/data/config",
+          "${job_volumes}/$${NOMAD_JOB_NAME}/journal:/usr/share/graylog/data/journal"                    
         ]
       }
 

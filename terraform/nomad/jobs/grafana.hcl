@@ -34,7 +34,7 @@ job "grafana" {
         image = "grafana/grafana-oss:11.1.3"
         ports = ["http"]
         volumes = [
-          "${job_volumes}/grafana:/var/lib/grafana"
+          "${job_volumes}/$${NOMAD_JOB_NAME}:/var/lib/grafana"
         ]
 
       }
