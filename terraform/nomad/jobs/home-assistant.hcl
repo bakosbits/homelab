@@ -36,7 +36,7 @@ job "home-assistant" {
       driver = "docker"
 
       config {
-        image        = "homeassistant/home-assistant:2024.11.1"
+        image        = "homeassistant/home-assistant:2025.1.2"
         ports        = ["http"]
         network_mode = "host"
       }
