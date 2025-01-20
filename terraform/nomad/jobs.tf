@@ -110,10 +110,6 @@ resource "nomad_job" "n8n" {
   })  
 }
 
-resource "nomad_job" "n8n" {
-  jobspec = file("${local.jobs}/n8n.hcl")
-}
-
 resource "nomad_job" "nomad-cleanup" {
   jobspec = templatefile("${local.jobs}/nomad-cleanup.hcl",
   {
