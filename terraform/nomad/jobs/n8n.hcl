@@ -17,10 +17,14 @@ job "n8n" {
       driver = "docker"
 
       config {
-        image        = "n8n:1.74"
+        image        = "docker.n8n.io/n8nio/n8n"
         ports        = ["http"]      
       }
 
+      env {
+        TZ = "America/Denver"
+      }
+      
       resources {
         cpu    = 512
         memory = 512
