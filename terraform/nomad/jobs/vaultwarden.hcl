@@ -41,14 +41,8 @@ job "vaultwarden" {
       }
 
       config {
-        image        = "vaultwarden/server:1.31.0"
-        network_mode = "host"
-        ports        = ["http"]
-      }
-
-      volume_mount {
-        volume      = "vaultwarden"
-        destination = "/data"
+        image = "vaultwarden/server:1.31.0"
+        ports = ["http"]
       }
 
       resources {

@@ -56,7 +56,7 @@ module "server" {
 
 module "client" {
   source = "../vm"
-  
+
   for_each = {
     for idx, vm in var.clients : idx + 1 => vm
   }

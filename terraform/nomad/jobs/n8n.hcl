@@ -22,21 +22,21 @@ job "n8n" {
         path     = "/"
         interval = "10s"
         timeout  = "2s"
-      }      
+      }
     }
 
     task "n8n" {
       driver = "docker"
 
       config {
-        image        = "docker.n8n.io/n8nio/n8n"
-        ports        = ["http"]      
+        image = "docker.n8n.io/n8nio/n8n"
+        ports = ["http"]
       }
 
       env {
         TZ = "America/Denver"
       }
-      
+
       resources {
         cpu    = 512
         memory = 512

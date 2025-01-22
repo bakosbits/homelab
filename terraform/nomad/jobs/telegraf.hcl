@@ -23,11 +23,10 @@ job "telegraf" {
       }
 
       config {
-        image      = "telegraf:1.31.2"
-        privileged = "true"
-        ports      = ["http"]
+        image = "telegraf:1.31.2"
+        ports = ["http"]
         args = [
-          "--config=/local/config.yaml",
+          "--config=/local/config.toml",
         ]
       }
 
@@ -37,6 +36,8 @@ job "telegraf" {
       }
 
       template {
+        destination = "local/config.toml"
+        env         = false
         data        = <<-EOH
         [global_tags]
           realm = 'home'
