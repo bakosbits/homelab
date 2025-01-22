@@ -50,6 +50,7 @@ resource "consul_key_prefix" "traefik" {
     {
       domain = var.domain
     }),
+    
     "dynamic.yaml" = templatefile("${local.files}/traefik/dynamic.yaml",
     {
       domain         = var.domain

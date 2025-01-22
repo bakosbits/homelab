@@ -33,8 +33,8 @@ job "vaultwarden" {
       }
 
       config {
-        image   = "vaultwarden/server:1.31.0"
-        ports   = ["http"]
+        image = "vaultwarden/server:1.31.0"
+        ports = ["http"]
         volumes = [
           "${job_volumes}/$${NOMAD_JOB_NAME}:/data"
         ]

@@ -31,24 +31,24 @@ job "graylog" {
         image        = "graylog/graylog:6.1"
         ports        = ["http"]
         network_mode = "host"
-        volumes      = [        
+        volumes = [
           "${job_volumes}/$${NOMAD_JOB_NAME}/data:/usr/share/graylog/data/data",
           "${job_volumes}/$${NOMAD_JOB_NAME}:/usr/share/graylog/data/config",
-          "${job_volumes}/$${NOMAD_JOB_NAME}/journal:/usr/share/graylog/data/journal"                    
+          "${job_volumes}/$${NOMAD_JOB_NAME}/journal:/usr/share/graylog/data/journal"
         ]
       }
 
       env {
-        PUID = 1100
-        PGID = 1100
-        TZ   = "America/Denver"           
+        PUID                           = 1100
+        PGID                           = 1100
+        TZ                             = "America/Denver"
         GRAYLOG_NODE_ID_FILE           = ""
         GRAYLOG_HTTP_BIND_ADDRESS      = ""
         GRAYLOG_MONGODB_URI            = ""
         GRAYLOG_REPORT_DISABLE_SANDBOX = true
         GRAYLOG_PASSWORD_SECRET        = ""
         GRAYLOG_ROOT_PASSWORD_SHA2     = ""
-        GRAYLOG_HTTP_EXTERNAL_URI      = ""   
+        GRAYLOG_HTTP_EXTERNAL_URI      = ""
       }
 
       resources {

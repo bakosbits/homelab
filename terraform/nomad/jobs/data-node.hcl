@@ -10,7 +10,7 @@ job "data-node" {
   group "data-node" {
 
     network {
-      port "http" {static = "8999"}
+      port "http" { static = "8999" }
       port "9200" { static = "9200" }
       port "9300" { static = "9300" }
     }
@@ -32,24 +32,24 @@ job "data-node" {
       config {
         image        = "graylog/graylog-datanode:6.1"
         ports        = ["http", "9200", "9300"]
-        network_mode = "host"  
+        network_mode = "host"
         ulimit {
           memlock = "-1:-1"
           nofile  = "65536:65536"
-        }      
+        }
         volumes = [
           "${job_volumes}/data_node:/usr/share/data-node/data",
         ]
       }
 
       env = {
-        PUID = 1000
-        PGID = 1000           
-        GRAYLOG_DATANODE_NODE_ID_FILE = "/var/lib/graylog-datanode/node-id"
-        GRAYLOG_DATANODE_PASSWORD_SECRET = "somepasswordpepper"
+        PUID                                = 1000
+        PGID                                = 1000
+        GRAYLOG_DATANODE_NODE_ID_FILE       = "/var/lib/graylog-datanode/node-id"
+        GRAYLOG_DATANODE_PASSWORD_SECRET    = "somepasswordpepper"
         GRAYLOG_DATANODE_ROOT_PASSWORD_SHA2 = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
-        GRAYLOG_DATANODE_MONGODB_URI = "mongodb://$${NOMAD_JOB_NAME}.${consul_domain}:27017/graylog"
-        TZ = "America/Denver"           
+        GRAYLOG_DATANODE_MONGODB_URI        = "mongodb://$${NOMAD_JOB_NAME}.${consul_domain}:27017/graylog"
+        TZ                                  = "America/Denver"
       }
 
       resources {

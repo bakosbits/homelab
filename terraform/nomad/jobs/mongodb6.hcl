@@ -2,7 +2,7 @@ job "mongodb6" {
   datacenters = ["dc1"]
   type        = "service"
 
-    constraint {
+  constraint {
     attribute = "${attr.unique.hostname}"
     value     = "nomadcli01"
   }
@@ -24,10 +24,10 @@ job "mongodb6" {
       config {
         image        = "mongo:6.0.18"
         network_mode = "host"
-        ports        = ["mongo"]      
+        ports        = ["mongo"]
         volumes = [
           "${job_volumes}/$${NOMAD_JOB_NAME}/data/db:/data/db",
-          "${job_volumes}/$${NOMAD_JOB_NAME}/data/config:/data/config"          
+          "${job_volumes}/$${NOMAD_JOB_NAME}/data/config:/data/config"
         ]
       }
 

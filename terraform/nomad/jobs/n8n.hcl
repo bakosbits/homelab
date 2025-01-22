@@ -22,23 +22,23 @@ job "n8n" {
         path     = "/"
         interval = "10s"
         timeout  = "2s"
-      }      
+      }
     }
 
     task "n8n" {
       driver = "docker"
 
       config {
-        image        = "docker.n8n.io/n8nio/n8n"
-        ports        = ["http"]
+        image = "docker.n8n.io/n8nio/n8n"
+        ports = ["http"]
         volumes = [
           "${job_volumes}/$${NOMAD_JOB_NAME}:/n8nio/n8n"
-        ]              
+        ]
       }
 
       env {
         TZ = "America/Denver"
-      }      
+      }
 
       resources {
         cpu    = 512

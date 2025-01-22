@@ -28,8 +28,8 @@ job "transmission" {
       driver = "docker"
 
       config {
-        image   = "lscr.io/linuxserver/transmission:latest"
-        ports   = ["http"]
+        image = "lscr.io/linuxserver/transmission:latest"
+        ports = ["http"]
         volumes = [
           "${job_volumes}/$${NOMAD_JOB_NAME}:/config",
           "${job_volumes}/media:/data",

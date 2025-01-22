@@ -1,4 +1,4 @@
-# path to the application volumes
+# Path to the application volumes
 variable "job_volumes" {
   type        = string
   description = "The base path to the job volumes"
