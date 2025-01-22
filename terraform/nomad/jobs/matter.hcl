@@ -30,8 +30,8 @@ job "matter" {
       driver = "docker"
 
       config {
-        image   = "ghcr.io/home-assistant-libs/python-matter-server:stable"
-        ports   = ["websocket"]
+        image = "ghcr.io/home-assistant-libs/python-matter-server:stable"
+        ports = ["websocket"]
       }
 
       resources {

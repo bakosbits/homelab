@@ -15,6 +15,7 @@ module "nomad" {
   depends_on = [module.consul]
 
   domain = var.domain
+
   consul_domain = var.consul_domain
   job_volumes   = var.job_volumes
   nomad_url     = var.nomad_url

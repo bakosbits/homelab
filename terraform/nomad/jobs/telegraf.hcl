@@ -25,7 +25,7 @@ job "telegraf" {
       config {
         image = "telegraf:1.31.2"
         ports = ["http"]
-        args  = [
+        args = [
           "--config=/local/config.toml",
         ]
       }
@@ -37,7 +37,7 @@ job "telegraf" {
 
       template {
         destination = "local/config.toml"
-        env         = false        
+        env         = false
         data        = <<-EOH
         {{- key "homelab/telegraf/config.toml"}}
         EOH
