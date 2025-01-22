@@ -40,6 +40,7 @@ job "n8n" {
         TZ = "America/Denver"
       }
 
+
       resources {
         cpu    = 512
         memory = 512
