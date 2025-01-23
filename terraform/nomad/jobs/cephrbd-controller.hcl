@@ -8,7 +8,7 @@ job "cephrbd-controller" {
     }
 
     service {
-      name = "cephrbd-controller"
+      name = "$${NOMAD_JOB_NAME}"
       port = "metrics"
     }
 

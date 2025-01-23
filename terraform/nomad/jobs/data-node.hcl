@@ -16,7 +16,7 @@ job "data-node" {
     }
 
     service {
-      name = "data-node"
+      name = "$${NOMAD_JOB_NAME}"
       port = "http"
 
       check {
