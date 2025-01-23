@@ -9,7 +9,7 @@ job "postgres" {
     }
 
     service {
-      name = "postgres"
+      name = "$${NOMAD_JOB_NAME}"
       port = "postgres"
       tags = [
         "traefik.enable=true",
