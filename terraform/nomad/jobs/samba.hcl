@@ -17,7 +17,7 @@ job "samba" {
     } 
 
     service {
-      name = "samba"
+      name = "$${NOMAD_JOB_NAME}"
       port = "smb"
       
       check {

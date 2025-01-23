@@ -9,7 +9,7 @@ job "cephfs-controller" {
     }
    
     service {
-      name = "cephfs-controller"
+      name = "$${NOMAD_JOB_NAME}"
       port = "metrics"
     }
 

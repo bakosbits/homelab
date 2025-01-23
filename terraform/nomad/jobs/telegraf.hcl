@@ -12,7 +12,7 @@ job "telegraf" {
       driver = "docker"
       
       service {
-        name = "telegraf"
+        name = "$${NOMAD_JOB_NAME}"
         port = "http"
 
         check {

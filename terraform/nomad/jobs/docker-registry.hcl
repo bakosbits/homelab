@@ -18,7 +18,8 @@ job "docker-registry" {
 
     service {
       port = "http"
-      name = "docker-registry"
+      name = "$${NOMAD_JOB_NAME}"
+
       check {
         type     = "http"
         path     = "/"
