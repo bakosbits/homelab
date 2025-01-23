@@ -29,7 +29,10 @@ job "mosquitto" {
         image        = "eclipse-mosquitto"
         ports        = ["mqtt", "websocket"]
         network_mode = "host"
-
+        volumes = [
+          "local/mosquitto.conf:/mosquitto/config/mosquitto.conf",
+          "secrets/password.txt:/mosquitto/config/password.txt",
+        ]
       }
 
       env {
