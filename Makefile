@@ -6,11 +6,11 @@ help:##..................Show the help
 	@echo ""
 
 .PHONY: init-cluster
-init-cluster:##..........Initialize terraform
+init-cluster:##..........Initialize terraform for the cluster
 	cd terraform/cluster && terraform init
 
 .PHONY: init-services
-init-services:##.........Initialize terraform
+init-services:##.........Initialize terraform for services
 	cd terraform/services && terraform init
 
 .PHONY: init-upgrade-cluster

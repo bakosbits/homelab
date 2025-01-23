@@ -35,7 +35,7 @@ job "mongodb7" {
         env         = true
         destination = "secrets/mongo.env"
         data        = <<-EOF
-        {{- with nomadVar "nomad/jobs/mongodb7" }}
+        {{- with nomadVar "nomad/jobs/mongo" }}
           {{- range .Tuples }}
             {{ .K }}={{ .V }}
           {{- end }}
