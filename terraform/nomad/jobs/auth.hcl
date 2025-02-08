@@ -9,15 +9,15 @@ job "auth" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "auth"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
-        "traefik.http.middlewares.$${NOMAD_JOB_NAME}.forwardauth.address=http://$${NOMAD_JOB_NAME}.${consul_domain}:4181/",
-        "traefik.http.middlewares.$${NOMAD_JOB_NAME}.forwardauth.trustForwardHeader=true",
-        "traefik.http.middlewares.$${NOMAD_JOB_NAME}.forwardauth.authResponseHeaders=X-Forwarded-User",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=$${NOMAD_JOB_NAME}",
+        "traefik.http.routers.auth.entrypoints=websecure",
+        "traefik.http.middlewares.auth.forwardauth.address=http://auth.${consul_domain}:4181/",
+        "traefik.http.middlewares.auth.forwardauth.trustForwardHeader=true",
+        "traefik.http.middlewares.auth.forwardauth.authResponseHeaders=X-Forwarded-User",
+        "traefik.http.routers.auth.middlewares=auth",
       ]
 
       check {
@@ -51,7 +51,7 @@ job "auth" {
 
       resources {
         cpu    = 200
-        memory = 256
+        memory = 200
       }
     }
   }

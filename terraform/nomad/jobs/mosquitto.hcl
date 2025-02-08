@@ -11,7 +11,7 @@ job "mosquitto" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "mosquitto"
       port = "mqtt"
 
       check {
@@ -32,9 +32,9 @@ job "mosquitto" {
         volumes = [
           "local/mosquitto.conf:/mosquitto/config/mosquitto.conf",
           "secrets/password.txt:/mosquitto/config/password.txt",
-          "${job_volumes}/$${NOMAD_JOB_NAME}/config:/mosquitto/config",
-          "${job_volumes}/$${NOMAD_JOB_NAME}/data:/mosquitto/data",
-          "${job_volumes}/$${NOMAD_JOB_NAME}/log:/mosquitto/log",          
+          "${job_volumes}/mosquitto/config:/mosquitto/config",
+          "${job_volumes}/mosquitto/data:/mosquitto/data",
+          "${job_volumes}/mosquitto/log:/mosquitto/log",
         ]
       }
 
@@ -46,7 +46,7 @@ job "mosquitto" {
 
       resources {
         cpu    = 300
-        memory = 256
+        memory = 300
       }
 
 

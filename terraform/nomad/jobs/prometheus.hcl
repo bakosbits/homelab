@@ -9,12 +9,12 @@ job "prometheus" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "prometheus"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
+        "traefik.http.routers.prometheus.entrypoints=websecure",
+        "traefik.http.routers.prometheus.middlewares=auth"
       ]
       check {
         type     = "http"
@@ -33,14 +33,14 @@ job "prometheus" {
         network_mode = "host"
         ports        = ["http"]
         volumes = [
-          "${job_volumes}/$${NOMAD_JOB_NAME}:/opt/prometheus",
+          "${job_volumes}/prometheus:/opt/prometheus",
           "local/prometheus.yml:/etc/prometheus/prometheus.yml",
         ]
       }
 
       resources {
-        cpu    = 1000
-        memory = 512
+        cpu    = 750
+        memory = 750
       }
 
       template {

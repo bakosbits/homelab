@@ -15,7 +15,7 @@ job "vector" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "vector"
       port = "api"
 
       check {

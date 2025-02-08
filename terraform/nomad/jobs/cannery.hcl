@@ -9,12 +9,12 @@ job "cannery" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "cannery"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers."$${NOMAD_JOB_NAME}".entrypoints=websecure",
-        "traefik.http.routers"$${NOMAD_JOB_NAME}".middlewares=auth"
+        "traefik.http.routers.cannery.entrypoints=websecure",
+        "traefik.http.routerscannery.middlewares=auth"
       ]
 
       check {
@@ -35,7 +35,7 @@ job "cannery" {
 
       resources {
         cpu    = 200
-        memory = 256
+        memory = 200
       }
 
       template {

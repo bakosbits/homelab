@@ -9,7 +9,7 @@ job "mongodb7" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "mongodb7"
       port = "mongo"
     }
 
@@ -22,13 +22,13 @@ job "mongodb7" {
         ports        = ["mongo"]
         volumes = [
           "${job_volumes}/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro",
-          "${job_volumes}/$${NOMAD_JOB_NAME}:/data/db"
+          "${job_volumes}/mongodb7:/data/db"
         ]
       }
 
       resources {
         cpu    = 500
-        memory = 512
+        memory = 500
       }
 
       template {

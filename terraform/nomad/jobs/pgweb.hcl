@@ -9,12 +9,12 @@ job "pgweb" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "pgweb"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
+        "traefik.http.routers.pgweb.entrypoints=websecure",
+        "traefik.http.routers.pgweb.middlewares=auth"
       ]
 
       check {
@@ -36,8 +36,8 @@ job "pgweb" {
       }
 
       resources {
-        cpu    = 128
-        memory = 128
+        cpu    = 150
+        memory = 150
       }
     }
   }

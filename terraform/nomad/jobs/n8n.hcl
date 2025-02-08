@@ -9,12 +9,12 @@ job "n8n" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "n8n"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
+        "traefik.http.routers.n8n.entrypoints=websecure",
+        "traefik.http.routers.n8n.middlewares=auth"
       ]
 
       check {
@@ -32,7 +32,7 @@ job "n8n" {
         image = "docker.n8n.io/n8nio/n8n"
         ports = ["http"]
         volumes = [
-          "${job_volumes}/$${NOMAD_JOB_NAME}:/n8nio/n8n"
+          "${job_volumes}/n8n:/n8nio/n8n"
         ]
       }
 
@@ -42,8 +42,8 @@ job "n8n" {
 
 
       resources {
-        cpu    = 512
-        memory = 512
+        cpu    = 750
+        memory = 750
       }
     }
   }

@@ -14,12 +14,12 @@ job "plex" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "plex"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
+        "traefik.http.routers.plex.entrypoints=websecure",
+        "traefik.http.routers.plex.middlewares=auth"
       ]
 
       check {
@@ -38,7 +38,7 @@ job "plex" {
         ports        = ["http"]
         network_mode = "host"
         volumes = [
-          "${job_volumes}/$${NOMAD_JOB_NAME}:/config",
+          "${job_volumes}/plex:/config",
           "${job_volumes}/media:/data"
         ]
       }
@@ -51,7 +51,7 @@ job "plex" {
 
       resources {
         cpu    = 1000
-        memory = 1024
+        memory = 1000
       }
     }
   }

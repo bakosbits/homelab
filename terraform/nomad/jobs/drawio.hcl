@@ -9,12 +9,12 @@ job "drawio" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "draw-io"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
+        "traefik.http.routers.draw-io.entrypoints=websecure",
+        "traefik.http.routers.draw-io.middlewares=auth"
       ]
 
       check {
@@ -34,7 +34,7 @@ job "drawio" {
 
       resources {
         cpu    = 500
-        memory = 512
+        memory = 500
       }
     }
   }

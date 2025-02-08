@@ -9,7 +9,7 @@ job "flaresolverr" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "flaresolverr"
       port = "http"
 
       check {
@@ -27,7 +27,7 @@ job "flaresolverr" {
         ports        = ["http"]
         network_mode = "host"
         volumes = [
-          "${job_volumes}/$${NOMAD_JOB_NAME}:/config",
+          "${job_volumes}/flaresolverr:/config",
           "${job_volumes}/media:/data"
         ]
       }
@@ -40,7 +40,7 @@ job "flaresolverr" {
 
       resources {
         cpu    = 500
-        memory = 512
+        memory = 500
       }
     }
   }

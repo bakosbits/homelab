@@ -9,12 +9,12 @@ job "radarr" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "radarr"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
+        "traefik.http.routers.radarr.entrypoints=websecure",
+        "traefik.http.routers.radarr.middlewares=auth"
       ]
 
       check {
@@ -33,7 +33,7 @@ job "radarr" {
         ports        = ["http"]
         network_mode = "host"
         volumes = [
-          "${job_volumes}/$${NOMAD_JOB_NAME}:/config",
+          "${job_volumes}/radarr:/config",
           "${job_volumes}/media:/data"
         ]
       }
@@ -46,7 +46,7 @@ job "radarr" {
 
       resources {
         cpu    = 1000
-        memory = 1024
+        memory = 1000
       }
     }
   }

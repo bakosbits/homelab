@@ -11,11 +11,11 @@ job "matter" {
 
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "matter"
       port = "websocket"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
+        "traefik.http.routers.matter.entrypoints=websecure",
       ]
 
       check {
@@ -32,12 +32,12 @@ job "matter" {
       config {
         image   = "ghcr.io/home-assistant-libs/python-matter-server:stable"
         ports   = ["websocket"]
-        volumes = ["${job_volumes}/$${NOMAD_JOB_NAME}:/data"]
+        volumes = ["${job_volumes}/matter:/data"]
       }
 
       resources {
         cpu    = 300
-        memory = 256
+        memory = 300
       }
     }
   }

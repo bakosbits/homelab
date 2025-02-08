@@ -9,12 +9,12 @@ job "vaultwarden" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "vaultwarden"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
+        "traefik.http.routers.vaultwarden.entrypoints=websecure",
+        "traefik.http.routers.vaultwarden.middlewares=auth"
       ]
 
       check {
@@ -36,13 +36,13 @@ job "vaultwarden" {
         image = "vaultwarden/server:1.31.0"
         ports = ["http"]
         volumes = [
-          "${job_volumes}/$${NOMAD_JOB_NAME}:/data"
+          "${job_volumes}/vaultwarden:/data"
         ]
       }
 
       resources {
         cpu    = 250
-        memory = 256
+        memory = 250
       }
     }
   }

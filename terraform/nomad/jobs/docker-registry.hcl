@@ -39,8 +39,8 @@ job docker-registry {
       }
 
       resources {
-        cpu    = 20
-        memory = 256
+        cpu    = 200
+        memory = 200
       }
     }
   }

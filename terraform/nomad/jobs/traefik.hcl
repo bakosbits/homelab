@@ -11,7 +11,7 @@ job "traefik" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "traefik"
       port = "http"
       tags = [
         "traefik.enable=true",
@@ -38,13 +38,13 @@ job "traefik" {
         volumes = [
           "local/traefik.yaml:/etc/traefik/traefik.yaml",
           "local/dynamic.yaml:/etc/traefik/dynamic/dynamic.yaml",
-          "${job_volumes}/certs:/etc/traefik/certs",          
-        ]        
+          "${job_volumes}/certs:/etc/traefik/certs",
+        ]
       }
 
       resources {
         cpu    = 250
-        memory = 256
+        memory = 250
       }
 
       template {

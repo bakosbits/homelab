@@ -27,7 +27,8 @@ module "overwatch" {
 }
 
 module "dns" {
-  source = "../vm"
+  source     = "../vm"
+  depends_on = [module.client, module.server]
 
   for_each = {
     for idx, vm in var.dns : idx + 1 => vm

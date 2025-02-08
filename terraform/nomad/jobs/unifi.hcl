@@ -14,13 +14,13 @@ job "unifi" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "unifi"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
-        "traefik.http.services.$${NOMAD_JOB_NAME}.loadbalancer.server.scheme=https",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
+        "traefik.http.routers.unifi.entrypoints=websecure",
+        "traefik.http.services.unifi.loadbalancer.server.scheme=https",
+        "traefik.http.routers.unifi.middlewares=auth"
       ]
 
       check {
@@ -39,13 +39,13 @@ job "unifi" {
         network_mode = "host"
         ports        = ["http"]
         volumes = [
-          "${job_volumes}/$${NOMAD_JOB_NAME}:/config"
+          "${job_volumes}/unifi:/config"
         ]
       }
 
       resources {
-        cpu    = 1000
-        memory = 1536
+        cpu    = 1500
+        memory = 1500
       }
 
       template {

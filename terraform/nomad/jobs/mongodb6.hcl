@@ -14,7 +14,7 @@ job "mongodb6" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "mongodb6"
       port = "mongo"
     }
 
@@ -26,14 +26,14 @@ job "mongodb6" {
         network_mode = "host"
         ports        = ["mongo"]
         volumes = [
-          "${job_volumes}/$${NOMAD_JOB_NAME}/data/db:/data/db",
-          "${job_volumes}/$${NOMAD_JOB_NAME}/data/config:/data/config"
+          "${job_volumes}/mongodb6/data/db:/data/db",
+          "${job_volumes}/mongodb6/data/config:/data/config"
         ]
       }
 
       resources {
-        cpu    = 512
-        memory = 512
+        cpu    = 500
+        memory = 500
       }
     }
   }

@@ -10,11 +10,11 @@ job "hass" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "hass"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
+        "traefik.http.routers.hass.entrypoints=websecure",
       ]
 
       check {
@@ -33,7 +33,7 @@ job "hass" {
         ports        = ["http"]
         network_mode = "host"
         volumes = [
-          "${job_volumes}/$${NOMAD_JOB_NAME}:/config",
+          "${job_volumes}/hass:/config",
           "local/automations.yaml:/config/automations.yaml",
           "local/binary_sensors.yaml:/config/binary_sensors.yaml",
           "local/configuration.yaml:/config/configuration.yaml",
@@ -56,7 +56,7 @@ job "hass" {
 
       resources {
         cpu    = 1000
-        memory = 1024
+        memory = 1000
       }
 
       template {

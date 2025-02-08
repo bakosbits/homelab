@@ -77,7 +77,7 @@ variable "servers" {
   type = list(object({
     vmid        = string
     name        = string
-    ipconfig    = string    
+    ipconfig    = string
     target_node = string
     clone       = string
     sockets     = number
@@ -92,7 +92,7 @@ variable "clients" {
   type = list(object({
     vmid        = string
     name        = string
-    ipconfig    = string    
+    ipconfig    = string
     target_node = string
     clone       = string
     sockets     = number

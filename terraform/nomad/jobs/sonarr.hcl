@@ -9,12 +9,12 @@ job "sonarr" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "sonarr"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
+        "traefik.http.routers.sonarr.entrypoints=websecure",
+        "traefik.http.routers.sonarr.middlewares=auth"
       ]
 
       check {
@@ -32,7 +32,7 @@ job "sonarr" {
         image = "linuxserver/sonarr:4.0.9"
         ports = ["http"]
         volumes = [
-          "${job_volumes}/$${NOMAD_JOB_NAME}:/config",
+          "${job_volumes}/sonarr:/config",
           "${job_volumes}/media:/data"
         ]
       }
@@ -45,7 +45,7 @@ job "sonarr" {
 
       resources {
         cpu    = 1000
-        memory = 1024
+        memory = 1000
       }
     }
   }

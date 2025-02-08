@@ -9,13 +9,13 @@ job "postgres" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "postgres"
       port = "postgres"
       tags = [
         "traefik.enable=true",
-        "traefik.tcp.routers.$${NOMAD_JOB_NAME}.entrypoints=postgres",
-        "traefik.tcp.routers.$${NOMAD_JOB_NAME}.rule=HostSNI(`*`)",
-        "traefik.tcp.services.$${NOMAD_JOB_NAME}.loadBalancer.server.port=$${NOMAD_HOST_PORT_postgres}"
+        "traefik.tcp.routers.postgres.entrypoints=postgres",
+        "traefik.tcp.routers.postgres.rule=HostSNI(`*`)",
+        "traefik.tcp.services.postgres.loadBalancer.server.port=$${NOMAD_HOST_PORT_postgres}"
       ]
 
       check {
@@ -33,13 +33,13 @@ job "postgres" {
         image = "postgres:16.4"
         ports = ["postgres"]
         volumes = [
-          "${job_volumes}/$${NOMAD_JOB_NAME}:/var/lib/pgsql/db"
+          "${job_volumes}/postgres:/var/lib/pgsql/db"
         ]
       }
 
       resources {
         cpu    = 1000
-        memory = 1024
+        memory = 1000
       }
 
       template {

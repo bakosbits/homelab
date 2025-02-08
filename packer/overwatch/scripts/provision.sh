@@ -16,7 +16,7 @@ sudo systemctl disable consul nomad
 # Configure ceph
 sudo cp /tmp/configs/ceph/ceph.conf /etc/ceph/ceph.conf
 sudo echo "192.168.1.10:/ /mnt ceph name=admin,secret=AQD1yylngu+3IxAAFKhcBp9ufX6sZNDkLJxyHw==,fs=cephfs,relatime,_netdev 0 0" >> /etc/fstab
-sudo echo "192.168.1.10:6789:/volumes/home/rab/ /home/rab ceph name=admin,secret=AQD1yylngu+3IxAAFKhcBp9ufX6sZNDkLJxyHw==,fs=cephfs,relatime,_netdev 0 0" >> /etc/fstab
+sudo echo "192.168.1.10:/volumes/home/rab/ /home/rab ceph name=admin,secret=AQD1yylngu+3IxAAFKhcBp9ufX6sZNDkLJxyHw==,fs=cephfs,relatime,_netdev 0 0" >> /etc/fstab
 
 # Disable root
 sudo /usr/bin/passwd -l root

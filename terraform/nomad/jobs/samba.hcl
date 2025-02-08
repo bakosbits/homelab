@@ -9,7 +9,7 @@ job "samba" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "samba"
       port = "smb"
 
       check {
@@ -27,14 +27,14 @@ job "samba" {
         ports        = ["smb"]
         network_mode = "host"
         volumes = [
-          "${job_volumes}/$${NOMAD_JOB_NAME}:/shares/homelab",
+          "${job_volumes}/samba:/shares/homelab",
           "${job_volumes}/media:/data"
         ]
       }
 
       resources {
-        cpu    = 200
-        memory = 256
+        cpu    = 250
+        memory = 250
       }
 
       template {

@@ -10,11 +10,11 @@ job "sabnzbd" {
 
     service {
       port = "http"
-      name = "$${NOMAD_JOB_NAME}"
+      name = "sabnzbd"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
+        "traefik.http.routers.sabnzbd.entrypoints=websecure",
+        "traefik.http.routers.sabnzbd.middlewares=auth"
       ]
 
       check {
@@ -32,7 +32,7 @@ job "sabnzbd" {
         image = "linuxserver/sabnzbd:4.3.2"
         ports = ["http"]
         volumes = [
-          "${job_volumes}/$${NOMAD_JOB_NAME}:/config",
+          "${job_volumes}/sabnzbd:/config",
           "${job_volumes}/media:/data"
         ]
       }
@@ -45,7 +45,7 @@ job "sabnzbd" {
 
       resources {
         cpu    = 500
-        memory = 512
+        memory = 500
       }
     }
   }

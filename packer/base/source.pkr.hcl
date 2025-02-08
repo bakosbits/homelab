@@ -39,16 +39,18 @@ source "proxmox-iso" "base" {
     type              = "scsi"
   }
 
-  iso_file     = "local:iso/debian-12.8.0-amd64-netinst.iso"
-  iso_checksum = "sha512:f4f7de1665cdcd00b2e526da6876f3e06a37da3549e9f880602f64407f602983a571c142eb0de0eacfc9c1d0f534e9339cdce04eb9daddc6ddfa8cf34853beed"
+  iso_file     = "local:iso/debian-12.9.0-amd64-netinst.iso"
+  iso_checksum = "sha512:9ebe405c3404a005ce926e483bc6c6841b405c4d85e0c8a7b1707a7fe4957c617ae44bd807a57ec3e5c2d3e99f2101dfb26ef36b3720896906bdc3aaeec4cd80"
   unmount_iso  = true
 
 
   http_directory = "./http"
-  http_port_min  = 8100
-  http_port_max  = 8100
+  http_port_min  = 8200
+  http_port_max  = 8200
   boot_wait      = "10s"
-  boot_command   = ["<esc><wait>auto url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<enter>"]
+  boot_command   = [
+    "<esc><wait>auto url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<enter>"
+    ]
 
   ssh_username = "root"
   ssh_password = "packer"

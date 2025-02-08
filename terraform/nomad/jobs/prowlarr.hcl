@@ -9,12 +9,12 @@ job "prowlarr" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "prowlarr"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
+        "traefik.http.routers.prowlarr.entrypoints=websecure",
+        "traefik.http.routers.prowlarr.middlewares=auth"
       ]
 
       check {
@@ -32,7 +32,7 @@ job "prowlarr" {
         ports        = ["http"]
         network_mode = "host"
         volumes = [
-          "${job_volumes}/$${NOMAD_JOB_NAME}:/config",
+          "${job_volumes}/prowlarr:/config",
           "${job_volumes}/media:/data"
         ]
       }
@@ -44,7 +44,7 @@ job "prowlarr" {
 
       resources {
         cpu    = 500
-        memory = 512
+        memory = 500
       }
     }
   }
