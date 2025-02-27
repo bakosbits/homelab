@@ -40,7 +40,7 @@ job "prometheus" {
 
       resources {
         cpu    = 750
-        memory = 750
+        memory = 768
       }
 
       template {

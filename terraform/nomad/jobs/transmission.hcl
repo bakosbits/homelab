@@ -45,7 +45,7 @@ job "transmission" {
 
       resources {
         cpu    = 750
-        memory = 750
+        memory = 756
       }
     }
   }

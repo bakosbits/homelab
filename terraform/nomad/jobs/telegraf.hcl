@@ -32,7 +32,7 @@ job "telegraf" {
 
       resources {
         cpu    = 125
-        memory = 125
+        memory = 128
       }
 
       template {

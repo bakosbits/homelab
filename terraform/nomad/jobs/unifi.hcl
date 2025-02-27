@@ -45,7 +45,7 @@ job "unifi" {
 
       resources {
         cpu    = 1500
-        memory = 1500
+        memory = 1536
       }
 
       template {

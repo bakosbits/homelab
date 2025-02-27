@@ -46,7 +46,7 @@ job "radarr" {
 
       resources {
         cpu    = 1000
-        memory = 1000
+        memory = 1024
       }
     }
   }

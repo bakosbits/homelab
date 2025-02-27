@@ -43,7 +43,7 @@ job "n8n" {
 
       resources {
         cpu    = 750
-        memory = 750
+        memory = 768
       }
     }
   }

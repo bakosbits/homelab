@@ -43,7 +43,7 @@ job "wikijs" {
 
       resources {
         cpu    = 250
-        memory = 250
+        memory = 256
       }
     }
   }

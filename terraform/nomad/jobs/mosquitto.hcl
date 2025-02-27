@@ -46,7 +46,7 @@ job "mosquitto" {
 
       resources {
         cpu    = 300
-        memory = 300
+        memory = 384
       }
 
 

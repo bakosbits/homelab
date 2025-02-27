@@ -37,7 +37,7 @@ job "matter" {
 
       resources {
         cpu    = 300
-        memory = 300
+        memory = 384
       }
     }
   }

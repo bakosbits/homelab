@@ -51,7 +51,7 @@ job "auth" {
 
       resources {
         cpu    = 200
-        memory = 200
+        memory = 256
       }
     }
   }

@@ -36,8 +36,8 @@ job "pgweb" {
       }
 
       resources {
-        cpu    = 150
-        memory = 150
+        cpu    = 200
+        memory = 256
       }
     }
   }
