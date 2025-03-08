@@ -2,7 +2,7 @@ job "mosquitto" {
   datacenters = ["dc1"]
   type        = "service"
 
-  group "moquitto" {
+  group "mosquitto" {
 
     network {
       port "mqtt" { static = 1883 }
