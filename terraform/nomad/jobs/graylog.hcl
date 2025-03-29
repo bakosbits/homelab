@@ -14,7 +14,7 @@ job "graylog" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "graylog"
       port = "http"
 
       check {
@@ -31,6 +31,11 @@ job "graylog" {
         image        = "graylog/graylog:6.1"
         ports        = ["http"]
         network_mode = "host"
+        volumes = [
+          "${job_volumes}/graylog/data:/usr/share/graylog/data/data",
+          "${job_volumes}/graylog:/usr/share/graylog/data/config",
+          "${job_volumes}/graylog/journal:/usr/share/graylog/data/journal"
+        ]
       }
 
       env {
@@ -47,7 +52,7 @@ job "graylog" {
       }
 
       resources {
-        cpu    = 512
+        cpu    = 1000
         memory = 1024
       }
     }

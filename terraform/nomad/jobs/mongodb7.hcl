@@ -9,7 +9,7 @@ job "mongodb7" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "mongodb7"
       port = "mongo"
     }
 
@@ -20,6 +20,10 @@ job "mongodb7" {
         image        = "mongo:7.0.14"
         network_mode = "host"
         ports        = ["mongo"]
+        volumes = [
+          "${job_volumes}/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro",
+          "${job_volumes}/mongodb7:/data/db"
+        ]
       }
 
       resources {
@@ -31,7 +35,7 @@ job "mongodb7" {
         env         = true
         destination = "secrets/mongo.env"
         data        = <<-EOF
-        {{- with nomadVar "nomad/jobs/mongodb7" }}
+        {{- with nomadVar "nomad/jobs/mongo" }}
           {{- range .Tuples }}
             {{ .K }}={{ .V }}
           {{- end }}

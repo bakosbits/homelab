@@ -9,13 +9,12 @@ job "grafana" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "grafana"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.rule=Host(`$${NOMAD_JOB_NAME}.${domain}`)",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
+        "traefik.http.routers.grafana.entrypoints=websecure",
+        "traefik.http.routers.grafana.middlewares=auth"
       ]
 
       check {
@@ -33,10 +32,14 @@ job "grafana" {
       config {
         image = "grafana/grafana-oss:11.1.3"
         ports = ["http"]
+        volumes = [
+          "${job_volumes}/grafana:/var/lib/grafana"
+        ]
+
       }
 
       resources {
-        cpu    = 200
+        cpu    = 250
         memory = 256
       }
 

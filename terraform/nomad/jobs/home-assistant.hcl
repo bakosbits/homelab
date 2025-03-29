@@ -10,11 +10,11 @@ job "hass" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "hass"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
+        "traefik.http.routers.hass.entrypoints=websecure",
       ]
 
       check {
@@ -29,10 +29,11 @@ job "hass" {
       driver = "docker"
 
       config {
-        image        = "homeassistant/home-assistant:2025.1.2"
+        image        = "homeassistant/home-assistant:2025.2.5"
         ports        = ["http"]
         network_mode = "host"
         volumes = [
+          "${job_volumes}/hass:/config",
           "local/automations.yaml:/config/automations.yaml",
           "local/binary_sensors.yaml:/config/binary_sensors.yaml",
           "local/configuration.yaml:/config/configuration.yaml",

@@ -9,7 +9,7 @@ job "flaresolverr" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "flaresolverr"
       port = "http"
 
       check {
@@ -26,6 +26,10 @@ job "flaresolverr" {
         image        = "flaresolverr/flaresolverr:latest"
         ports        = ["http"]
         network_mode = "host"
+        volumes = [
+          "${job_volumes}/flaresolverr:/config",
+          "${job_volumes}/media:/data"
+        ]
       }
 
       env {

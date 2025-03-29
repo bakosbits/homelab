@@ -15,7 +15,7 @@ job "vector" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "vector"
       port = "api"
 
       check {
@@ -49,7 +49,7 @@ job "vector" {
 
       resources {
         cpu    = 500
-        memory = 500
+        memory = 512
       }
 
       template {

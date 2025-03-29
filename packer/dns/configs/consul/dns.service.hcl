@@ -1,6 +1,6 @@
 service {
-  id      = "cluster-dns"
-  name    = "cluster-dns"
+  id      = "coredns"
+  name    = "coredns"
   address = "{{GetInterfaceIP \"eth0\"}}"
   port    = 53
 }

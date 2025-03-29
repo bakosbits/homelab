@@ -43,6 +43,13 @@ resource "consul_key_prefix" "loki" {
   }
 }
 
+resource "consul_key_prefix" "telegraf" {
+  path_prefix = "homelab/telegraf/"
+  subkeys = {
+    "config.toml" = file("${local.files}/telegraf/config.toml"),
+  }
+}
+
 resource "consul_key_prefix" "traefik" {
   path_prefix = "homelab/traefik/"
   subkeys = {
@@ -50,6 +57,7 @@ resource "consul_key_prefix" "traefik" {
     {
       domain = var.domain
     }),
+    
     "dynamic.yaml" = templatefile("${local.files}/traefik/dynamic.yaml",
     {
       domain         = var.domain

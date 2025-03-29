@@ -9,12 +9,12 @@ job "jellyfin" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "jellyfin"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
+        "traefik.http.routers.jellyfin.entrypoints=websecure",
+        "traefik.http.routers.jellyfin.middlewares=auth"
       ]
 
       check {
@@ -30,12 +30,16 @@ job "jellyfin" {
       config {
         image = "linuxserver/jellyfin:10.9.8"
         ports = ["http"]
+        volumes = [
+          "${job_volumes}/jellyfin:/config/cache",
+          "${job_volumes}/media:/data"
+        ]
       }
 
       env {
         PUID                        = "1010"
         PGID                        = "1010"
-        JELLYFIN_PublishedServerUrl = "https://$${NOMAD_JOB_NAME}.${domain}"
+        JELLYFIN_PublishedServerUrl = "https://jellyfin.${domain}"
       }
 
       resources {

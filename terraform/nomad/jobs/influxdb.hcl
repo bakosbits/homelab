@@ -9,12 +9,12 @@ job "influxdb" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "influxdb"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
+        "traefik.http.routers.influxdb.entrypoints=websecure",
+        "traefik.http.routers.influxdb.middlewares=auth"
       ]
 
       check {
@@ -31,6 +31,10 @@ job "influxdb" {
       config {
         image = "influxdb:2.7.8-alpine"
         ports = ["http"]
+        volumes = [
+          "${job_volumes}/influxdb/config:/etc/influxdb2",
+          "${job_volumes}/influxdb/data:/var/lib/influxdb2"
+        ]
       }
 
       resources {

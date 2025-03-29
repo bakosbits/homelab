@@ -1,4 +1,4 @@
-job "docker-registry" {
+job docker-registry {
   datacenters = ["dc1"]
   type        = "service"
 
@@ -27,6 +27,9 @@ job "docker-registry" {
         image        = "registry:2.8.3"
         network_mode = "host"
         ports        = ["http"]
+        volumes = [
+          "${job_volumes}/docker_registry:/data"
+        ]
       }
 
       env {
@@ -36,7 +39,7 @@ job "docker-registry" {
       }
 
       resources {
-        cpu    = 20
+        cpu    = 200
         memory = 256
       }
     }

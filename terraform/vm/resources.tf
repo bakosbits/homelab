@@ -19,6 +19,7 @@ resource "proxmox_vm_qemu" "vm" {
   os_type    = "cloud_init"
   ciuser     = var.ciuser
   cipassword = var.cipassword
+  ciupgrade  = true
   sshkeys    = var.sshkeys
   ipconfig0  = var.ipconfig
 
@@ -48,20 +49,6 @@ resource "proxmox_vm_qemu" "vm" {
         }
       }
     }
-  }
-
-  connection {
-    type     = "ssh"
-    user     = var.ciuser
-    password = var.cipassword
-    host     = self.default_ipv4_address
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "sudo cloud-init status --wait",
-      "sudo reboot now"
-    ]
   }
 
   lifecycle {

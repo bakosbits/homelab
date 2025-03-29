@@ -43,6 +43,21 @@ variable "vlan" {
   description = "The vlan used by the virtual machines"
 }
 
+variable "overwatch" {
+  type = list(object({
+    vmid        = string
+    name        = string
+    ipconfig    = string
+    target_node = string
+    clone       = string
+    sockets     = number
+    cores       = number
+    memory      = number
+    disk_size   = string
+  }))
+  default = []
+}
+
 variable "dns" {
   type = list(object({
     vmid        = string
@@ -62,6 +77,7 @@ variable "servers" {
   type = list(object({
     vmid        = string
     name        = string
+    ipconfig    = string
     target_node = string
     clone       = string
     sockets     = number
@@ -76,6 +92,7 @@ variable "clients" {
   type = list(object({
     vmid        = string
     name        = string
+    ipconfig    = string
     target_node = string
     clone       = string
     sockets     = number

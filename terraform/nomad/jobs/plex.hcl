@@ -14,12 +14,12 @@ job "plex" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "plex"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
+        "traefik.http.routers.plex.entrypoints=websecure",
+        "traefik.http.routers.plex.middlewares=auth"
       ]
 
       check {
@@ -37,6 +37,10 @@ job "plex" {
         image        = "plexinc/pms-docker:latest"
         ports        = ["http"]
         network_mode = "host"
+        volumes = [
+          "${job_volumes}/plex:/config",
+          "${job_volumes}/media:/data"
+        ]
       }
 
       env {

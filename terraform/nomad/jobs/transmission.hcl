@@ -9,12 +9,12 @@ job "transmission" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "transmission"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
+        "traefik.http.routers.transmission.entrypoints=websecure",
+        "traefik.http.routers.transmission.middlewares=auth"
       ]
 
       check {
@@ -28,8 +28,13 @@ job "transmission" {
       driver = "docker"
 
       config {
-        image = "lscr.io/linuxserver/transmission:latest"
+        image = "lscr.io/linuxserver/transmission:4.0.6"
         ports = ["http"]
+        volumes = [
+          "${job_volumes}/transmission:/config",
+          "${job_volumes}/media:/data",
+          "${job_volumes}/media/downloads/torrents:/watch"
+        ]
       }
 
       env {
@@ -39,8 +44,8 @@ job "transmission" {
       }
 
       resources {
-        cpu    = 500
-        memory = 768
+        cpu    = 750
+        memory = 756
       }
     }
   }

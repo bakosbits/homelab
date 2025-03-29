@@ -55,6 +55,10 @@ job "emulatorjs" {
       config {
         image = "linuxserver/emulatorjs:latest"
         ports = ["http", "admin"]
+        volumes = [
+          "${job_volumes}/emulator_config:/config",
+          "${job_volumes}/emulator_data:/data",
+        ]
       }
 
       env {

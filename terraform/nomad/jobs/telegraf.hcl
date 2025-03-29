@@ -12,7 +12,7 @@ job "telegraf" {
       driver = "docker"
 
       service {
-        name = "$${NOMAD_JOB_NAME}"
+        name = "telegraf"
         port = "http"
 
         check {
@@ -31,7 +31,7 @@ job "telegraf" {
       }
 
       resources {
-        cpu    = 100
+        cpu    = 125
         memory = 128
       }
 

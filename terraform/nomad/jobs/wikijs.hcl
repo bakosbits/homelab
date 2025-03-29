@@ -8,12 +8,12 @@ job "wikijs" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "wikijs"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.entrypoints=websecure",
-        "traefik.http.routers.$${NOMAD_JOB_NAME}.middlewares=auth"
+        "traefik.http.routers.wikijs.entrypoints=websecure",
+        "traefik.http.routers.wikijs.middlewares=auth"
       ]
 
       check {
@@ -30,6 +30,9 @@ job "wikijs" {
       config {
         image = "linuxserver/wikijs:2.5.303"
         ports = ["http"]
+        volumes = [
+          "${job_volumes}/wikijs:/config"
+        ]
       }
 
       env {

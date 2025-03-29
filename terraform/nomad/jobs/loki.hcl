@@ -9,7 +9,7 @@ job "loki" {
     }
 
     service {
-      name = "$${NOMAD_JOB_NAME}"
+      name = "loki"
       port = "http"
 
       check {
@@ -32,11 +32,15 @@ job "loki" {
           "-config.file",
           "local/loki/local-config.yaml",
         ]
+        volumes = [
+          "${job_volumes}/loki:/loki"
+        ]
+
       }
 
       resources {
-        cpu    = 512
-        memory = 256
+        cpu    = 500
+        memory = 512
       }
 
       template {
