@@ -39,7 +39,7 @@ source "proxmox-iso" "base" {
     type              = "scsi"
   }
 
-  iso_file     = "local:iso/debian-12.8.0-amd64-netinst.iso"
+  iso_file     = "local:iso/debian-12.10.0-amd64-netinst.iso"
   iso_checksum = "sha512:f4f7de1665cdcd00b2e526da6876f3e06a37da3549e9f880602f64407f602983a571c142eb0de0eacfc9c1d0f534e9339cdce04eb9daddc6ddfa8cf34853beed"
   unmount_iso  = true
 

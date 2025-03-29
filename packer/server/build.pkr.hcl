@@ -1,5 +1,5 @@
 build {
-  sources = ["source.proxmox-clone.server"]
+  sources = ["source.proxmox-iso.server"]
   
   # Copy configs up to tmp
   provisioner "file" {
