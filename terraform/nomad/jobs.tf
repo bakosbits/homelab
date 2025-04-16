@@ -117,12 +117,12 @@ resource "nomad_job" "nomad-cleanup" {
   })
 }
 
-resource "nomad_job" "ollama" {
-  jobspec = templatefile("${local.jobs}/ollama.hcl",
-  {
-    job_volumes = local.job_volumes
-  })  
-}
+# resource "nomad_job" "ollama" {
+#   jobspec = templatefile("${local.jobs}/ollama.hcl",
+#   {
+#     job_volumes = local.job_volumes
+#   })  
+# }
 
 resource "nomad_job" "pgweb" {
   jobspec = file("${local.jobs}/pgweb.hcl")
