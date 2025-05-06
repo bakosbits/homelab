@@ -29,7 +29,7 @@ job "radarr" {
       driver = "docker"
 
       config {
-        image        = "linuxserver/radarr:5.19.3"
+        image        = "linuxserver/radarr:5.22.4"
         ports        = ["http"]
         network_mode = "host"
         volumes = [

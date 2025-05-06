@@ -28,7 +28,7 @@ job "prowlarr" {
       driver = "docker"
 
       config {
-        image        = "linuxserver/prowlarr:1.31.2"
+        image        = "linuxserver/prowlarr:1.34.1"
         ports        = ["http"]
         network_mode = "host"
         volumes = [

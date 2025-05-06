@@ -29,7 +29,7 @@ job "sonarr" {
       driver = "docker"
 
       config {
-        image = "linuxserver/sonarr:4.0.9"
+        image = "linuxserver/sonarr:4.0.14"
         ports = ["http"]
         volumes = [
           "${job_volumes}/sonarr:/config",
