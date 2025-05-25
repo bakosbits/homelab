@@ -103,6 +103,13 @@ resource "nomad_job" "mosquitto" {
   })  
 }
 
+resource "nomad_job" "motioneye" {
+  jobspec = templatefile("${local.jobs}/motioneye.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
+}
+
 resource "nomad_job" "n8n" {
   jobspec = templatefile("${local.jobs}/n8n.hcl",
   {

@@ -32,7 +32,7 @@ job "traefik" {
       driver = "docker"
 
       config {
-        image        = "traefik:3.3"
+        image        = "traefik:3.4"
         ports        = ["http", "https", "postgres"]
         network_mode = "host"
         volumes = [

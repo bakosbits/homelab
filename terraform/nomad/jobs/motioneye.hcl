@@ -1,0 +1,50 @@
+job "motioneye" {
+  datacenters = ["dc1"]
+  type        = "service"
+
+  group "motioneye" {
+
+    network {
+      port "http" { static = 8765 }
+    }
+
+    service {
+      name = "motioneye"
+      port = "http"
+      tags = [
+        "traefik.enable=true",
+        "traefik.http.routers.motioneye.entrypoints=websecure",
+        "traefik.http.routers.motioneye.middlewares=auth"
+      ]
+
+      check {
+        type     = "http"
+        path     = "/"
+        interval = "10s"
+        timeout  = "2s"
+      }
+    }
+
+    task "motioneye" {
+      driver = "docker"
+
+      config {
+        image        = "ccrisan/motioneye:master-amd64"
+        hostname     = "motioneye"
+        privileged   = true
+        ports        = ["http"]
+        network_mode = "host"
+        volumes = [
+          "/etc/localtime:/etc/localtime:ro",
+          "${job_volumes}/motioneye/shared:/shared",
+          "${job_volumes}/motioneye/etc:/etc/motioneye"
+        ]
+      }
+
+      resources {
+        cpu    = 500
+        memory = 512
+      }
+    }
+  }
+}
