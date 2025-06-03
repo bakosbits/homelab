@@ -2,15 +2,11 @@ job "unifi" {
   datacenters = ["dc1"]
   type        = "service"
 
-  constraint {
-    attribute = "$${attr.unique.hostname}"
-    value     = "nomadcli03"
-  }
-
   group "unifi" {
 
     network {
       port "http" { static = "8443" }
+      # port "unifi-adoption" { static = "8080" }
     }
 
     service {
@@ -29,6 +25,24 @@ job "unifi" {
         interval = "10s"
         timeout  = "2s"
       }
+
+    # service {
+    #   name = "unifi-adoption"
+    #   port = "unifi-adoption"
+    #   tags = [
+    #     "traefik.enable=true",
+    #     "traefik.tcp.routers.unifi-adoption.entrypoints=unifi-adoption",
+    #     "traefik.tcp.routers.unifi-adoption.rule=HostSNI(`*`)",
+    #     "traefik.tcp.services.unifi-adoption.loadBalancer.server.port=$${NOMAD_HOST_PORT_unifi-adoption}"
+    #   ]
+
+    #   check {
+    #     type     = "tcp"
+    #     port     = "unifi-adoption"
+    #     interval = "10s"
+    #     timeout  = "2s"
+    #   }
+
     }
 
     task "unifi" {

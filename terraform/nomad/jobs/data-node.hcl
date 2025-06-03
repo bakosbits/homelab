@@ -2,11 +2,6 @@ job "data-node" {
   datacenters = ["dc1"]
   type        = "service"
 
-  constraint {
-    attribute = "$${attr.unique.hostname}"
-    value     = "nomadcli01"
-  }
-
   group "data-node" {
 
     network {

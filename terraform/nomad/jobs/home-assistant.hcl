@@ -2,7 +2,6 @@ job "hass" {
   datacenters = ["dc1"]
   type        = "service"
 
-
   group "hass" {
 
     network {

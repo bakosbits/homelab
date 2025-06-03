@@ -2,11 +2,6 @@ job "graylog" {
   datacenters = ["dc1"]
   type        = "service"
 
-  constraint {
-    attribute = "$${attr.unique.hostname}"
-    value     = "nomadcli01"
-  }
-
   group "graylog" {
 
     network {

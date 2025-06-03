@@ -2,11 +2,6 @@ job "mongodb6" {
   datacenters = ["dc1"]
   type        = "service"
 
-  constraint {
-    attribute = "${attr.unique.hostname}"
-    value     = "nomadcli01"
-  }
-
   group "mongodb6" {
 
     network {
