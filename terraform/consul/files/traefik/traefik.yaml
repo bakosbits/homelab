@@ -7,20 +7,17 @@ entryPoints:
           to: websecure
           scheme: https
           permanent: true
-    proxyProtocol:
-      trustedIPs:
-        - 192.168.2.1
+#    proxyProtocol:
+#      trustedIPs:
+#        - 192.168.2.1
         
   websecure:
     address: :443
     http:
       tls: true
-    proxyProtocol:
-      trustedIPs:
-        - 192.168.2.1
-
-  postgres:
-    address: :5432
+#    proxyProtocol:
+#      trustedIPs:
+#        - 192.168.2.1   
 
 providers:
   file:
@@ -47,6 +44,8 @@ api:
 
 log:
   level: info
+  # filePath: "/etc/traefik/logs"
+  
 
 accessLog:
   format: json

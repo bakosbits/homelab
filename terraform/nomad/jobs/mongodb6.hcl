@@ -21,8 +21,8 @@ job "mongodb6" {
         network_mode = "host"
         ports        = ["mongo"]
         volumes = [
-          "${job_volumes}/mongodb6/data/db:/data/db",
-          "${job_volumes}/mongodb6/data/config:/data/config"
+          "/mnt/volumes/mongodb6/data/db:/data/db",
+          "/mnt/volumes/mongodb6/data/config:/data/config"
         ]
       }
 

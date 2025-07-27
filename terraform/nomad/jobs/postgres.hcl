@@ -5,7 +5,7 @@ job "postgres" {
   group "postgres" {
 
     network {
-      port "postgres" { to = "5432" }
+      port "postgres" { static = "5432" }
     }
 
     service {
@@ -33,7 +33,7 @@ job "postgres" {
         image = "postgres:16.4"
         ports = ["postgres"]
         volumes = [
-          "${job_volumes}/postgres:/var/lib/pgsql/db"
+          "/mnt/volumes/postgres:/var/lib/pgsql/data"
         ]
       }
 

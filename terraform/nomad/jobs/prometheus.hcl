@@ -33,7 +33,7 @@ job "prometheus" {
         network_mode = "host"
         ports        = ["http"]
         volumes = [
-          "${job_volumes}/prometheus:/opt/prometheus",
+          "/mnt/volumes/prometheus:/opt/prometheus",
           "local/prometheus.yml:/etc/prometheus/prometheus.yml",
         ]
       }

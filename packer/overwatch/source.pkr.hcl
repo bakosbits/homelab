@@ -27,7 +27,6 @@ source "proxmox-clone" "overwatch" {
   network_adapters {
     model    = "virtio"    
     bridge   = "vmbr2"
-    vlan_tag = "20"
   }
 
   ssh_username = var.ssh_username

@@ -53,7 +53,7 @@ job "unifi" {
         network_mode = "host"
         ports        = ["http"]
         volumes = [
-          "${job_volumes}/unifi:/config"
+          "/mnt/volumes/unifi:/config"
         ]
       }
 

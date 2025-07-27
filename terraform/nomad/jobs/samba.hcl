@@ -27,8 +27,8 @@ job "samba" {
         ports        = ["smb"]
         network_mode = "host"
         volumes = [
-          "${job_volumes}/samba:/shares/homelab",
-          "${job_volumes}/media:/data"
+          "/mnt/volumes/samba:/shares/homelab",
+          "/mnt/volumes/media:/data"
         ]
       }
 

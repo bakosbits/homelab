@@ -31,7 +31,7 @@ job "wikijs" {
         image = "linuxserver/wikijs:2.5.303"
         ports = ["http"]
         volumes = [
-          "${job_volumes}/wikijs:/config"
+          "/mnt/volumes/wikijs:/config"
         ]
       }
 

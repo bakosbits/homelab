@@ -1,3 +1,8 @@
+variable "secret_id" {
+  type        = string
+  description = "The Nomad Secret ID"
+}
+
 # Path to the application volumes
 variable "job_volumes" {
   type        = string
@@ -183,4 +188,9 @@ variable "mqtt_user" {
 variable "mqtt_password" {
   type        = string
   description = "The mqtt password for mosquitto"
+}
+
+variable "windmill_db" {
+  type        = string
+  description = "The db connection url for Windmill"
 }

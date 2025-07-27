@@ -7,7 +7,6 @@ job "traefik" {
     network {
       port "http" { static = "80" }
       port "https" { static = "443" }
-      port "postgres" { static = "5432" }
     }
 
     service {
@@ -33,12 +32,13 @@ job "traefik" {
 
       config {
         image        = "traefik:3.4"
-        ports        = ["http", "https", "postgres"]
+        ports        = ["http", "https"]
         network_mode = "host"
         volumes = [
           "local/traefik.yaml:/etc/traefik/traefik.yaml",
           "local/dynamic.yaml:/etc/traefik/dynamic/dynamic.yaml",
-          "${job_volumes}/certs:/etc/traefik/certs",
+          "/mnt/volumes/traefik/logs:/etc/traefik/logs",
+          "/mnt/volumes/certs:/etc/traefik/certs",
         ]
       }
 

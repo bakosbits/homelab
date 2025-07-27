@@ -31,9 +31,9 @@ job "transmission" {
         image = "lscr.io/linuxserver/transmission:4.0.6"
         ports = ["http"]
         volumes = [
-          "${job_volumes}/transmission:/config",
-          "${job_volumes}/media:/data",
-          "${job_volumes}/media/downloads/torrents:/watch"
+          "/mnt/volumes/transmission:/config",
+          "/mnt/volumes/media:/data",
+          "/mnt/volumes/media/downloads/torrents:/watch"
         ]
       }
 

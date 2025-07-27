@@ -37,8 +37,8 @@ job "motioneye" {
         network_mode = "host"
         volumes = [
           "/etc/localtime:/etc/localtime:ro",
-          "${job_volumes}/motioneye/shared:/shared",
-          "${job_volumes}/motioneye/etc:/etc/motioneye"
+          "/mnt/volumes/motioneye/shared:/shared",
+          "/mnt/volumes/motioneye/etc:/etc/motioneye"
         ]
       }
 

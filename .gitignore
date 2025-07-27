@@ -6,3 +6,4 @@
 *.secret
 *.keyring
 .terraform/
+.vscode

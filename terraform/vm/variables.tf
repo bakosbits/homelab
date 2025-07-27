@@ -52,11 +52,6 @@ variable "bridge" {
   default     = "vmbr2"
 }
 
-variable "vlan" {
-  type        = number
-  description = "The vlan used by the virtual machines"
-  default     = 20
-}
 
 variable "ipconfig" {
   type        = string

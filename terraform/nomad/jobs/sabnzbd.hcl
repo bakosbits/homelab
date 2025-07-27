@@ -32,8 +32,8 @@ job "sabnzbd" {
         image = "linuxserver/sabnzbd:4.3.2"
         ports = ["http"]
         volumes = [
-          "${job_volumes}/sabnzbd:/config",
-          "${job_volumes}/media:/data"
+          "/mnt/volumes/sabnzbd:/config",
+          "/mnt/volumes/media:/data"
         ]
       }
 

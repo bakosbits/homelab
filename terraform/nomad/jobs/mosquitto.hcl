@@ -32,9 +32,9 @@ job "mosquitto" {
         volumes = [
           "local/mosquitto.conf:/mosquitto/config/mosquitto.conf",
           "secrets/password.txt:/mosquitto/config/password.txt",
-          "${job_volumes}/mosquitto/config:/mosquitto/config",
-          "${job_volumes}/mosquitto/data:/mosquitto/data",
-          "${job_volumes}/mosquitto/log:/mosquitto/log",
+          "/mnt/volumes/mosquitto/config:/mosquitto/config",
+          "/mnt/volumes/mosquitto/data:/mosquitto/data",
+          "/mnt/volumes/mosquitto/log:/mosquitto/log",
         ]
       }
 

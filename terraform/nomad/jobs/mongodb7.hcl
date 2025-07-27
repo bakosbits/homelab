@@ -21,8 +21,8 @@ job "mongodb7" {
         network_mode = "host"
         ports        = ["mongo"]
         volumes = [
-          "${job_volumes}/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro",
-          "${job_volumes}/mongodb7:/data/db"
+          "/mnt/volumes/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro",
+          "/mnt/volumes/mongodb7:/data/db"
         ]
       }
 

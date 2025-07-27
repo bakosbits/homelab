@@ -1,11 +1,11 @@
 tls:
   certificates:
-    - certFile: "/etc/traefik/certs/${domain}.crt"
+    - certFile: "/etc/traefik/certs/${domain}.fullchain"
       keyFile: "/etc/traefik/certs/${domain}.key"
   stores:
     default:
       defaultCertificate:
-        certFile: "/etc/traefik/certs/${domain}.crt"
+        certFile: "/etc/traefik/certs/${domain}.fullchain"
         keyFile: "/etc/traefik/certs/${domain}.key"
 
 http:

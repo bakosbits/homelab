@@ -27,12 +27,12 @@ resource "nomad_job" "drawio" {
   jobspec = file("${local.jobs}/drawio.hcl")
 }
 
-resource "nomad_job" "emulatorjs" {
-  jobspec = templatefile("${local.jobs}/emulatorjs.hcl",
-  {
-    job_volumes = local.job_volumes
-  })
-}
+# resource "nomad_job" "emulatorjs" {
+#   jobspec = templatefile("${local.jobs}/emulatorjs.hcl",
+#   {
+#     job_volumes = local.job_volumes
+#   })
+# }
 
 resource "nomad_job" "flaresolverr" {
   jobspec = templatefile("${local.jobs}/flaresolverr.hcl",
@@ -124,12 +124,12 @@ resource "nomad_job" "nomad-cleanup" {
   })
 }
 
-# resource "nomad_job" "ollama" {
-#   jobspec = templatefile("${local.jobs}/ollama.hcl",
-#   {
-#     job_volumes = local.job_volumes
-#   })  
-# }
+resource "nomad_job" "nginx" {
+  jobspec = templatefile("${local.jobs}/nginx.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
+}
 
 resource "nomad_job" "pgweb" {
   jobspec = file("${local.jobs}/pgweb.hcl")
@@ -218,6 +218,13 @@ resource "nomad_job" "vaultwarden" {
 
 resource "nomad_job" "wikijs" {
   jobspec = templatefile("${local.jobs}/wikijs.hcl",
+  {
+    job_volumes = local.job_volumes
+  })  
+}
+
+resource "nomad_job" "windmill" {
+  jobspec = templatefile("${local.jobs}/windmill.hcl",
   {
     job_volumes = local.job_volumes
   })  

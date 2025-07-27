@@ -30,7 +30,6 @@ source "proxmox-iso" "base" {
   network_adapters {
     model    = "virtio"    
     bridge   = "vmbr2"
-    vlan_tag = "20"
   }
 
   disks {

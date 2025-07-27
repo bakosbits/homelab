@@ -38,10 +38,7 @@ variable "bridge" {
   description = "The network bridge used by the virtual machines"
 }
 
-variable "vlan" {
-  type        = number
-  description = "The vlan used by the virtual machines"
-}
+
 
 variable "overwatch" {
   type = list(object({

@@ -31,8 +31,8 @@ job "jellyfin" {
         image = "linuxserver/jellyfin:10.9.8"
         ports = ["http"]
         volumes = [
-          "${job_volumes}/jellyfin:/config/cache",
-          "${job_volumes}/media:/data"
+          "/mnt/volumes/jellyfin:/config/cache",
+          "/mnt/volumes/media:/data"
         ]
       }
 

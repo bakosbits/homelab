@@ -86,3 +86,10 @@ resource "nomad_variable" "mqtt" {
   }
 }
 
+resource "nomad_variable" "windmill" {
+  path = "nomad/jobs/windmill"
+  items = {
+    DATABASE_URL = var.windmill_db
+
+  }
+}

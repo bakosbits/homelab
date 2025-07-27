@@ -35,7 +35,7 @@ apply-cluster:##.........Execute a terraform plan for the cluster
 
 .PHONY: apply-services
 apply-services:##........Execute a terraform plan for the services
-	cd terraform/services && terraform apply --auto-approve
+	cd terraform/services && terraform apply --auto-approve 
 
 .PHONY: format
 format:##................Format both terraform and nomd job files

@@ -28,7 +28,7 @@ job docker-registry {
         network_mode = "host"
         ports        = ["http"]
         volumes = [
-          "${job_volumes}/docker_registry:/data"
+          "/mnt/volumes/docker_registry:/data"
         ]
       }
 

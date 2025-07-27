@@ -13,8 +13,14 @@ job "n8n" {
       port = "http"
       tags = [
         "traefik.enable=true",
+        "traefik.http.routers.n8n.rule=Host(`n8n.bakos.me`)",
         "traefik.http.routers.n8n.entrypoints=websecure",
-        "traefik.http.routers.n8n.middlewares=auth"
+        # "traefik.http.routers.n8n.middlewares=auth",
+        # "traefik.http.routers.n8n.service=n8n",
+        
+        # "traefik.http.routers.n8n-webhook.entrypoints=websecure", 
+        # "traefik.http.routers.n8n-webhook.rule=Host(`n8n.bakos.me`) && PathPrefix(`/webhook/`)",
+        # "traefik.http.routers.n8n-webhook.service=n8n",
       ]
 
       check {
@@ -29,21 +35,22 @@ job "n8n" {
       driver = "docker"
 
       config {
-        image = "docker.n8n.io/n8nio/n8n"
+        image = "docker.n8n.io/n8nio/n8n:latest"
         ports = ["http"]
         volumes = [
-          "${job_volumes}/n8n:/n8nio/n8n"
+          "/mnt/volumes/n8n:/home/node/.n8n"
         ]
       }
 
       env {
+        WEBHOOK_URL = "https://n8n.bakos.me/"
         TZ = "America/Denver"
       }
 
 
       resources {
-        cpu    = 750
-        memory = 768
+        cpu    = 1024
+        memory = 1024
       }
     }
   }

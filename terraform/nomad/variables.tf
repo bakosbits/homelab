@@ -18,6 +18,11 @@ variable "nomad_url" {
   description = "The url to nomad, used for batch jobs"
 }
 
+variable "secret_id" {
+  type        = string
+  description = "The nomad Secret ID"
+}
+
 variable "ceph_userkey" {
   type        = string
   description = "The secret for the ceph user"
@@ -141,4 +146,8 @@ variable "mqtt_password" {
   description = "The mqtt password for mosquitto"
 }
 
+variable "windmill_db" {
+  type        = string
+  description = "The db connection url for Windmill"
+}
 

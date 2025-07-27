@@ -12,6 +12,7 @@ module "consul" {
 
 module "nomad" {
   source     = "../nomad"
+  secret_id  = var.secret_id
   depends_on = [module.consul]
 
   domain = var.domain
@@ -50,5 +51,7 @@ module "nomad" {
 
   mqtt_user     = var.mqtt_user
   mqtt_password = var.mqtt_password
+
+  windmill_db = var.windmill_db
 
 }

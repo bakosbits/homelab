@@ -25,8 +25,8 @@ job "ollama" {
         image = "ghcr.io/open-webui/open-webui:ollama"
         ports = ["http"]
         volumes = [
-          "${job_volumes}/open-webui:/app/backend/data",
-          "${job_volumes}/ollama:/root/.ollama"
+          "/mnt/volumes/open-webui:/app/backend/data",
+          "/mnt/volumes/ollama:/root/.ollama"
         ]
       }
 

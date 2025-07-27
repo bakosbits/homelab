@@ -27,8 +27,8 @@ job "flaresolverr" {
         ports        = ["http"]
         network_mode = "host"
         volumes = [
-          "${job_volumes}/flaresolverr:/config",
-          "${job_volumes}/media:/data"
+          "/mnt/volumes/flaresolverr:/config",
+          "/mnt/volumes/media:/data"
         ]
       }
 

@@ -28,11 +28,11 @@ job "hass" {
       driver = "docker"
 
       config {
-        image        = "homeassistant/home-assistant:2025.5.2"
+        image        = "homeassistant/home-assistant:2025.6.0"
         ports        = ["http"]
         network_mode = "host"
         volumes = [
-          "${job_volumes}/hass:/config",
+          "/mnt/volumes/hass:/config",
           "local/automations.yaml:/config/automations.yaml",
           "local/binary_sensors.yaml:/config/binary_sensors.yaml",
           "local/configuration.yaml:/config/configuration.yaml",

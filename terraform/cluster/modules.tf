@@ -45,7 +45,6 @@ module "dns" {
 
   ipconfig = var.dns[count.index].ipconfig
   bridge   = var.bridge
-  vlan     = var.vlan
 
   disk_size    = var.dns[count.index].disk_size
   storage_pool = var.storage_pool
@@ -74,7 +73,6 @@ module "server" {
 
   ipconfig = each.value.ipconfig
   bridge   = var.bridge
-  vlan     = var.vlan
 
   disk_size    = each.value.disk_size
   storage_pool = var.storage_pool
@@ -104,7 +102,6 @@ module "client" {
 
   ipconfig = each.value.ipconfig
   bridge   = var.bridge
-  vlan     = var.vlan
 
   disk_size    = each.value.disk_size
   storage_pool = var.storage_pool
