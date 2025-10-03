@@ -13,11 +13,11 @@ job "mongo" {
       port = "mongo"
     }
 
-    task "mongodb7" {
+    task "mongo" {
       driver = "docker"
 
       config {
-        image        = "mongo:7.0.14"
+        image        = "mongo:8.0.14"
         network_mode = "host"
         ports        = ["mongo"]
         volumes = [

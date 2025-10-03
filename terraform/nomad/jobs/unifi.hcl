@@ -49,10 +49,10 @@ job "unifi" {
       driver = "docker"
 
       config {
-        image        = "linuxserver/unifi-network-application:9.1.120"
+        image        = "linuxserver/unifi-network-application:9.4.19"
         network_mode = "host"
         ports        = ["http"]
-        volumes = [
+        volumes = [       
           "/mnt/volumes/unifi:/config"
         ]
       }

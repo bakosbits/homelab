@@ -89,8 +89,8 @@ resource "nomad_job" "matter" {
   })  
 }
 
-resource "nomad_job" "mongodb7" {
-  jobspec = templatefile("${local.jobs}/mongodb7.hcl",
+resource "nomad_job" "mongo" {
+  jobspec = templatefile("${local.jobs}/mongodb8.hcl",
   {
     job_volumes = local.job_volumes
   })  
