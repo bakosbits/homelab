@@ -18,7 +18,6 @@ job "mongo" {
 
       config {
         image        = "mongo:8.0.14"
-        network_mode = "host"
         ports        = ["mongo"]
         volumes = [
           "/mnt/volumes/init_mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro",

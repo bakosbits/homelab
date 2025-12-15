@@ -14,7 +14,7 @@ job "cannery" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.cannery.entrypoints=websecure",
-        "traefik.http.routerscannery.middlewares=auth"
+        "traefik.http.routers.cannery.middlewares=auth@consulcatalog"
       ]
 
       check {
@@ -29,7 +29,6 @@ job "cannery" {
 
       config {
         image        = "shibaobun/cannery:latest"
-        network_mode = "host"
         ports        = ["http"]
       }
 

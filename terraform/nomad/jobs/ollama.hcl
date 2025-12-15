@@ -14,8 +14,16 @@ job "ollama" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.open-webui.entrypoints=websecure",
-        "traefik.http.routers.open-webui.middlewares=auth"
+        "traefik.http.routers.open-webui.rule=Host(`ai.bakos.me`)",
+        "traefik.http.routers.open-webui.middlewares=auth@consulcatalog"
       ]
+      
+      check {
+        type     = "http"
+        path     = "/health"
+        interval = "20s"
+        timeout  = "5s"
+      }
     }
 
     task "ollama" {
@@ -29,10 +37,16 @@ job "ollama" {
           "/mnt/volumes/ollama:/root/.ollama"
         ]
       }
+      
+      # CPU-Only Optimization
+      env {
+        OLLAMA_KEEP_ALIVE = "5m"
+        OLLAMA_NUM_THREADS = "8"        
+      }
 
       resources {
-        cpu    = 4000
-        memory = 8192
+        cpu    = 22000
+        memory = 94517
       }
     }
   }

@@ -5,7 +5,10 @@ job "radarr" {
   group "radarr" {
 
     network {
-      port "http" { static = "7878" }
+      mode = "bridge"
+      port "http" { 
+        to = 7878 
+      }
     }
 
     service {
@@ -14,7 +17,6 @@ job "radarr" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.radarr.entrypoints=websecure",
-        "traefik.http.routers.radarr.middlewares=auth"
       ]
 
       check {
@@ -31,7 +33,6 @@ job "radarr" {
       config {
         image        = "linuxserver/radarr:5.22.4"
         ports        = ["http"]
-        network_mode = "host"
         volumes = [
           "/mnt/volumes/radarr:/config",
           "/mnt/volumes/media:/data"

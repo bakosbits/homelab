@@ -1,8 +1,3 @@
-variable "job_volumes" {
-  type        = string
-  description = "The base path to the job volumes"
-}
-
 variable "domain" {
   type        = string
   description = "The domain used to host the services"
@@ -56,6 +51,11 @@ variable "auth_secret" {
 variable "auth_whitelist_email" {
   type        = string
   description = "The email to be whitelisted by the forwardAuth plugin"
+}
+
+variable "cloudflared_tunnel_token" {
+  type        = string
+  description = "The Cloudflared tunnel token"
 }
 
 # Grafana
@@ -146,8 +146,8 @@ variable "mqtt_password" {
   description = "The mqtt password for mosquitto"
 }
 
-variable "windmill_db" {
-  type        = string
-  description = "The db connection url for Windmill"
-}
+# variable "windmill_db" {
+#   type        = string
+#   description = "The db connection url for Windmill"
+# }
 

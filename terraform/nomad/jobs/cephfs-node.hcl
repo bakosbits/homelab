@@ -17,7 +17,7 @@ job "cephfs-node" {
       driver = "docker"
 
       config {
-        image      = "quay.io/cephcsi/cephcsi:v3.13.0"
+        image      = "quay.io/cephcsi/cephcsi:v3.15.0"
         privileged = true
         args = [
           "--type=cephfs",

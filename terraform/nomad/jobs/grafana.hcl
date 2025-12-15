@@ -14,7 +14,7 @@ job "grafana" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.grafana.entrypoints=websecure",
-        "traefik.http.routers.grafana.middlewares=auth"
+        "traefik.http.routers.grafana.rule=Host(`grafana.bakos.me`)",
       ]
 
       check {

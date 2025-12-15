@@ -6,8 +6,6 @@ log_level   = "warn"
 server {
   enabled = true
   bootstrap_expect = 3
-  # heartbeat_grace = "300s"
-  # min_heartbeat_ttl = "20s"
 }
 
 advertise {

@@ -27,8 +27,8 @@ job "graylog" {
         ports        = ["http"]
         network_mode = "host"
         volumes = [
-          "/mnt/volumes/graylog/data:/usr/share/graylog/data/data",
           "/mnt/volumes/graylog:/usr/share/graylog/data/config",
+          "/mnt/volumes/graylog/data:/usr/share/graylog/data/data",
           "/mnt/volumes/graylog/journal:/usr/share/graylog/data/journal"
         ]
       }

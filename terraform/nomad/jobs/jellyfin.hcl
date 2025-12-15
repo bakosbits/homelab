@@ -14,7 +14,6 @@ job "jellyfin" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.jellyfin.entrypoints=websecure",
-        "traefik.http.routers.jellyfin.middlewares=auth"
       ]
 
       check {

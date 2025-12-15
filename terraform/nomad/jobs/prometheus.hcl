@@ -14,7 +14,7 @@ job "prometheus" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.prometheus.entrypoints=websecure",
-        "traefik.http.routers.prometheus.middlewares=auth"
+        "traefik.http.routers.prometheus.middlewares=auth@consulcatalog"
       ]
       check {
         type     = "http"
@@ -30,7 +30,6 @@ job "prometheus" {
 
       config {
         image        = "prometheus"
-        network_mode = "host"
         ports        = ["http"]
         volumes = [
           "/mnt/volumes/prometheus:/opt/prometheus",

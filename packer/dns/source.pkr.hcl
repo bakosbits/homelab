@@ -38,10 +38,8 @@ source "proxmox-iso" "dns" {
     type              = "scsi"
   }
 
-  iso_file     = "local:iso/debian-12.10.0-amd64-netinst.iso"
-  iso_checksum = "sha512:f4f7de1665cdcd00b2e526da6876f3e06a37da3549e9f880602f64407f602983a571c142eb0de0eacfc9c1d0f534e9339cdce04eb9daddc6ddfa8cf34853beed"
-  unmount_iso  = true
-
+  iso_file     = "local:iso/debian-13.1.0-amd64-netinst.iso"
+ 
   ssh_username = var.ssh_username
   ssh_password = var.ssh_password
   ssh_timeout  = "20m"

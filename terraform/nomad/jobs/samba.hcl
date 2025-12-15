@@ -5,12 +5,12 @@ job "samba" {
   group "samba" {
 
     network {
-      port "smb" { static = "445" }
+      port "http" { static = "445" }
     }
 
     service {
       name = "samba"
-      port = "smb"
+      port = "http"
 
       check {
         type     = "tcp"
@@ -23,9 +23,8 @@ job "samba" {
       driver = "docker"
 
       config {
-        image        = "servercontainers/samba:smbd-only-a3.19.0-s4.18.9-r0"
-        ports        = ["smb"]
-        network_mode = "host"
+        image   = "servercontainers/samba:smbd-only-a3.19.0-s4.18.9-r0"
+        ports   = ["http"]
         volumes = [
           "/mnt/volumes/samba:/shares/homelab",
           "/mnt/volumes/media:/data"

@@ -9,12 +9,13 @@ job "drawio" {
     }
 
     service {
-      name = "draw-io"
+      name = "drawio"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.draw-io.entrypoints=websecure",
-        "traefik.http.routers.draw-io.middlewares=auth"
+        "traefik.http.routers.drawio.entrypoints=websecure",
+        "traefik.http.routers.drawio.rule=Host(`drawio.bakos.me`)",
+        "traefik.http.routers.drawio.middlewares=auth@consulcatalog"
       ]
 
       check {
@@ -28,7 +29,7 @@ job "drawio" {
       driver = "docker"
 
       config {
-        image = "jgraph/drawio:24.7.5"
+        image = "jgraph/drawio:latest"
         ports = ["http"]
       }
 

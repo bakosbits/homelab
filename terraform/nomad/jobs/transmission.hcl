@@ -5,7 +5,11 @@ job "transmission" {
   group "transmission" {
 
     network {
-      port "http" { static = 9091 }
+      mode = "host"
+      port "http" { 
+        static = 9091
+        to = 9091  
+      }
     }
 
     service {
@@ -14,7 +18,7 @@ job "transmission" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.transmission.entrypoints=websecure",
-        "traefik.http.routers.transmission.middlewares=auth"
+        "traefik.http.routers.transmission.middlewares=auth@consulcatalog"
       ]
 
       check {

@@ -5,7 +5,10 @@ job "sonarr" {
   group "sonarr" {
 
     network {
-      port "http" { static = "8989" }
+      mode = "bridge"
+      port "http" { 
+        to = 8989 
+      }
     }
 
     service {
@@ -14,7 +17,6 @@ job "sonarr" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.sonarr.entrypoints=websecure",
-        "traefik.http.routers.sonarr.middlewares=auth"
       ]
 
       check {

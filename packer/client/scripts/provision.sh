@@ -40,6 +40,11 @@ sudo cp /tmp/configs/ceph/ceph.conf /etc/ceph/ceph.conf
 sudo cp /tmp/configs/ceph/ceph.client.admin.keyring /etc/ceph/ceph.client.admin.keyring
 sudo echo "192.168.1.10,192.168.1.11,192.168.1.12:/ /mnt ceph name=admin,secret=AQD1yylngu+3IxAAFKhcBp9ufX6sZNDkLJxyHw==,fs=cephfs,relatime,_netdev 0 0" >> /etc/fstab
 
+# Add a containers user
+sudo /sbin/groupadd -g 1000 containers
+sudo /sbin/useradd -M -u 1000 -g 1000 containers
+sudo /sbin/usermod -L containers
+
 # Add a media user
 sudo /sbin/groupadd -g 1010 media
 sudo /sbin/useradd -M -u 1010 -g 1010 media

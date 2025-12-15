@@ -14,7 +14,6 @@ job "sabnzbd" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.sabnzbd.entrypoints=websecure",
-        "traefik.http.routers.sabnzbd.middlewares=auth"
       ]
 
       check {

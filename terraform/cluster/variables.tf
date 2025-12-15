@@ -38,7 +38,10 @@ variable "bridge" {
   description = "The network bridge used by the virtual machines"
 }
 
-
+variable "vlan_tag" {
+  type        = number
+  description = "The network vlan used by the virtual machines"
+}
 
 variable "overwatch" {
   type = list(object({

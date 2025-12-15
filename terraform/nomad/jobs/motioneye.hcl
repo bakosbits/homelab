@@ -1,4 +1,3 @@
-
 job "motioneye" {
   datacenters = ["dc1"]
   type        = "service"
@@ -15,7 +14,6 @@ job "motioneye" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.motioneye.entrypoints=websecure",
-        "traefik.http.routers.motioneye.middlewares=auth"
       ]
 
       check {
@@ -34,7 +32,6 @@ job "motioneye" {
         hostname     = "motioneye"
         privileged   = true
         ports        = ["http"]
-        network_mode = "host"
         volumes = [
           "/etc/localtime:/etc/localtime:ro",
           "/mnt/volumes/motioneye/shared:/shared",

@@ -17,7 +17,10 @@ entryPoints:
       tls: true
 #    proxyProtocol:
 #      trustedIPs:
-#        - 192.168.2.1   
+#        - 192.168.2.1  
+
+  postgres:
+    address: :5432
 
 providers:
   file:
@@ -43,11 +46,11 @@ api:
   disabledashboardad: true
 
 log:
-  level: info
-  # filePath: "/etc/traefik/logs"
-  
+  level: debug
+  filePath: "/etc/traefik/logs/traefik.log"
 
 accessLog:
+  filePath: "/etc/traefik/logs/access.log"
   format: json
   filters:
     statusCodes:

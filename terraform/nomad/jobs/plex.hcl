@@ -13,8 +13,7 @@ job "plex" {
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.plex.entrypoints=websecure",
-        "traefik.http.routers.plex.middlewares=auth"
+        "traefik.http.routers.plex.entrypoints=websecure",     
       ]
 
       check {
@@ -27,21 +26,20 @@ job "plex" {
 
     task "plex" {
       driver = "docker"
-
       config {
-        image        = "plexinc/pms-docker:latest"
-        ports        = ["http"]
+        image      = "plexinc/pms-docker:latest"   
         network_mode = "host"
+        ports      = ["http"]
         volumes = [
           "/mnt/volumes/plex:/config",
           "/mnt/volumes/media:/data"
-        ]
+        ]        
       }
 
       env {
         PLEX_UID   = "1010"
         PLEX_GID   = "1010"
-        PLEX_CLAIM = "claim-bCf7ssezRk2zmX_PDGyv"
+        PLEX_CLAIM = "claim-NCxXrMeNC7yJD57cnVcu"
       }
 
       resources {

@@ -5,7 +5,10 @@ job "prowlarr" {
   group "prowlarr" {
 
     network {
-      port "http" { static = "9696" }
+      mode = "bridge"
+      port "http" { 
+        to = 9696
+      }
     }
 
     service {
@@ -14,7 +17,6 @@ job "prowlarr" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.prowlarr.entrypoints=websecure",
-        "traefik.http.routers.prowlarr.middlewares=auth"
       ]
 
       check {
@@ -30,7 +32,6 @@ job "prowlarr" {
       config {
         image        = "linuxserver/prowlarr:1.34.1"
         ports        = ["http"]
-        network_mode = "host"
         volumes = [
           "/mnt/volumes/prowlarr:/config",
           "/mnt/volumes/media:/data"

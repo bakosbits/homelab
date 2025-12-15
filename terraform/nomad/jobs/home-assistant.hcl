@@ -13,6 +13,7 @@ job "hass" {
       port = "http"
       tags = [
         "traefik.enable=true",
+        "traefik.http.routers.hass.rule=Host(`hass.bakos.me`) || Host(`home-assistant.bakos.me`)",
         "traefik.http.routers.hass.entrypoints=websecure",
       ]
 
@@ -28,11 +29,11 @@ job "hass" {
       driver = "docker"
 
       config {
-        image        = "homeassistant/home-assistant:2025.6.0"
-        ports        = ["http"]
+        image        = "homeassistant/home-assistant:2025.11.3"
         network_mode = "host"
+        ports        = ["http"]
         volumes = [
-          "/mnt/volumes/hass:/config",
+          "/mnt/volumes/hass:/config",          
           "local/automations.yaml:/config/automations.yaml",
           "local/binary_sensors.yaml:/config/binary_sensors.yaml",
           "local/configuration.yaml:/config/configuration.yaml",

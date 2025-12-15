@@ -1,5 +1,6 @@
 job "cephfs-controller" {
   datacenters = ["dc1"]
+  type        = "system"
 
   group "cephfs-controller" {
 
@@ -16,7 +17,7 @@ job "cephfs-controller" {
       driver = "docker"
 
       config {
-        image = "quay.io/cephcsi/cephcsi:v3.13.0"
+        image = "quay.io/cephcsi/cephcsi:v3.15.0"
         args = [
           "--type=cephfs",
           "--controllerserver=true",

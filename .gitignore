@@ -5,5 +5,7 @@
 *.pkrvars*
 *.secret
 *.keyring
+ceph*
 .terraform/
 .vscode
+

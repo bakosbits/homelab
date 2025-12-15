@@ -17,7 +17,7 @@ job "traefik" {
         "traefik.http.routers.api.entrypoints=websecure",
         "traefik.http.routers.api.service=api@internal",
         "traefik.http.services.dummy.loadbalancer.server.port=9000",
-        "traefik.http.routers.api.middlewares=auth",
+        "traefik.http.routers.api.middlewares=auth@consulcatalog",
       ]
 
       check {
@@ -31,7 +31,8 @@ job "traefik" {
       driver = "docker"
 
       config {
-        image        = "traefik:3.4"
+        image        = "traefik:3.6.1"
+        force_pull   = false
         ports        = ["http", "https"]
         network_mode = "host"
         volumes = [

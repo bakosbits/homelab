@@ -21,7 +21,8 @@ job "emulatorjs" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.arcade.entrypoints=websecure",
-        "traefik.http.routers.arcade.middlewares=auth"
+        "traefik.http.routers.arcade.rule=Host(`arcade.bakos.me`)",
+        "traefik.http.routers.arcade.middlewares=auth@consulcatalog@consulcatalog@consulcatalog"
       ]
 
       check {
@@ -38,7 +39,7 @@ job "emulatorjs" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.arcade-admin.entrypoints=websecure",
-        "traefik.http.routers.arcade-admin.middlewares=auth"
+        "traefik.http.routers.arcade-admin.middlewares=auth@consulcatalog"
       ]
 
       check {

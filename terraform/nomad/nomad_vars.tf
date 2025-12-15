@@ -86,10 +86,10 @@ resource "nomad_variable" "mqtt" {
   }
 }
 
-resource "nomad_variable" "windmill" {
-  path = "nomad/jobs/windmill"
+resource "nomad_variable" "cloudflared" {
+  path = "nomad/jobs/cloudflared"
   items = {
-    DATABASE_URL = var.windmill_db
+    CLOUDFLARED_TUNNEL_TOKEN = var.cloudflared_tunnel_token
 
   }
 }

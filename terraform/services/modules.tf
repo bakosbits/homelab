@@ -18,7 +18,6 @@ module "nomad" {
   domain = var.domain
 
   consul_domain = var.consul_domain
-  job_volumes   = var.job_volumes
   nomad_url     = var.nomad_url
 
   ceph_userid  = var.ceph_userid
@@ -29,7 +28,9 @@ module "nomad" {
   auth_client_secret   = var.auth_client_secret
   auth_secret          = var.auth_secret
   auth_whitelist_email = var.auth_whitelist_email
-
+ 
+  cloudflared_tunnel_token = var.cloudflared_tunnel_token
+  
   grafana_url      = var.grafana_url
   grafana_email    = var.grafana_email
   grafana_password = var.grafana_password
@@ -52,6 +53,6 @@ module "nomad" {
   mqtt_user     = var.mqtt_user
   mqtt_password = var.mqtt_password
 
-  windmill_db = var.windmill_db
+  # windmill_db = var.windmill_db
 
 }

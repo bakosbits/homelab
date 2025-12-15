@@ -52,6 +52,22 @@ variable "bridge" {
   default     = "vmbr2"
 }
 
+variable "vlan_tag" {
+  type        = number
+  description = "The network vlan used by the virtual machines"
+  default     = 20
+}
+
+variable "nameserver" {
+  type        = string
+  description = "The network nameserver used by the virtual machines"
+  default     = "192.168.2.2"
+}
+
+variable "searchdomain" {
+  type        = string
+  description = "The network search domain used by the virtual machines"
+}
 
 variable "ipconfig" {
   type        = string

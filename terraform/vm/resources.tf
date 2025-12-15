@@ -16,17 +16,20 @@ resource "proxmox_vm_qemu" "vm" {
   onboot    = true
   agent     = 1
 
-  os_type    = "cloud_init"
-  ciuser     = var.ciuser
-  cipassword = var.cipassword
-  ciupgrade  = true
-  sshkeys    = var.sshkeys
-  ipconfig0  = var.ipconfig
+  os_type      = "cloud_init"
+  ciuser       = var.ciuser
+  cipassword   = var.cipassword
+  ciupgrade    = true
+  nameserver   = var.nameserver
+  searchdomain = var.searchdomain
+  sshkeys      = var.sshkeys
+  ipconfig0    = var.ipconfig
 
   network {
     id     = 0
     model  = "virtio"
-    bridge = var.bridge    
+    bridge = var.bridge   
+    tag    = var.vlan_tag
   }
 
   disks {
@@ -34,7 +37,7 @@ resource "proxmox_vm_qemu" "vm" {
       scsi0 {
         disk {
           size       = var.disk_size
-          storage    = var.storage_pool
+          storage    = "rbd"
           iothread   = true
           emulatessd = true
           discard    = true

@@ -16,12 +16,6 @@ job "nginx" {
         "traefik.http.routers.nginx.entrypoints=websecure",
       ]
 
-      # check {
-      #   type     = "tcp"
-      #   port     = "http"
-      #   interval = "10s"
-      #   timeout  = "2s"
-      # }
     }
 
     task "nginx" {

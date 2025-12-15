@@ -25,7 +25,6 @@ job "flaresolverr" {
       config {
         image        = "flaresolverr/flaresolverr:latest"
         ports        = ["http"]
-        network_mode = "host"
         volumes = [
           "/mnt/volumes/flaresolverr:/config",
           "/mnt/volumes/media:/data"

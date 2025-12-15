@@ -5,7 +5,7 @@ job "postgres" {
   group "postgres" {
 
     network {
-      port "postgres" { static = "5432" }
+      port "postgres" { to = "5432" }
     }
 
     service {
@@ -30,7 +30,7 @@ job "postgres" {
       driver = "docker"
 
       config {
-        image = "postgres:16.4"
+        image = "postgres:18.1"
         ports = ["postgres"]
         volumes = [
           "/mnt/volumes/postgres:/var/lib/pgsql/data"

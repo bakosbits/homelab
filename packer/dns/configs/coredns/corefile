@@ -8,3 +8,11 @@ consul.:53 {
     forward . 127.0.0.1:8600
     log
 }
+
+bakos.me.:53 {
+    file /etc/coredns/zones/db.bakos.me {
+        reload 10s
+    }
+}
+
+

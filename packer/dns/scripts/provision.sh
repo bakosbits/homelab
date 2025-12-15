@@ -40,10 +40,11 @@ echo 'nameserver 127.0.0.1' | sudo tee -a /etc/resolvconf/resolv.conf.d/head > /
 sudo tar -xvvf /tmp/coredns.tgz --directory /tmp
 sudo chmod +x /tmp/coredns
 sudo mv /tmp/coredns /usr/local/bin
-sudo mkdir -p /opt/coredns /etc/coredns
+sudo mkdir -p /opt/coredns /etc/coredns/zones
 sudo useradd -d /var/lib/coredns -m coredns
 sudo chown coredns:coredns /opt/coredns
 sudo cp /tmp/configs/coredns/corefile /etc/coredns/corefile
+sudo cp /tmp/configs/coredns/db.bakos.me /etc/coredns/zones/db.bakos.me
 sudo cp /tmp/configs/coredns/coredns.service /etc/systemd/system
 sudo chmod 755 /etc/systemd/system/coredns.service
 sudo systemctl enable coredns

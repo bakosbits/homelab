@@ -14,7 +14,6 @@ job "influxdb" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.influxdb.entrypoints=websecure",
-        "traefik.http.routers.influxdb.middlewares=auth"
       ]
 
       check {

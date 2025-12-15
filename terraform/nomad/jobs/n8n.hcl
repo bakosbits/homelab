@@ -5,7 +5,10 @@ job "n8n" {
   group "n8n" {
 
     network {
-      port "http" { to = "5678" }
+      mode = "bridge"
+      port "http" { 
+        to = "5678" 
+      }
     }
 
     service {
@@ -13,14 +16,8 @@ job "n8n" {
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.n8n.rule=Host(`n8n.bakos.me`)",
         "traefik.http.routers.n8n.entrypoints=websecure",
-        # "traefik.http.routers.n8n.middlewares=auth",
-        # "traefik.http.routers.n8n.service=n8n",
-        
-        # "traefik.http.routers.n8n-webhook.entrypoints=websecure", 
-        # "traefik.http.routers.n8n-webhook.rule=Host(`n8n.bakos.me`) && PathPrefix(`/webhook/`)",
-        # "traefik.http.routers.n8n-webhook.service=n8n",
+        "traefik.http.routers.n8n.rule=Host(`n8n.bakos.me`)",
       ]
 
       check {
@@ -43,7 +40,14 @@ job "n8n" {
       }
 
       env {
+        PUID = 1000
+        PGID = 1000        
         WEBHOOK_URL = "https://n8n.bakos.me/"
+        N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+        N8N_LOG_LEVEL="debug"
+        N8N_LOG_OUTPUT="file"
+        N8N_LOG_FILE_PATH="/home/node/.n8n/n8n.log"
+        N8N_SECURE_COOKIE=false
         TZ = "America/Denver"
       }
 

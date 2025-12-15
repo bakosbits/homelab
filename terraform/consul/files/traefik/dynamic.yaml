@@ -8,6 +8,7 @@ tls:
         certFile: "/etc/traefik/certs/${domain}.fullchain"
         keyFile: "/etc/traefik/certs/${domain}.key"
 
+
 http:
   routers:
     nomad:
@@ -29,22 +30,6 @@ http:
     pfsense:
       service: pfsense
       rule: Host(`pfsense.${domain}`)
-      entrypoints:
-        - websecure
-      middlewares:
-        - auth
-
-    pve:
-      service: pve
-      rule: Host(`pve.${domain}`)
-      entrypoints:
-        - websecure
-      middlewares:
-        - auth
-
-    pve-backup:
-      service: pve-backup
-      rule: Host(`pve-backup.${domain}`)
       entrypoints:
         - websecure
       middlewares:
@@ -74,13 +59,4 @@ http:
         servers:
           - url: ${pfsense_url}
     
-    pve:
-      loadbalancer:
-        servers:
-          - url: ${pve_url}
-
-    pve-backup:
-      loadbalancer:
-        servers:
-          - url: ${pve_backup_url}
                     

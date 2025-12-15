@@ -26,7 +26,6 @@ job "loki" {
 
       config {
         image        = "grafana/loki:2.9.10"
-        network_mode = "host"
         ports        = ["http"]
         args = [
           "-config.file",

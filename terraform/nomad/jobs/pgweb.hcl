@@ -5,7 +5,7 @@ job "pgweb" {
   group "pgweb" {
 
     network {
-      port "http" { to = 8082 }
+      port "http" { static = 8082 }
     }
 
     service {
@@ -14,12 +14,13 @@ job "pgweb" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.pgweb.entrypoints=websecure",
-        "traefik.http.routers.pgweb.middlewares=auth"
+        "traefik.http.routers.pgweb.rule=Host(`pgweb.bakos.me`)",
+        "traefik.http.routers.pgweb.middlewares=auth@consulcatalog"
       ]
 
       check {
-        type     = "http"
-        path     = "/"
+        type     = "tcp"
+        port     = "http"
         interval = "10s"
         timeout  = "2s"
       }
@@ -30,6 +31,7 @@ job "pgweb" {
 
       config {
         image   = "sosedoff/pgweb:0.15.0"
+        network_mode = "host"
         ports   = ["http"]
         command = "/usr/bin/pgweb"
         args    = ["--bind=0.0.0.0", "--listen=8082"]

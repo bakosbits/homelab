@@ -13,7 +13,6 @@ job "wikijs" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.wikijs.entrypoints=websecure",
-        "traefik.http.routers.wikijs.middlewares=auth"
       ]
 
       check {

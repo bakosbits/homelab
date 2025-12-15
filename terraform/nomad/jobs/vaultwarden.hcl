@@ -14,7 +14,7 @@ job "vaultwarden" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.vaultwarden.entrypoints=websecure",
-        "traefik.http.routers.vaultwarden.middlewares=auth"
+        "traefik.http.routers.vaultwarden.middlewares=auth@consulcatalog"
       ]
 
       check {
@@ -27,17 +27,19 @@ job "vaultwarden" {
 
     task "vaultwarden" {
       driver = "docker"
-
-      env {
-        ROCKET_PORT = 8089
-      }
+      force_pull   = false
 
       config {
         image = "vaultwarden/server:1.31.0"
+
         ports = ["http"]
         volumes = [
           "/mnt/volumes/vaultwarden:/data"
         ]
+      }
+
+      env {
+        ROCKET_PORT = 8089
       }
 
       resources {
