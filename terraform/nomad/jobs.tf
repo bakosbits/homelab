@@ -4,13 +4,13 @@ locals {
   consul_domain = var.consul_domain
 }
 
-# resource "nomad_job" "cephfs-controller" {
-#   jobspec = file("${local.jobs}/cephfs-controller.hcl")
-# }
+resource "nomad_job" "cephfs-controller" {
+  jobspec = file("${local.jobs}/cephfs-controller.hcl")
+}
 
-# resource "nomad_job" "cephfs-node" {
-#   jobspec = file("${local.jobs}/cephfs-node.hcl")
-# }
+resource "nomad_job" "cephfs-node" {
+  jobspec = file("${local.jobs}/cephfs-node.hcl")
+}
 
 resource "nomad_job" "auth" {
   jobspec = templatefile("${local.jobs}/auth.hcl",
@@ -35,9 +35,9 @@ resource "nomad_job" "drawio" {
   jobspec = file("${local.jobs}/drawio.hcl")
 }
 
-# resource "nomad_job" "emulatorjs" {
-#   jobspec = file("${local.jobs}/emulatorjs.hcl")
-# }
+resource "nomad_job" "emulatorjs" {
+  jobspec = file("${local.jobs}/emulatorjs.hcl")
+}
 
 resource "nomad_job" "flaresolverr" {
   jobspec = file("${local.jobs}/flaresolverr.hcl")
@@ -100,9 +100,9 @@ resource "nomad_job" "nomad-cleanup" {
   })
 }
 
-# resource "nomad_job" "nginx" {
-#   jobspec = file("${local.jobs}/nginx.hcl")  
-# }
+resource "nomad_job" "nginx" {
+  jobspec = file("${local.jobs}/nginx.hcl")  
+}
 
 # resource "nomad_job" "ollama" {
 #   jobspec = file("${local.jobs}/ollama.hcl")
@@ -140,10 +140,10 @@ resource "nomad_job" "sonarr" {
   jobspec = file("${local.jobs}/sonarr.hcl")  
 }
 
-# resource "nomad_job" "telegraf" {
-#   jobspec = file("${local.jobs}/telegraf.hcl")
-# }
-#
+resource "nomad_job" "telegraf" {
+  jobspec = file("${local.jobs}/telegraf.hcl")
+}
+
 
 resource "nomad_job" "traefik" {
   jobspec = file("${local.jobs}/traefik.hcl")
@@ -157,13 +157,13 @@ resource "nomad_job" "unifi" {
   jobspec = file("${local.jobs}/unifi.hcl")
 }
 
-# resource "nomad_job" "vaultwarden" {
-#   jobspec = file("${local.jobs}/vaultwarden.hcl")  
-# }
+resource "nomad_job" "vaultwarden" {
+  jobspec = file("${local.jobs}/vaultwarden.hcl")  
+}
 
-# resource "nomad_job" "wikijs" {
-#   jobspec = file("${local.jobs}/wikijs.hcl")  
-# }
+resource "nomad_job" "wikijs" {
+  jobspec = file("${local.jobs}/wikijs.hcl")  
+}
 
 # resource "nomad_job" "windmill" {
 #   jobspec = file("${local.jobs}/windmill.hcl")  

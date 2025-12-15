@@ -27,7 +27,6 @@ job "vaultwarden" {
 
     task "vaultwarden" {
       driver = "docker"
-      force_pull   = false
 
       config {
         image = "vaultwarden/server:1.31.0"
