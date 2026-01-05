@@ -28,10 +28,10 @@ job "motioneye" {
       driver = "docker"
 
       config {
-        image        = "ccrisan/motioneye:master-amd64"
-        hostname     = "motioneye"
-        privileged   = true
-        ports        = ["http"]
+        image      = "ccrisan/motioneye:master-amd64"
+        hostname   = "motioneye"
+        privileged = true
+        ports      = ["http"]
         volumes = [
           "/etc/localtime:/etc/localtime:ro",
           "/mnt/volumes/motioneye/shared:/shared",

@@ -4,27 +4,9 @@ set -o errexit
 
 DEBIAN_FRONTEND=noninteractive
 
-# Add Docker's official GPG key:
-sudo apt-get update
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-# Add the Docker repo to Apt sources:
-echo \
-"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
-$(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-
-# Add Hashicorp repo
-wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-sudo apt-get update
-
 # Install ceph, docker, nomad, consul, cloud-init
 sudo apt-get update
-sudo apt-get install -y ceph-common docker-ce consul nomad cloud-init cloud-utils
+sudo apt-get install -y ceph-common docker-ce consul nomad cloud-init cloud-utils resolvconf
 
 # Configure docker and registry proxy
 sudo cp /tmp/configs/docker/daemon.json /etc/docker/daemon.json
@@ -39,6 +21,9 @@ sudo systemctl enable consul nomad
 sudo cp /tmp/configs/ceph/ceph.conf /etc/ceph/ceph.conf
 sudo cp /tmp/configs/ceph/ceph.client.admin.keyring /etc/ceph/ceph.client.admin.keyring
 sudo echo "192.168.1.10,192.168.1.11,192.168.1.12:/ /mnt ceph name=admin,secret=AQD1yylngu+3IxAAFKhcBp9ufX6sZNDkLJxyHw==,fs=cephfs,relatime,_netdev 0 0" >> /etc/fstab
+
+# Configure revolv.conf
+echo 'nameserver 192.168.2.1' | sudo tee -a /etc/resolvconf/resolv.conf.d/head > /dev/null
 
 # Add a containers user
 sudo /sbin/groupadd -g 1000 containers

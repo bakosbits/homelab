@@ -61,12 +61,7 @@ variable "vlan_tag" {
 variable "nameserver" {
   type        = string
   description = "The network nameserver used by the virtual machines"
-  default     = "192.168.2.2"
-}
-
-variable "searchdomain" {
-  type        = string
-  description = "The network search domain used by the virtual machines"
+  default     = "192.168.2.1"
 }
 
 variable "ipconfig" {

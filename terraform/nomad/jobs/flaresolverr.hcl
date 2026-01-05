@@ -23,8 +23,8 @@ job "flaresolverr" {
       driver = "docker"
 
       config {
-        image        = "flaresolverr/flaresolverr:latest"
-        ports        = ["http"]
+        image = "flaresolverr/flaresolverr:latest"
+        ports = ["http"]
         volumes = [
           "/mnt/volumes/flaresolverr:/config",
           "/mnt/volumes/media:/data"

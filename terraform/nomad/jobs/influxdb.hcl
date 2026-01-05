@@ -17,10 +17,10 @@ job "influxdb" {
       ]
 
       check {
-        type     = "tcp"
-        port     = "http"
+        type     = "http"
+        path     = "/health"
         interval = "10s"
-        timeout  = "1s"
+        timeout  = "3s"
       }
     }
 

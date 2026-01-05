@@ -13,22 +13,22 @@ job "windmill" {
       name = "windmill"
       port = "http"
       tags = [
-         // --- Router for Windmill UI (with authentication) ---
-          "traefik.enable=true", // Enable Traefik for this service
-          "traefik.http.routers.windmill-ui.entrypoints=websecure", // Use HTTPS entrypoint
-          "traefik.http.routers.windmill-ui.rule=Host(`windmill.bakos.me`)", // Route based on hostname
-          "traefik.http.routers.windmill-ui.middlewares=auth@consulcatalog", // Apply your authentication middleware
-          "traefik.http.routers.windmill-ui.service=windmill", // Link to this service
+        // --- Router for Windmill UI (with authentication) ---
+        "traefik.enable=true",                                             // Enable Traefik for this service
+        "traefik.http.routers.windmill-ui.entrypoints=websecure",          // Use HTTPS entrypoint
+        "traefik.http.routers.windmill-ui.rule=Host(`windmill.bakos.me`)", // Route based on hostname
+        "traefik.http.routers.windmill-ui.middlewares=auth@consulcatalog", // Apply your authentication middleware
+        "traefik.http.routers.windmill-ui.service=windmill",               // Link to this service
 
-          // --- Router for Windmill Webhooks (NO authentication) ---
-          "traefik.http.routers.windmill-webhook.entrypoints=websecure", // Use HTTPS entrypoint
-          // Rule to match your hostname AND the specific API path prefix for webhooks
-          "traefik.http.routers.windmill-webhook.rule=Host(`windmill.bakos.me`) && PathPrefix(`/api/w`)",
-          "traefik.http.routers.windmill-webhook.service=windmill", // Link to the same service
-          // IMPORTANT: NO "traefik.http.routers.windmill-webhook.middlewares=auth@consulcatalog" here!
+        // --- Router for Windmill Webhooks (NO authentication) ---
+        "traefik.http.routers.windmill-webhook.entrypoints=websecure", // Use HTTPS entrypoint
+        // Rule to match your hostname AND the specific API path prefix for webhooks
+        "traefik.http.routers.windmill-webhook.rule=Host(`windmill.bakos.me`) && PathPrefix(`/api/w`)",
+        "traefik.http.routers.windmill-webhook.service=windmill", // Link to the same service
+        // IMPORTANT: NO "traefik.http.routers.windmill-webhook.middlewares=auth@consulcatalog" here!
 
-          // --- Service Definition (tells Traefik where to send traffic) ---
-          "traefik.http.services.windmill.loadbalancer.server.port=8000" // The internal port of your Windmill app
+        // --- Service Definition (tells Traefik where to send traffic) ---
+        "traefik.http.services.windmill.loadbalancer.server.port=8000" // The internal port of your Windmill app
       ]
 
       check {
@@ -106,6 +106,6 @@ job "windmill" {
       #   {{- end }}
       #   EOF
       # }      
-    }    
+    }
   }
 }

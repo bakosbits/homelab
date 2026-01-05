@@ -1,4 +1,4 @@
-- name: Copy nomad volumes to client machnies
+- name: Copy nomad volumes to client machines
   hosts: nomad_clients
   become: yes
   

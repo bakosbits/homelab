@@ -5,7 +5,7 @@ job "nginx" {
   group "nginx" {
 
     network {
-      port "http" { static = 8182 }
+      port "http" { to = 80 }
     }
 
     service {
@@ -22,18 +22,17 @@ job "nginx" {
       driver = "docker"
 
       config {
-        image        = "linuxserver/nginx:latest"
-        ports        = ["http"]
-        network_mode = "host"
+        image = "linuxserver/nginx:latest"
+        ports = ["http"]
         volumes = [
-          "/mnt/volumes/nginx/config:/config",          
+          "/mnt/volumes/nginx/config:/config",
         ]
       }
 
       env {
-        PUID   = "1010"
-        PGID   = "1010"
-        TZ     = "Etc/UTC"
+        PUID = "1010"
+        PGID = "1010"
+        TZ   = "Etc/UTC"
       }
 
       resources {

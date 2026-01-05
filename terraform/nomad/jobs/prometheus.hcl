@@ -29,8 +29,8 @@ job "prometheus" {
       driver = "docker"
 
       config {
-        image        = "prometheus"
-        ports        = ["http"]
+        image = "prom/prometheus"
+        ports = ["http"]
         volumes = [
           "/mnt/volumes/prometheus:/opt/prometheus",
           "local/prometheus.yml:/etc/prometheus/prometheus.yml",
@@ -47,7 +47,7 @@ job "prometheus" {
         change_mode   = "signal"
         change_signal = "SIGHUP"
         data          = <<-EOF
-        {{- key "homelab/prometheus"}}
+        {{- key "homelab/prometheus/prometheus.yml"}}
         EOF
       }
     }

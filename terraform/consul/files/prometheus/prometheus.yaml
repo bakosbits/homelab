@@ -6,7 +6,7 @@ scrape_configs:
   # Job that polls the nomad prometheus metric endpoints
   - job_name: nomad-metrics
     consul_sd_configs:
-      - server: https://consul.bakos.lan
+      - server: https://consul.bakos.me
         services: ['nomad-client', 'nomad']
     relabel_configs:
       - source_labels: ['__meta_consul_tags']
@@ -19,28 +19,29 @@ scrape_configs:
   # Job that polls the traefik instance's metric endpoints
   - job_name: traefik-metrics
     consul_sd_configs:
-      - server: https://consul.bakos.lan
+      - server: https://consul.bakos.me
         services: ['traefik-metrics']
     metrics_path: /metrics
+
 
   # Job that polls the node-exporter instance's metric endpoint
   - job_name: node-metrics
     consul_sd_configs:
-      - server: https://consul.bakos.lan
+      - server: https://consul.bakos.me
         services: ['node-exporter']
     metrics_path: /metrics
 
   # Job that polls the exporter-postgres instance's metric endpoint
   - job_name: postgres-metrics
     consul_sd_configs:
-      - server: https://consul.bakos.lan
+      - server: https://consul.bakos.me
         services: ['prometheus-exporter-postgres']
     metrics_path: /metrics
 
   # Job that polls the home-assistant instance's metric endpoint
   - job_name: home-assistant-metrics
     consul_sd_configs:
-      - server: https://consul.bakos.lan
+      - server: https://consul.bakos.me
         services: ['home-assistant']
     metrics_path: /api/prometheus
     authorization:

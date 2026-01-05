@@ -5,9 +5,8 @@ job "sonarr" {
   group "sonarr" {
 
     network {
-      mode = "bridge"
-      port "http" { 
-        to = 8989 
+      port "http" {
+        to = 8989
       }
     }
 
@@ -20,10 +19,10 @@ job "sonarr" {
       ]
 
       check {
-        type     = "tcp"
-        port     = "http"
+        type     = "http"
+        path     = "/ping"
         interval = "10s"
-        timeout  = "2s"
+        timeout  = "3s"
       }
     }
 

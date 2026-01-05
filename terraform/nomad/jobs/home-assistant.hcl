@@ -33,7 +33,7 @@ job "hass" {
         network_mode = "host"
         ports        = ["http"]
         volumes = [
-          "/mnt/volumes/hass:/config",          
+          "/mnt/volumes/hass:/config",
           "local/automations.yaml:/config/automations.yaml",
           "local/binary_sensors.yaml:/config/binary_sensors.yaml",
           "local/configuration.yaml:/config/configuration.yaml",

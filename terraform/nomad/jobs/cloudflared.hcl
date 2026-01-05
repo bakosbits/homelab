@@ -14,15 +14,15 @@ job "cloudflared" {
       driver = "docker"
 
       config {
-        image = "cloudflare/cloudflared:latest"
+        image        = "cloudflare/cloudflared:latest"
         network_mode = "host"
         # The command and args mirror the docker run command
         args = [
           "tunnel",
-          "--no-autoupdate", 
+          "--no-autoupdate",
           "run",
           "--token",
-          "${CLOUDFLARED_TUNNEL_TOKEN}"        
+          "${CLOUDFLARED_TUNNEL_TOKEN}"
         ]
       }
 
@@ -31,7 +31,7 @@ job "cloudflared" {
         cpu    = 100 # 100 MHz
         memory = 64  # 64 MB
       }
-    
+
       template {
         env         = true
         destination = "secrets/cloudflared.env"

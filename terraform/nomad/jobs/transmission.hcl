@@ -6,9 +6,9 @@ job "transmission" {
 
     network {
       mode = "host"
-      port "http" { 
+      port "http" {
         static = 9091
-        to = 9091  
+        to     = 9091
       }
     }
 

@@ -23,8 +23,8 @@ job "samba" {
       driver = "docker"
 
       config {
-        image   = "servercontainers/samba:smbd-only-a3.19.0-s4.18.9-r0"
-        ports   = ["http"]
+        image = "servercontainers/samba:smbd-only-a3.19.0-s4.18.9-r0"
+        ports = ["http"]
         volumes = [
           "/mnt/volumes/samba:/shares/homelab",
           "/mnt/volumes/media:/data"

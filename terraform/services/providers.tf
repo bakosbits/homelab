@@ -12,8 +12,8 @@ terraform {
 }
 
 provider "nomad" {
-  address = var.nomad_url
-  secret_id = var.secret_id  
+  address   = var.nomad_url
+  secret_id = var.secret_id
 }
 
 provider "consul" {

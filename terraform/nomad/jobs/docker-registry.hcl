@@ -25,7 +25,7 @@ job docker-registry {
 
       config {
         image        = "registry:2.8.3"
-        network_mode = "host"        
+        network_mode = "host"
         ports        = ["http"]
         volumes = [
           "/mnt/volumes/docker_registry:/data"
@@ -39,8 +39,8 @@ job docker-registry {
       }
 
       resources {
-        cpu    = 200
-        memory = 256
+        cpu    = 512
+        memory = 2048
       }
     }
   }

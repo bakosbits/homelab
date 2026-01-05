@@ -1,10 +1,11 @@
-source "proxmox-iso" "dns" {
+source "proxmox-clone" "dns" {
   
   proxmox_url = var.proxmox_url
   username    = var.proxmox_user
   password    = var.proxmox_password
   node        = var.proxmox_node
-  
+  clone_vm    = "base-tpl"
+
   insecure_skip_tls_verify = true
 
   vm_id                = 9001
@@ -37,8 +38,6 @@ source "proxmox-iso" "dns" {
     storage_pool      = "rbd"
     type              = "scsi"
   }
-
-  iso_file     = "local:iso/debian-13.1.0-amd64-netinst.iso"
  
   ssh_username = var.ssh_username
   ssh_password = var.ssh_password

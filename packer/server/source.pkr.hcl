@@ -1,16 +1,17 @@
-source "proxmox-iso" "server" {
+source "proxmox-clone" "server" {
   
   proxmox_url = var.proxmox_url
   username    = var.proxmox_user
   password    = var.proxmox_password
   node        = var.proxmox_node
-  
+  clone_vm    = "base-tpl"  
+
   insecure_skip_tls_verify = true
 
   vm_id                = 9002
   vm_name              = "server-tpl"
   template_description = "Nomad server template"
-
+  
   os              = "l26"
   cpu_type        = "host"
   sockets         = 1
@@ -37,8 +38,6 @@ source "proxmox-iso" "server" {
     storage_pool      = "rbd"
     type              = "scsi"
   }
-
-  iso_file     = "local:iso/debian-13.1.0-amd64-netinst.iso"
   
   ssh_username = var.ssh_username
   ssh_password = var.ssh_password

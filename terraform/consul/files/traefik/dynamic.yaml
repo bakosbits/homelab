@@ -32,8 +32,13 @@ http:
       rule: Host(`pfsense.${domain}`)
       entrypoints:
         - websecure
-      middlewares:
-        - auth
+
+    proxmox:
+      service: proxmox
+      rule: Host(`pve.${domain}`)
+      entrypoints:
+        - websecure
+
 
   middlewares:
     auth:
@@ -58,5 +63,8 @@ http:
       loadbalancer:
         servers:
           - url: ${pfsense_url}
-    
-                    
+
+    proxmox:
+      loadbalancer:
+        servers:
+          - url: ${pve_url}

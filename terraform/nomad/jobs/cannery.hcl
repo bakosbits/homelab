@@ -28,8 +28,8 @@ job "cannery" {
       driver = "docker"
 
       config {
-        image        = "shibaobun/cannery:latest"
-        ports        = ["http"]
+        image = "shibaobun/cannery:latest"
+        ports = ["http"]
       }
 
       resources {

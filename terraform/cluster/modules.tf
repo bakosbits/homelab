@@ -1,6 +1,6 @@
 module "server" {
-  source = "../vm"
-  depends_on = [module.dns]  
+  source     = "../vm"
+  depends_on = [module.dns]
   for_each = {
     for idx, vm in var.servers : idx + 1 => vm
   }
@@ -13,7 +13,7 @@ module "server" {
 
   cores  = each.value.cores
   memory = each.value.memory
-  bridge   = var.bridge
+  bridge = var.bridge
 
   disk_size    = each.value.disk_size
   storage_pool = "rbd"
@@ -22,15 +22,14 @@ module "server" {
   cipassword = var.cipassword
   sshkeys    = var.sshkeys
   nameserver = var.nameserver
-  searchdomain = var.searchdomain
-  ipconfig = each.value.ipconfig
+  ipconfig   = each.value.ipconfig
 }
 
 
 module "client" {
-  source = "../vm"
+  source     = "../vm"
   depends_on = [module.server]
-  
+
   for_each = {
     for idx, vm in var.clients : idx + 1 => vm
   }
@@ -57,10 +56,9 @@ module "client" {
 }
 
 module "dns" {
-  source     = "../vm"
-  count      = 1
-  depends_on = [module.server]
-  
+  source = "../vm"
+  count  = 1
+
   vmid        = var.dns[count.index].vmid
   name        = var.dns[count.index].name
   target_node = var.dns[count.index].target_node

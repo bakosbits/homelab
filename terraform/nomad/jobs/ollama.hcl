@@ -17,7 +17,7 @@ job "ollama" {
         "traefik.http.routers.open-webui.rule=Host(`ai.bakos.me`)",
         "traefik.http.routers.open-webui.middlewares=auth@consulcatalog"
       ]
-      
+
       check {
         type     = "http"
         path     = "/health"
@@ -37,11 +37,11 @@ job "ollama" {
           "/mnt/volumes/ollama:/root/.ollama"
         ]
       }
-      
+
       # CPU-Only Optimization
       env {
-        OLLAMA_KEEP_ALIVE = "5m"
-        OLLAMA_NUM_THREADS = "8"        
+        OLLAMA_KEEP_ALIVE  = "5m"
+        OLLAMA_NUM_THREADS = "8"
       }
 
       resources {

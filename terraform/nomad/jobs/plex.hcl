@@ -13,7 +13,7 @@ job "plex" {
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.plex.entrypoints=websecure",     
+        "traefik.http.routers.plex.entrypoints=websecure",
       ]
 
       check {
@@ -27,13 +27,13 @@ job "plex" {
     task "plex" {
       driver = "docker"
       config {
-        image      = "plexinc/pms-docker:latest"   
+        image        = "plexinc/pms-docker:latest"
         network_mode = "host"
-        ports      = ["http"]
+        ports        = ["http"]
         volumes = [
           "/mnt/volumes/plex:/config",
           "/mnt/volumes/media:/data"
-        ]        
+        ]
       }
 
       env {

@@ -30,11 +30,11 @@ job "pgweb" {
       driver = "docker"
 
       config {
-        image   = "sosedoff/pgweb:0.15.0"
+        image        = "sosedoff/pgweb:0.15.0"
         network_mode = "host"
-        ports   = ["http"]
-        command = "/usr/bin/pgweb"
-        args    = ["--bind=0.0.0.0", "--listen=8082"]
+        ports        = ["http"]
+        command      = "/usr/bin/pgweb"
+        args         = ["--bind=0.0.0.0", "--listen=8082"]
       }
 
       resources {

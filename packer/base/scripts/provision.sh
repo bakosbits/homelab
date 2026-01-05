@@ -1,9 +1,5 @@
 #!/usr/bin/bash
 
-set -o errexit
-
-DEBIAN_FRONTEND=noninteractive
-
 # Add Docker's official GPG key:
 sudo apt-get update
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -22,5 +18,4 @@ wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/sha
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 sudo apt-get update
 
-# Finish
-exit 0
+exit

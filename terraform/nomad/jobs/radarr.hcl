@@ -5,9 +5,8 @@ job "radarr" {
   group "radarr" {
 
     network {
-      mode = "bridge"
-      port "http" { 
-        to = 7878 
+      port "http" {
+        to = 7878
       }
     }
 
@@ -21,9 +20,9 @@ job "radarr" {
 
       check {
         type     = "http"
-        path     = "/"
+        path     = "/ping"
         interval = "10s"
-        timeout  = "2s"
+        timeout  = "3s"
       }
     }
 
@@ -31,8 +30,8 @@ job "radarr" {
       driver = "docker"
 
       config {
-        image        = "linuxserver/radarr:5.22.4"
-        ports        = ["http"]
+        image = "linuxserver/radarr:5.22.4"
+        ports = ["http"]
         volumes = [
           "/mnt/volumes/radarr:/config",
           "/mnt/volumes/media:/data"

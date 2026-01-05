@@ -8,12 +8,6 @@ job "vector" {
       port "api" { static = 8686 }
     }
 
-    volume "docker-sock" {
-      type      = "host"
-      source    = "docker-sock-ro"
-      read_only = true
-    }
-
     service {
       name = "vector"
       port = "api"
@@ -32,15 +26,12 @@ job "vector" {
         image        = "timberio/vector:0.41.X-debian"
         network_mode = "host"
         ports        = ["api"]
+        volumes = [
+          "/var/run/docker.sock:/var/run/docker.sock:ro",
+        ]
       }
 
       kill_timeout = "30s"
-
-      volume_mount {
-        volume      = "docker-sock"
-        destination = "/var/run/docker.sock"
-        read_only   = true
-      }
 
       env {
         VECTOR_CONFIG          = "local/vector.toml"
@@ -49,7 +40,7 @@ job "vector" {
 
       resources {
         cpu    = 500
-        memory = 512
+        memory = 1024
       }
 
       template {

@@ -43,6 +43,12 @@ variable "vlan_tag" {
   description = "The network vlan used by the virtual machines"
 }
 
+variable "nameserver" {
+  type        = string
+  description = "The network nameserver used by the virtual machines"
+  default     = "192.168.2.1"
+}
+
 variable "overwatch" {
   type = list(object({
     vmid        = string

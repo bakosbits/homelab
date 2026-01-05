@@ -21,7 +21,6 @@ resource "proxmox_vm_qemu" "vm" {
   cipassword   = var.cipassword
   ciupgrade    = true
   nameserver   = var.nameserver
-  searchdomain = var.searchdomain
   sshkeys      = var.sshkeys
   ipconfig0    = var.ipconfig
 

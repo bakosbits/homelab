@@ -5,8 +5,7 @@ job "prowlarr" {
   group "prowlarr" {
 
     network {
-      mode = "bridge"
-      port "http" { 
+      port "http" {
         to = 9696
       }
     }
@@ -20,18 +19,18 @@ job "prowlarr" {
       ]
 
       check {
-        type     = "tcp"
+        type     = "http"
+        path     = "/ping"
         interval = "10s"
-        timeout  = "2s"
+        timeout  = "3s"
       }
     }
 
     task "prowlarr" {
       driver = "docker"
-
       config {
-        image        = "linuxserver/prowlarr:1.34.1"
-        ports        = ["http"]
+        image = "linuxserver/prowlarr:2.3.0"
+        ports = ["http"]
         volumes = [
           "/mnt/volumes/prowlarr:/config",
           "/mnt/volumes/media:/data"

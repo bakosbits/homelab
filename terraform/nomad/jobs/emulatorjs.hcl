@@ -22,7 +22,7 @@ job "emulatorjs" {
         "traefik.enable=true",
         "traefik.http.routers.arcade.entrypoints=websecure",
         "traefik.http.routers.arcade.rule=Host(`arcade.bakos.me`)",
-        "traefik.http.routers.arcade.middlewares=auth@consulcatalog@consulcatalog@consulcatalog"
+        "traefik.http.routers.arcade.middlewares=auth@consulcatalog"
       ]
 
       check {
@@ -54,7 +54,7 @@ job "emulatorjs" {
       driver = "docker"
 
       config {
-        image = "linuxserver/emulatorjs:latest"
+        image = "linuxserver/emulatorjs:1.9.2"
         ports = ["http", "admin"]
         volumes = [
           "/mnt/volumes/emulator_config:/config",

@@ -50,3 +50,10 @@ validate-jobs:##.........Validate all nomad jobs for correctness
 .PHONY: build-%
 build-%:##...............Build an image with packer
 	cd packer/$* && packer build -var-file=../packer.pkrvars.hcl .
+
+.PHONY: build-all
+build-all:##...............Build an image with packer
+	## cd packer/base && packer build -var-file=../packer.pkrvars.hcl .	
+	cd packer/dns && packer build -var-file=../packer.pkrvars.hcl .	
+	cd packer/server && packer build -var-file=../packer.pkrvars.hcl .	
+	cd packer/client && packer build -var-file=../packer.pkrvars.hcl .	
