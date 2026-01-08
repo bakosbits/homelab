@@ -14,7 +14,6 @@ job "prometheus" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.prometheus.entrypoints=websecure",
-        "traefik.http.routers.prometheus.middlewares=auth@consulcatalog"
       ]
       check {
         type     = "http"

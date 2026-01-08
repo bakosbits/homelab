@@ -32,12 +32,6 @@ source "proxmox-clone" "server" {
     model    = "virtio"    
     bridge   = "vmbr2"
   }
-
-  disks {
-    disk_size         = "6G"
-    storage_pool      = "rbd"
-    type              = "scsi"
-  }
   
   ssh_username = var.ssh_username
   ssh_password = var.ssh_password

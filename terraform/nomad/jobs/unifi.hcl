@@ -35,7 +35,7 @@ job "unifi" {
       config {
         force_pull   = false
         network_mode = "host"
-        image        = "linuxserver/unifi-network-application:9.5.21"
+        image        = "linuxserver/unifi-network-application:10.0.162"
         ports        = ["http"]
         volumes = [
           "/mnt/volumes/unifi:/config"

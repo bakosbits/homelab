@@ -17,7 +17,7 @@ http:
       entrypoints:
         - websecure
       middlewares:
-        - auth
+        - auth@consulcatalog
 
     consul:
       service: consul
@@ -25,7 +25,7 @@ http:
       entrypoints:
         - websecure
       middlewares:
-        - auth
+        - auth@consulcatalog
 
     pfsense:
       service: pfsense
@@ -39,14 +39,20 @@ http:
       entrypoints:
         - websecure
 
+    backup:
+      service: backup
+      rule: Host(`backup.${domain}`)
+      entrypoints:
+        - websecure
 
-  middlewares:
-    auth:
-      forwardAuth:
-        address: http://auth.${consul_domain}:4181
-        authResponseHeaders:
-          - X-Forwarded-User
-        trustForwardHeader: true
+
+  # middlewares:
+  #   auth:
+  #     forwardAuth:
+  #       address: http://auth.${consul_domain}:4181
+  #       authResponseHeaders:
+  #         - X-Forwarded-User
+  #       trustForwardHeader: true
 
   services:
     nomad:
@@ -68,3 +74,8 @@ http:
       loadbalancer:
         servers:
           - url: ${pve_url}
+
+    backup:
+      loadbalancer:
+        servers:
+          - url: ${pve_backup_url}

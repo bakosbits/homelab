@@ -15,7 +15,6 @@ job "ollama" {
         "traefik.enable=true",
         "traefik.http.routers.open-webui.entrypoints=websecure",
         "traefik.http.routers.open-webui.rule=Host(`ai.bakos.me`)",
-        "traefik.http.routers.open-webui.middlewares=auth@consulcatalog"
       ]
 
       check {

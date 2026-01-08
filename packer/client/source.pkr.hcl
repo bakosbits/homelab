@@ -33,13 +33,6 @@ source "proxmox-clone" "client" {
     bridge   = "vmbr2"
   }
 
-  disks {
-    disk_size         = "6G"
-    storage_pool      = "rbd"
-    type              = "scsi"
-  }
-
-  # iso_file     = "local:iso/debian-13.1.0-amd64-netinst.iso"
   
   ssh_username = var.ssh_username
   ssh_password = var.ssh_password

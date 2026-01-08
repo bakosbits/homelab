@@ -29,7 +29,7 @@ job "hass" {
       driver = "docker"
 
       config {
-        image        = "homeassistant/home-assistant:2025.11.3"
+        image        = "homeassistant/home-assistant:2026.1.0"
         network_mode = "host"
         ports        = ["http"]
         volumes = [

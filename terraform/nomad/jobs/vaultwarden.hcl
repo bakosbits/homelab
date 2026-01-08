@@ -14,7 +14,6 @@ job "vaultwarden" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.vaultwarden.entrypoints=websecure",
-        "traefik.http.routers.vaultwarden.middlewares=auth@consulcatalog"
       ]
 
       check {

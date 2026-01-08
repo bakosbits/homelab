@@ -15,7 +15,6 @@ job "pgweb" {
         "traefik.enable=true",
         "traefik.http.routers.pgweb.entrypoints=websecure",
         "traefik.http.routers.pgweb.rule=Host(`pgweb.bakos.me`)",
-        "traefik.http.routers.pgweb.middlewares=auth@consulcatalog"
       ]
 
       check {
