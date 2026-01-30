@@ -1,0 +1,323 @@
+# Terraform Services Variables Example
+#
+# Copy this file to terraform.auto.tfvars and fill in your values:
+#   cp terraform.auto.tfvars.example terraform.auto.tfvars
+#
+# This file contains sensitive credentials and should NOT be committed to git.
+# The .gitignore file is configured to exclude *auto.tfvars files.
+
+# ==============================================================================
+# Nomad/Consul Connection
+# ==============================================================================
+
+# Nomad API endpoint
+# Should point to one of your manager nodes
+nomad_url = "http://192.168.1.71:4646"
+
+# Consul API endpoint
+# Should point to one of your manager nodes
+consul_url = "http://192.168.1.71:8500"
+
+# Nomad ACL token (if ACLs are enabled)
+# Leave empty if ACLs are not configured
+# To generate: nomad acl token create -name="terraform" -type="management"
+secret_id = ""
+
+# ==============================================================================
+# Domain Configuration
+# ==============================================================================
+
+# Primary domain for services
+# This will be used by Traefik for routing
+# Example: service-name.example.com
+domain = "example.com"
+
+# Consul service discovery domain
+# Default: "service.consul"
+consul_domain = "service.consul"
+
+# ==============================================================================
+# Dashboard URLs (for Traefik routing)
+# ==============================================================================
+
+# These are infrastructure dashboards that Traefik will route to
+# Update these to match your environment
+
+# pfSense firewall URL
+pfsense_url = "https://192.168.1.1"
+
+# Proxmox VE URL
+pve_url = "https://proxmox.example.com:8006"
+
+# Proxmox Backup Server URL
+pve_backup_url = "https://pbs.example.com:8007"
+
+# ==============================================================================
+# OAuth Forward Authentication (Traefik)
+# ==============================================================================
+
+# OAuth provider domain (e.g., Google, GitHub)
+auth_domain = "example.com"
+
+# OAuth client ID from your provider
+# For Google: Create at https://console.cloud.google.com/apis/credentials
+# For GitHub: Create at https://github.com/settings/developers
+auth_client_id = "your-oauth-client-id"
+
+# OAuth client secret from your provider
+auth_client_secret = "your-oauth-client-secret"
+
+# Random secret for JWT signing
+# Generate with: openssl rand -hex 32
+auth_secret = "your-random-secret-string-here"
+
+# Email address(es) to whitelist for access
+# Comma-separated for multiple: "user1@example.com,user2@example.com"
+auth_whitelist_email = "admin@example.com"
+
+# ==============================================================================
+# Cloudflare Tunnel
+# ==============================================================================
+
+# Cloudflare tunnel token for external access
+# Create at: https://one.dash.cloudflare.com/
+# Navigate to: Access > Tunnels > Create Tunnel
+cloudflared_tunnel_token = "your-cloudflare-tunnel-token"
+
+# ==============================================================================
+# Grafana Configuration
+# ==============================================================================
+
+# Grafana admin email/username
+grafana_email = "admin@example.com"
+
+# Grafana admin password
+# Choose a strong password
+grafana_password = "your-secure-grafana-password"
+
+# Grafana public URL (used for OAuth callbacks)
+grafana_url = "https://grafana.example.com"
+
+# ==============================================================================
+# PostgreSQL Configuration
+# ==============================================================================
+
+# PostgreSQL root username
+# Default: "postgres"
+postgres_root_user = "postgres"
+
+# PostgreSQL root password
+# Choose a strong password
+postgres_root_password = "your-secure-postgres-password"
+
+# ==============================================================================
+# InfluxDB Configuration
+# ==============================================================================
+
+# InfluxDB admin username
+influxdb_user = "admin"
+
+# InfluxDB admin password
+influxdb_password = "your-secure-influxdb-password"
+
+# ==============================================================================
+# Samba File Sharing
+# ==============================================================================
+
+# Samba user UID (should match container user)
+# Default: "1000" (matches the containers user)
+samba_user = "1000"
+
+# Samba share name
+samba_name = "share"
+
+# Samba password for the share
+samba_pass = "your-secure-samba-password"
+
+# ==============================================================================
+# MongoDB Configuration (for UniFi Controller)
+# ==============================================================================
+
+# MongoDB username for UniFi application
+mongo_user = "unifi"
+
+# MongoDB password for UniFi user
+mongo_password = "your-secure-mongo-password"
+
+# MongoDB root username
+mongo_initdb_root_username = "admin"
+
+# MongoDB root password
+mongo_initdb_root_password = "your-secure-mongo-root-password"
+
+# MongoDB authentication database
+# Default: "admin"
+mongo_authsource = "admin"
+
+# Database name for UniFi
+# Default: "unifi"
+mongo_dbname = "unifi"
+
+# ==============================================================================
+# MQTT (Mosquitto) Configuration
+# ==============================================================================
+
+# MQTT username for authentication
+mqtt_user = "mqtt"
+
+# MQTT password
+mqtt_password = "your-secure-mqtt-password"
+
+# ==============================================================================
+# Service-Specific Notes
+# ==============================================================================
+#
+# Media Services (Plex, Jellyfin, *arr stack):
+#   - No additional configuration required here
+#   - Configuration is done through the web UIs after deployment
+#   - Access via Traefik: https://service-name.example.com
+#
+# Home Assistant:
+#   - Initial setup through web UI after deployment
+#   - MQTT integration uses the mqtt_user/mqtt_password above
+#
+# Vaultwarden (Bitwarden):
+#   - No additional configuration required
+#   - Create admin account on first access
+#
+# Wiki.js:
+#   - Configure PostgreSQL connection through web UI
+#   - Database: postgres (managed by postgres service)
+#
+# n8n:
+#   - No additional configuration required
+#   - Set up workflows through web UI
+#
+# Docker Registry:
+#   - Acts as pull-through cache for Docker Hub
+#   - No authentication required for cluster use
+#
+# Traefik:
+#   - Dashboard: https://traefik.example.com
+#   - Configuration via Consul KV (consul_files/traefik/)
+#   - Let's Encrypt for automatic SSL certificates
+#
+# Prometheus/Grafana:
+#   - Prometheus scrapes metrics from Consul service discovery
+#   - Grafana configured to use Prometheus as data source
+#   - InfluxDB configured for long-term metrics storage
+#
+# Loki/Vector:
+#   - Vector collects logs from all services
+#   - Loki stores and indexes logs
+#   - Grafana configured to query Loki
+#
+# Storage (NFS CSI):
+#   - Volumes are defined in volumes.tf
+#   - NFS server must be configured separately
+#   - Ensure NFS exports match the external_id paths
+#   - Recommended permissions: UID 1000 (containers), UID 1010 (media)
+
+# ==============================================================================
+# Deployment Order
+# ==============================================================================
+#
+# Services are deployed in this order (via depends_on):
+#
+# 1. Storage plugins (storage-controller, storage-node)
+# 2. Docker registry (waits for completion)
+# 3. All other services (parallel deployment)
+#
+# Critical infrastructure services:
+#   - traefik (reverse proxy)
+#   - cloudflared (external access)
+#   - auth (OAuth authentication)
+#   - postgres (database for several services)
+#   - mongodb8 (database for UniFi)
+#   - mosquitto (MQTT for smart home)
+
+# ==============================================================================
+# NFS Server Configuration Required
+# ==============================================================================
+#
+# Before deploying services, ensure your NFS server has these exports:
+#
+# Example /etc/exports entries:
+#
+# /nfs/grafana            *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/plex               *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/jellyfin           *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/sonarr             *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/radarr             *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/prowlarr           *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/sabnzbd            *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/transmission       *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/hass               *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/postgres           *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/mongo              *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/vaultwarden        *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/wikijs             *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/n8n                *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/influxdb/config    *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/influxdb/data      *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/mosquitto/config   *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/mosquitto/data     *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/mosquitto/log      *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/loki               *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/matter             *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/motioneye/shared   *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/motioneye/etc      *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/unifi              *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/docker_registry    *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/flaresolverr       *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/arcade/config      *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/arcade/data        *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/media              *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/media/downloads    *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/media/downloads/torrents *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/certs              *(rw,sync,no_subtree_check,no_root_squash)
+# /nfs/traefik/logs       *(rw,sync,no_subtree_check,no_root_squash)
+#
+# Set ownership for service directories:
+#   chown -R 1000:1000 /nfs/{containers-services}
+#   chown -R 1010:1010 /nfs/{media-services}
+#   chown -R 1010:1010 /nfs/media
+#
+# Reload NFS exports:
+#   exportfs -ra
+
+# ==============================================================================
+# After Configuration
+# ==============================================================================
+#
+# 1. Ensure cluster is deployed and healthy:
+#      consul members
+#      nomad node status
+#
+# 2. Verify NFS server is accessible from workers:
+#      showmount -e <nfs-server-ip>
+#
+# 3. Initialize Terraform:
+#      make init-services
+#
+# 4. Review the execution plan:
+#      make plan-services
+#
+# 5. Validate Nomad job files:
+#      make validate-jobs
+#
+# 6. Deploy services:
+#      make deploy-services
+#
+# 7. Monitor deployment:
+#      nomad job status
+#      nomad alloc status <alloc-id>
+#
+# Services will be accessible at:
+#   - Traefik Dashboard:  https://traefik.example.com
+#   - Grafana:            https://grafana.example.com
+#   - Plex:               https://plex.example.com
+#   - Jellyfin:           https://jellyfin.example.com
+#   - Home Assistant:     https://hass.example.com
+#   - Vaultwarden:        https://vault.example.com
+#   - (and more based on Traefik configuration)

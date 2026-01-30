@@ -1,0 +1,190 @@
+# Terraform Cluster Variables Example
+#
+# Copy this file to terraform.auto.tfvars and fill in your values:
+#   cp terraform.auto.tfvars.example terraform.auto.tfvars
+#
+# This file contains sensitive credentials and should NOT be committed to git.
+# The .gitignore file is configured to exclude *auto.tfvars files.
+
+# ==============================================================================
+# Proxmox API Connection
+# ==============================================================================
+
+# The URL of your Proxmox VE API endpoint
+# Format: https://hostname-or-ip:8006
+proxmox_url = "https://proxmox.example.com:8006"
+
+# Proxmox API user for Terraform
+# Format: username@realm (e.g., terraform@pve or terraform@pam)
+# This user needs VM creation/management permissions
+proxmox_user = "terraform@pve"
+
+# Password for the Proxmox API user
+proxmox_password = "your-secure-password-here"
+
+# ==============================================================================
+# Proxmox Cluster Nodes
+# ==============================================================================
+
+# List of Proxmox nodes in your cluster
+# VMs will be distributed across these nodes in round-robin fashion
+# Default: ["pve01", "pve02", "pve03"]
+pve_nodes = ["pve01", "pve02", "pve03"]
+
+# ==============================================================================
+# Cloud-init Configuration
+# ==============================================================================
+
+# Username for the default user created by cloud-init
+# This user will have sudo access on all VMs
+ciuser = "admin"
+
+# Password for the cloud-init user
+# Set this to a strong password
+cipassword = "your-vm-admin-password"
+
+# SSH public key(s) for the cloud-init user
+# Paste your public SSH key here for key-based authentication
+# You can get this with: cat ~/.ssh/id_rsa.pub
+sshkeys = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC... your-public-key-here user@hostname"
+
+# ==============================================================================
+# Network Configuration
+# ==============================================================================
+
+# Network CIDR for the cluster
+# All VM IPs will be allocated within this subnet
+# Default: "192.168.1.0/24"
+cluster_cidr = "192.168.1.0/24"
+
+# DNS nameserver for manager and worker nodes
+# This should be your upstream DNS server (not the cluster DNS node)
+# The DNS node will use 127.0.0.1 as its nameserver
+nameserver = "192.168.1.1"
+
+# DNS search domain for the cluster
+searchdomain = "example.local"
+
+# Domain name for services
+# Used by CoreDNS for custom zone configuration
+domain = "example.com"
+
+# Network bridge on Proxmox hosts
+# Default: "vmbr2"
+bridge = "vmbr2"
+
+# VLAN tag for cluster network (optional)
+# Leave empty ("") if not using VLANs
+vlan_tag = ""
+
+# ==============================================================================
+# Cluster Sizing
+# ==============================================================================
+
+# Number of manager nodes (Consul + Nomad servers)
+# For HA, use 3 or 5 (odd numbers for quorum)
+# Default: 3
+manager_count = 3
+
+# Number of worker nodes (Docker + Nomad clients)
+# Scale this based on your workload requirements
+# Default: 3
+worker_count = 3
+
+# ==============================================================================
+# Storage Configuration
+# ==============================================================================
+
+# Storage pool for VM disks
+# This should be a Ceph RBD pool or other block storage
+# Default: "rbd"
+storage = "rbd"
+
+# Storage pool for cloud-init configuration files
+# This should be a shared filesystem like CephFS
+# Default: "cephfs"
+config_storage = "cephfs"
+
+# ==============================================================================
+# Nomad Configuration
+# ==============================================================================
+
+# Nomad datacenter name
+# All nodes will be part of this datacenter
+# Default: "dc1"
+datacenter = "dc1"
+
+# ==============================================================================
+# IP Address Allocation
+# ==============================================================================
+#
+# IPs are automatically calculated from cluster_cidr:
+#
+# DNS Node:      192.168.1.2        (offset: 2)
+# Manager Nodes: 192.168.1.71-73    (offset: 71+)
+# Worker Nodes:  192.168.1.81-83    (offset: 81+)
+#
+# Additional workers will get IPs starting at .84, .85, etc.
+#
+# These offsets are defined in locals.tf and cannot be changed here.
+
+# ==============================================================================
+# VM Template IDs
+# ==============================================================================
+#
+# The following template IDs should exist in Proxmox:
+#   - DNS Template:     9001 (dns-tpl)
+#   - Manager Template: 9002 (manager-tpl)
+#   - Worker Template:  9003 (worker-tpl)
+#
+# Build these templates with Packer before running terraform apply:
+#   make build-dns
+#   make build-manager
+#   make build-worker
+
+# ==============================================================================
+# Default VM Resources
+# ==============================================================================
+#
+# DNS Node:
+#   - CPU Cores: 2
+#   - Memory:    2048 MB (2 GB)
+#   - Disk:      8 GB
+#
+# Manager Nodes:
+#   - CPU Cores: 4
+#   - Memory:    8192 MB (8 GB)
+#   - Disk:      8 GB
+#
+# Worker Nodes:
+#   - CPU Cores: 12
+#   - Memory:    65536 MB (64 GB)
+#   - Disk:      30 GB
+#
+# These defaults are defined in locals.tf
+# To customize, you'll need to modify locals.tf directly
+
+# ==============================================================================
+# Notes
+# ==============================================================================
+#
+# After configuring this file:
+#
+# 1. Initialize Terraform:
+#      make init-cluster
+#
+# 2. Review the execution plan:
+#      make plan-cluster
+#
+# 3. Deploy the cluster:
+#      make deploy-cluster
+#
+# The deployment will create:
+#   - 1 DNS node running CoreDNS
+#   - 3 Manager nodes running Consul + Nomad servers
+#   - 3 Worker nodes running Docker + Nomad clients
+#
+# Verify deployment with:
+#   ssh admin@192.168.1.71
+#   consul members
+#   nomad node status
