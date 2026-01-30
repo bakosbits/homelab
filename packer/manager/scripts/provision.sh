@@ -10,8 +10,6 @@ sudo apt-get install -y consul nomad
 
 # Configure consul and nomad
 sudo rm /etc/consul.d/* /etc/nomad.d/*
-sudo cp /tmp/configs/consul/server.hcl /etc/consul.d/consul.hcl
-sudo cp /tmp/configs/nomad/server.hcl /etc/nomad.d/nomad.hcl
 sudo systemctl disable consul nomad
 
 # Disable root

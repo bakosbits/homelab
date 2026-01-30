@@ -13,8 +13,6 @@ sudo cp /tmp/configs/docker/daemon.json /etc/docker/daemon.json
 
 # Configure consul and nomad
 sudo rm /etc/consul.d/* /etc/nomad.d/*
-sudo cp /tmp/configs/consul/client.hcl /etc/consul.d/consul.hcl
-sudo cp /tmp/configs/nomad/client.hcl /etc/nomad.d/nomad.hcl
 sudo systemctl disable consul nomad
 
 # Add a containers user

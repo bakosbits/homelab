@@ -13,8 +13,6 @@ sudo apt-get install -y consul
 
 # Configure consul
 sudo rm /etc/consul.d/*
-sudo cp /tmp/configs/consul/client.hcl /etc/consul.d/consul.hcl
-sudo cp /tmp/configs/consul/dns.service.hcl /etc/consul.d/dns.service.hcl
 sudo systemctl disable consul
 
 # Configure coredns
