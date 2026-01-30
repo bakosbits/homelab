@@ -1,11 +1,10 @@
 *.tfplan
 *.tfstate
-*.tfvars
+*auto.tfvars
 *.backup
 *.pkrvars*
 *.secret
 *.keyring
-ceph.*
 .terraform/
 .vscode
-
+.ssh/

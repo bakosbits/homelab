@@ -33,20 +33,8 @@ source "proxmox-clone" "dns" {
     bridge   = "vmbr2"
   }
 
-  disks {
-    disk_size         = "6G"
-    storage_pool      = "rbd"
-    type              = "scsi"
-  }
- 
   ssh_username = var.ssh_username
   ssh_password = var.ssh_password
   ssh_timeout  = "20m"
-
-http_directory = "./http"
-  http_port_min  = 8100
-  http_port_max  = 8100
-  boot_wait      = "10s"
-  boot_command   = ["<esc><wait>auto url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<enter>"]  
   
 }

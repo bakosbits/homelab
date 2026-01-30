@@ -38,7 +38,7 @@ source "proxmox-iso" "base" {
     type              = "scsi"
   }
 
-  iso_file     = "local:iso/debian-13.1.0-amd64-netinst.iso"
+  iso_file     = "local:iso/debian-13.3.0-amd64-netinst.iso"
   
   http_directory = "./http"
   http_port_min  = 8200

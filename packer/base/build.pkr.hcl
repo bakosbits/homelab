@@ -12,5 +12,10 @@ build {
     inline_shebang  = "/bin/bash -e"
     inline          = ["/bin/bash /tmp/scripts/provision.sh"]
   }
-
+  
+  provisioner "shell" {
+    inline = [
+      "eject /dev/cdrom"
+    ]
+  }  
 }

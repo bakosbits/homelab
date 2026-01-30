@@ -43,18 +43,6 @@ variable "pve_backup_url" {
   description = "The url used to reach the proxmox backup UI"
 }
 
-# Ceph
-
-variable "ceph_userkey" {
-  type        = string
-  description = "The secret for the ceph user"
-}
-
-variable "ceph_userid" {
-  type        = string
-  description = "The ceph use assigned to jobs"
-}
-
 # Auth
 
 variable "auth_domain" {
@@ -130,17 +118,17 @@ variable "influxdb_user" {
 
 # Samba
 
-variable "samba_password" {
+variable "samba_pass" {
   type        = string
   description = "The password for samba"
 }
 
-variable "samba_share" {
+variable "samba_name" {
   type        = string
   description = "The samba share"
 }
 
-variable "samba_uid" {
+variable "samba_user" {
   type        = string
   description = "The UID for the samba user"
 }
@@ -188,8 +176,3 @@ variable "mqtt_password" {
   type        = string
   description = "The mqtt password for mosquitto"
 }
-
-# variable "windmill_db" {
-#   type        = string
-#   description = "The db connection url for Windmill"
-# }

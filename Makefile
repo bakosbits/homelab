@@ -1,7 +1,7 @@
 # include .env
 
 help:##..................Show the help
-	@echo ""
+	@e=cho ""
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//' | sed 's/^/    /'
 	@echo ""
 
@@ -29,12 +29,12 @@ plan-cluster:##..........Create a terraform execution plan for the cluster
 plan-services:##.........Create a terraform execution plan for the services
 	cd terraform/services && terraform plan
 
-.PHONY: apply-cluster
-apply-cluster:##.........Execute a terraform plan for the cluster
+.PHONY: deploy-cluster
+deploy-cluster:##.........Execute a terraform plan for the cluster
 	cd terraform/cluster && terraform apply --auto-approve
 
-.PHONY: apply-services
-apply-services:##........Execute a terraform plan for the services
+.PHONY: deploy-services
+deploy-services:##........Execute a terraform plan for the services
 	cd terraform/services && terraform apply --auto-approve 
 
 .PHONY: format
@@ -47,13 +47,18 @@ format:##................Format both terraform and nomd job files
 validate-jobs:##.........Validate all nomad jobs for correctness
 	./terraform/scripts/validate-jobs.sh
 
+# .PHONY: build-%
+# build-%:##...............Build an image with packer
+# 	cd packer/$* && packer build -var-file=../packer.pkrvars.hcl .
+
 .PHONY: build-%
 build-%:##...............Build an image with packer
 	cd packer/$* && packer build -var-file=../packer.pkrvars.hcl .
 
 .PHONY: build-all
+
 build-all:##...............Build an image with packer
-	## cd packer/base && packer build -var-file=../packer.pkrvars.hcl .	
+	cd packer/base && packer build -var-file=../packer.pkrvars.hcl .	
 	cd packer/dns && packer build -var-file=../packer.pkrvars.hcl .	
 	cd packer/server && packer build -var-file=../packer.pkrvars.hcl .	
 	cd packer/client && packer build -var-file=../packer.pkrvars.hcl .	

@@ -2,11 +2,11 @@ terraform {
   required_providers {
     consul = {
       source  = "hashicorp/consul"
-      version = "2.21.0"
+      version = "2.22.1"
     }
     nomad = {
       source  = "hashicorp/nomad"
-      version = "2.4.0"
+      version = "2.5.2"
     }
   }
 }
